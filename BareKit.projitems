@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>88517b41-78ad-4904-80a4-b0d1ffd08fb7</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>BareKit</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Entrypoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Container.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Drawable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Page.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\ScalingManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Sprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Stage.cs" />
+  </ItemGroup>
+</Project>
