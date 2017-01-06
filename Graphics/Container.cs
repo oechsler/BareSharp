@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BareKit.Graphics
@@ -20,7 +22,12 @@ namespace BareKit.Graphics
             if (containerBuffer == null)
                 containerBuffer = new SpriteBatch(buffer.GraphicsDevice);
 
-            containerBuffer.Begin();
+			Matrix transfrom = Matrix.CreateTranslation(-Scaling.Size.X / 2 + Origin.X, -Scaling.Size.Y / 2 + Origin.Y, 1) *
+						Matrix.CreateRotationZ(Rotation) *
+						Matrix.CreateTranslation(Scaling.Size.X / 2 + Position.X, Scaling.Size.Y / 2 + Position.Y, 0) *
+						Matrix.CreateScale(Scale.X, Scale.Y, 1);
+
+			containerBuffer.Begin(transformMatrix: transfrom);
             foreach (Drawable drawable in drawables)
                 drawable.Draw(containerBuffer);
             containerBuffer.End();
