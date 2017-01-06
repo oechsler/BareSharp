@@ -10,8 +10,6 @@ namespace BareKit.Graphics
 		ContentManager content;
         Stage stage;
 
-		Sprite letter;
-
 		public Page(ScalingManager scaling, ContentManager content, Stage stage) : base(scaling)
         {
 			this.content = content;
@@ -21,14 +19,11 @@ namespace BareKit.Graphics
             {
                 Resized();
             };
-
-			letter = new Sprite(scaling, content, "letter");
-			letter.Scale = new Vector2(.1f);
         }
 
         public virtual void Enter(Page from)
         {
-			AddChild(letter);
+
         }
 
         public virtual void Leave(bool terminate)
