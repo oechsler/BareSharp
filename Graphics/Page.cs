@@ -2,20 +2,15 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BareKit.Graphics
 {
     public class Page : Container
     {
-		ContentManager content;
-        Stage stage;
-
-		public Page(ScalingManager scaling, ContentManager content, Stage stage) : base(scaling)
+		public Page(ScalingManager scaling) : base(scaling)
         {
-			this.content = content;
-            this.stage = stage;
-
-            Scaling.Resized += (object sender, EventArgs e) =>
+			Scaling.Resized += (object sender, EventArgs e) =>
             {
                 Resized();
             };
@@ -49,17 +44,22 @@ namespace BareKit.Graphics
 
 		protected virtual void Resized()
         {
-
+			
         }
+
+		public sealed override void Draw(SpriteBatch buffer)
+		{
+			base.Draw(buffer);
+		}
 
 		protected ContentManager Content
 		{
-			get { return content; }
+			get { return ((Stage)Parent).Content; }
 		}
 
         protected Stage Stage
         {
-            get { return stage; }
+			get { return (Stage)Parent; }
         }
     }
 }
