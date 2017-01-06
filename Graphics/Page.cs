@@ -23,20 +23,31 @@ namespace BareKit.Graphics
 
         public virtual void Enter(Page from)
         {
-
+			LoadContent();
         }
+
+		protected virtual void LoadContent()
+		{
+			
+		}
 
         public virtual void Leave(bool terminate)
         {
-
+			if (terminate)
+				UnloadContent();
         }
+
+		protected virtual void UnloadContent()
+		{
+			
+		}
 
         public virtual void Update(GameTime delta)
         {
             
         }
 
-        public virtual void Resized()
+		protected virtual void Resized()
         {
 
         }
