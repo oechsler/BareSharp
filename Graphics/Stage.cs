@@ -31,7 +31,7 @@ namespace BareKit.Graphics
 
         public Stage NavigateTo(Type pageType)
         {
-			Page target = (Page)Activator.CreateInstance(pageType, Scaling, content, this);
+			Page target = (Page)Activator.CreateInstance(pageType, Scaling);
             Page current = null;
 
             if (Children.Count > 0)
@@ -60,5 +60,10 @@ namespace BareKit.Graphics
 
             return this;
         }
+
+		public ContentManager Content
+		{
+			get { return content; }
+		}
     }
 }

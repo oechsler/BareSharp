@@ -31,8 +31,6 @@ namespace BareKit
 
             buffer = new SpriteBatch(GraphicsDevice);
 			stage = new Stage(scaling, Content);
-
-			stage.NavigateTo(typeof(Page));
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,5 +50,25 @@ namespace BareKit
 
             base.Draw(gameTime);
         }
+
+		protected GraphicsDeviceManager Graphics
+		{
+			get { return graphics; }
+		}
+
+		protected ScalingManager Scaling
+		{
+			get { return scaling; }
+		}
+
+		protected SpriteBatch Buffer
+		{
+			get { return buffer; }
+		}
+
+		protected Stage Stage
+		{
+			get { return stage; }
+		}
     }
 }

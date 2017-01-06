@@ -2,58 +2,70 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BareKit.Graphics
 {
     public class Page : Container
     {
-		ContentManager content;
-        Stage stage;
+		bool contentLoaded;
 
-		Sprite letter;
-
-		public Page(ScalingManager scaling, ContentManager content, Stage stage) : base(scaling)
+		public Page(ScalingManager scaling) : base(scaling)
         {
-			this.content = content;
-            this.stage = stage;
-
-            Scaling.Resized += (object sender, EventArgs e) =>
+			Scaling.Resized += (object sender, EventArgs e) =>
             {
                 Resized();
             };
-
-			letter = new Sprite(scaling, content, "letter");
-			letter.Scale = new Vector2(.1f);
         }
 
         public virtual void Enter(Page from)
         {
-			AddChild(letter);
+			if (!contentLoaded)
+			{
+				LoadContent();
+				contentLoaded = true;
+			}
         }
+
+		protected virtual void LoadContent()
+		{
+			
+		}
 
         public virtual void Leave(bool terminate)
         {
-
+			if (terminate)
+				UnloadContent();
         }
+
+		protected virtual void UnloadContent()
+		{
+			
+		}
 
         public virtual void Update(GameTime delta)
         {
             
         }
 
-        public virtual void Resized()
+		protected virtual void Resized()
         {
-
+			
         }
+
+		public sealed override void Draw(SpriteBatch buffer)
+		{
+			base.Draw(buffer);
+		}
 
 		protected ContentManager Content
 		{
-			get { return content; }
+			get { return ((Stage)Parent).Content; }
 		}
 
         protected Stage Stage
         {
-            get { return stage; }
+			get { return (Stage)Parent; }
         }
     }
 }
