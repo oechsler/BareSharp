@@ -8,6 +8,8 @@ namespace BareKit.Graphics
 {
     public class Page : Container
     {
+		bool contentLoaded;
+
 		public Page(ScalingManager scaling) : base(scaling)
         {
 			Scaling.Resized += (object sender, EventArgs e) =>
@@ -18,7 +20,11 @@ namespace BareKit.Graphics
 
         public virtual void Enter(Page from)
         {
-			LoadContent();
+			if (!contentLoaded)
+			{
+				LoadContent();
+				contentLoaded = true;
+			}
         }
 
 		protected virtual void LoadContent()
