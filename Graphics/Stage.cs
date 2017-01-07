@@ -10,8 +10,9 @@ namespace BareKit.Graphics
     {
 		ContentManager content;
 
-		public Stage(ScalingManager scaling, ContentManager content) : base(scaling)
+		public Stage(ScalingManager scaling, ContentManager content)
         {
+			Initialize(scaling);
 			this.content = content;
 
 			Color = new Color(40, 40, 40);
@@ -31,19 +32,23 @@ namespace BareKit.Graphics
 
         public Stage NavigateTo(Type pageType)
         {
-			Page target = (Page)Activator.CreateInstance(pageType, Scaling);
-            Page current = null;
-
-            if (Children.Count > 0)
-                current = (Page)Children[Children.Count - 1];
-            
-            current?.Leave(false);
-
-            AddChild(target);
-			target.Enter(current);
-
-            return this;
+			return NavigateTo((Page)Activator.CreateInstance(pageType));
         }
+
+		public Stage NavigateTo(Page pageInstance)
+		{
+			Page current = null;
+
+			if (Children.Count > 0)
+				current = (Page)Children[Children.Count - 1];
+
+			current?.Leave(false);
+
+			AddChild(pageInstance);
+			pageInstance.Enter(current);
+
+			return this;
+		}
 
         public Stage NavigateBack()
         {

@@ -10,13 +10,20 @@ namespace BareKit.Graphics
     {
 		bool contentLoaded;
 
-		public Page(ScalingManager scaling) : base(scaling)
-        {
+		public sealed override void Initialize(ScalingManager scaling)
+		{
+			base.Initialize(scaling);
+
 			Scaling.Resized += (object sender, EventArgs e) =>
-            {
-                Resized();
-            };
-        }
+			{
+				Resized();
+			};
+		}
+
+		protected virtual void LoadContent()
+		{
+
+		}
 
         public virtual void Enter(Page from)
         {
@@ -27,9 +34,9 @@ namespace BareKit.Graphics
 			}
         }
 
-		protected virtual void LoadContent()
+		protected virtual void UnloadContent()
 		{
-			
+
 		}
 
         public virtual void Leave(bool terminate)
@@ -37,11 +44,6 @@ namespace BareKit.Graphics
 			if (terminate)
 				UnloadContent();
         }
-
-		protected virtual void UnloadContent()
-		{
-			
-		}
 
         public virtual void Update(GameTime delta)
         {

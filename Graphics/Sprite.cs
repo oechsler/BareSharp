@@ -15,16 +15,21 @@ namespace BareKit.Graphics
         Vector2 screenScale;
         Texture2D texture;
 
-        public Sprite(ScalingManager scaling, ContentManager content, string assetName) : base(scaling)
+        public Sprite(ContentManager content, string assetName)
         {
             this.content = content;
             this.assetName = assetName;
 
             texture = content.Load<Texture2D>(assetName + "_1x");
-
-            Scaling.Resized += onResize;
-			onResize(Scaling, EventArgs.Empty);
         }
+
+		public override void Initialize(ScalingManager scaling)
+		{
+			base.Initialize(scaling);
+
+			Scaling.Resized += onResize;
+			onResize(Scaling, EventArgs.Empty);
+		}
 
         public override void Draw(SpriteBatch buffer)
         {

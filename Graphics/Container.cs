@@ -10,7 +10,7 @@ namespace BareKit.Graphics
         List<Drawable> drawables;
         SpriteBatch containerBuffer;
 
-        public Container(ScalingManager scaling) : base(scaling)
+		public Container()
         {
             drawables = new List<Drawable>();
         }
@@ -35,6 +35,7 @@ namespace BareKit.Graphics
 
         public Container AddChild(Drawable child)
         {
+			child.Initialize(Scaling);
             drawables.Add(child);
             child.Parent = this;
 

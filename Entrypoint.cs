@@ -59,6 +59,7 @@ namespace BareKit
 		protected ScalingManager Scaling
 		{
 			get { return scaling; }
+			set { scaling = value; } 
 		}
 
 		protected SpriteBatch Buffer
