@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Glide;
 
+using BareKit.Audio;
+
 namespace BareKit.Graphics
 {
     public class Page : Container
@@ -45,6 +47,8 @@ namespace BareKit.Graphics
         {
 			if (terminate)
 				UnloadContent();
+
+			Tweening.CancelAndComplete();
         }
 
         public virtual void Update(GameTime delta)
@@ -75,6 +79,11 @@ namespace BareKit.Graphics
 		protected Tweener Tweening
 		{
 			get { return ((Stage)Parent).Tweening; }
+		}
+
+		protected SoundManager Sound 
+		{
+			get { return ((Stage)Parent).Sound; }
 		}
     }
 }

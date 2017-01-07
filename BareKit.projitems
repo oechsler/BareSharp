@@ -21,5 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Glide\Lerper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Glide\Tween.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Glide\Tweener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Audio\Sound.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Audio\SoundManager.cs" />
   </ItemGroup>
 </Project>

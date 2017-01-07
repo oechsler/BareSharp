@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Glide;
 
+using BareKit.Audio;
 using BareKit.Graphics;
 
 namespace BareKit
@@ -12,9 +13,10 @@ namespace BareKit
         GraphicsDeviceManager graphics;
         ScalingManager scaling;
 
-		Tweener tweening;
+		SoundManager sound;
 
         SpriteBatch buffer;
+		Tweener tweening;
         Stage stage;	
 
         public Entrypoint()
@@ -33,16 +35,18 @@ namespace BareKit
 
 			scaling.Center();
 
-			tweening = new Tweener();
+			sound = new SoundManager();
 
             buffer = new SpriteBatch(GraphicsDevice);
-			stage = new Stage(scaling, Content, tweening);
+			tweening = new Tweener();
+			stage = new Stage(scaling, Content, tweening, sound);
         }
 
         protected override void Update(GameTime gameTime)
         {
-			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+			sound.Update();
 
+			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             stage.Update(gameTime);
 
             base.Update(gameTime);

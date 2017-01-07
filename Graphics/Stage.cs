@@ -6,18 +6,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Glide;
 
+using BareKit.Audio;
+
 namespace BareKit.Graphics
 {
     public class Stage : Container
     {
 		ContentManager content;
 		Tweener tweening;
+		SoundManager sound;
 
-		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening)
+		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound)
         {
 			Initialize(scaling);
 			this.content = content;
 			this.tweening = tweening;
+			this.sound = sound;
 
 			Color = new Color(40, 40, 40);
         }
@@ -78,6 +82,11 @@ namespace BareKit.Graphics
 		public Tweener Tweening
 		{
 			get { return tweening; }
+		}
+
+		public SoundManager Sound
+		{
+			get { return sound; }
 		}
     }
 }
