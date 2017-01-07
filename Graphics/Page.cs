@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using Glide;
+
 namespace BareKit.Graphics
 {
     public class Page : Container
@@ -60,14 +62,19 @@ namespace BareKit.Graphics
 			
         }
 
+		protected Stage Stage
+		{
+			get { return (Stage)Parent; }
+		}
+
 		protected ContentManager Content
 		{
 			get { return ((Stage)Parent).Content; }
 		}
 
-        protected Stage Stage
-        {
-			get { return (Stage)Parent; }
-        }
+		protected Tweener Tweening
+		{
+			get { return ((Stage)Parent).Tweening; }
+		}
     }
 }

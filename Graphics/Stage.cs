@@ -4,16 +4,20 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using Glide;
+
 namespace BareKit.Graphics
 {
     public class Stage : Container
     {
 		ContentManager content;
+		Tweener tweening;
 
-		public Stage(ScalingManager scaling, ContentManager content)
+		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening)
         {
 			Initialize(scaling);
 			this.content = content;
+			this.tweening = tweening;
 
 			Color = new Color(40, 40, 40);
         }
@@ -69,6 +73,11 @@ namespace BareKit.Graphics
 		public ContentManager Content
 		{
 			get { return content; }
+		}
+
+		public Tweener Tweening
+		{
+			get { return tweening; }
 		}
     }
 }

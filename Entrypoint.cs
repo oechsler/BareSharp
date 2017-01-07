@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Glide;
+
 using BareKit.Graphics;
 
 namespace BareKit
@@ -9,6 +11,8 @@ namespace BareKit
     {
         GraphicsDeviceManager graphics;
         ScalingManager scaling;
+
+		Tweener tweening;
 
         SpriteBatch buffer;
         Stage stage;	
@@ -29,12 +33,16 @@ namespace BareKit
 
 			scaling.Center();
 
+			tweening = new Tweener();
+
             buffer = new SpriteBatch(GraphicsDevice);
-			stage = new Stage(scaling, Content);
+			stage = new Stage(scaling, Content, tweening);
         }
 
         protected override void Update(GameTime gameTime)
         {
+			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+
             stage.Update(gameTime);
 
             base.Update(gameTime);
