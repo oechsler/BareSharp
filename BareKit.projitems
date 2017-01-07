@@ -16,5 +16,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\ScalingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Stage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Glide\Ease.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Glide\GlideInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Glide\Lerper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Glide\Tween.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Glide\Tweener.cs" />
   </ItemGroup>
 </Project>
