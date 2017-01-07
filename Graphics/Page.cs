@@ -50,15 +50,15 @@ namespace BareKit.Graphics
             
         }
 
-		protected virtual void Resized()
-        {
-			
-        }
-
 		public sealed override void Draw(SpriteBatch buffer)
 		{
 			base.Draw(buffer);
 		}
+
+		protected virtual void Resized()
+        {
+			
+        }
 
 		protected ContentManager Content
 		{
