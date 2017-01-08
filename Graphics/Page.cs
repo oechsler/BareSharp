@@ -7,18 +7,23 @@ using Microsoft.Xna.Framework.Graphics;
 using Glide;
 
 using BareKit.Audio;
+using BareKit.Input;
 
 namespace BareKit.Graphics
 {
     public class Page : Container
     {
+		InputManager input;
+
 		bool contentLoaded;
 
 		public sealed override void Initialize(ScalingManager scaling)
 		{
 			base.Initialize(scaling);
 
-			Scaling.Resized += (object sender, EventArgs e) =>
+			input = new InputManager(scaling);
+
+			scaling.Resized += (object sender, EventArgs e) =>
 			{
 				Resized();
 			};
@@ -53,7 +58,7 @@ namespace BareKit.Graphics
 
         public virtual void Update(GameTime delta)
         {
-            
+			input.Update();
         }
 
 		public sealed override void Draw(SpriteBatch buffer)
@@ -84,6 +89,11 @@ namespace BareKit.Graphics
 		protected SoundManager Sound 
 		{
 			get { return ((Stage)Parent).Sound; }
+		}
+
+		protected InputManager Input
+		{
+			get { return input; }
 		}
     }
 }

@@ -1,18 +1,18 @@
 ﻿<Properties StartupConfiguration="{18B9D332-378F-4A08-AA24-766E110E24FB}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Audio/Sound.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Graphics/Page.cs">
     <Files>
-      <File FileName="BareMac/Main.cs" Line="40" Column="3" />
-      <File FileName="Entrypoint.cs" Line="6" Column="15" />
+      <File FileName="BareMac/Main.cs" Line="17" Column="1" />
+      <File FileName="Entrypoint.cs" Line="42" Column="55" />
       <File FileName="Graphics/ScalingManager.cs" Line="82" Column="26" />
-      <File FileName="BareMac/Info.plist" />
-      <File FileName="Graphics/Page.cs" Line="49" Column="33" />
-      <File FileName="Graphics/Stage.cs" Line="80" Column="28" />
+      <File FileName="Graphics/Page.cs" Line="91" Column="13" />
+      <File FileName="Graphics/Stage.cs" Line="17" Column="15" />
       <File FileName="Graphics/Sprite.cs" Line="31" Column="39" />
-      <File FileName="Graphics/Container.cs" Line="38" Column="30" />
-      <File FileName="BareMac/MainPage.cs" Line="28" Column="27" />
+      <File FileName="BareMac/MainPage.cs" Line="33" Column="1" />
       <File FileName="Graphics/Drawable.cs" Line="67" Column="48" />
       <File FileName="Audio/SoundManager.cs" Line="3" Column="18" />
-      <File FileName="Audio/Sound.cs" Line="6" Column="18" />
+      <File FileName="Audio/Sound.cs" Line="73" Column="1" />
+      <File FileName="Input/Input.cs" Line="28" Column="3" />
+      <File FileName="Input/InputManager.cs" Line="14" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
