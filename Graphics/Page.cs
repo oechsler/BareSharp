@@ -4,19 +4,35 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using Glide;
+
+using BareKit.Audio;
+using BareKit.Input;
+
 namespace BareKit.Graphics
 {
     public class Page : Container
     {
+		InputManager input;
+
 		bool contentLoaded;
 
-		public Page(ScalingManager scaling) : base(scaling)
-        {
-			Scaling.Resized += (object sender, EventArgs e) =>
-            {
-                Resized();
-            };
-        }
+		public sealed override void Initialize(ScalingManager scaling)
+		{
+			base.Initialize(scaling);
+
+			input = new InputManager(scaling);
+
+			scaling.Resized += (object sender, EventArgs e) =>
+			{
+				Resized();
+			};
+		}
+
+		protected virtual void LoadContent()
+		{
+
+		}
 
         public virtual void Enter(Page from)
         {
@@ -27,30 +43,22 @@ namespace BareKit.Graphics
 			}
         }
 
-		protected virtual void LoadContent()
+		protected virtual void UnloadContent()
 		{
-			
+
 		}
 
         public virtual void Leave(bool terminate)
         {
 			if (terminate)
 				UnloadContent();
-        }
 
-		protected virtual void UnloadContent()
-		{
-			
-		}
+			Tweening.CancelAndComplete();
+        }
 
         public virtual void Update(GameTime delta)
         {
-            
-        }
-
-		protected virtual void Resized()
-        {
-			
+			input.Update();
         }
 
 		public sealed override void Draw(SpriteBatch buffer)
@@ -58,14 +66,34 @@ namespace BareKit.Graphics
 			base.Draw(buffer);
 		}
 
+		protected virtual void Resized()
+        {
+			
+        }
+
+		protected Stage Stage
+		{
+			get { return (Stage)Parent; }
+		}
+
 		protected ContentManager Content
 		{
 			get { return ((Stage)Parent).Content; }
 		}
 
-        protected Stage Stage
-        {
-			get { return (Stage)Parent; }
-        }
+		protected Tweener Tweening
+		{
+			get { return ((Stage)Parent).Tweening; }
+		}
+
+		protected SoundManager Sound 
+		{
+			get { return ((Stage)Parent).Sound; }
+		}
+
+		protected InputManager Input
+		{
+			get { return input; }
+		}
     }
 }

@@ -17,10 +17,8 @@ namespace BareKit.Graphics
 
         Container parent;
 
-        public Drawable(ScalingManager scaling)
+        public Drawable()
         {
-            this.scaling = scaling;
-
             position = new Vector2(0);
             rotation = 0;
             scale = new Vector2(1);
@@ -29,6 +27,11 @@ namespace BareKit.Graphics
             color = Color.White;
             alpha = 1;
         }
+
+		public virtual void Initialize(ScalingManager scaling)
+		{
+			this.scaling = scaling;
+		}		
 
         public virtual void Draw(SpriteBatch buffer)
         {
@@ -61,7 +64,7 @@ namespace BareKit.Graphics
         public float Rotation 
         {
             get { return rotation; }
-            set { rotation = value; }
+			set { rotation = MathHelper.ToRadians(value); }
         }
 
         public Vector2 Scale

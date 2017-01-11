@@ -4,15 +4,24 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using Glide;
+
+using BareKit.Audio;
+
 namespace BareKit.Graphics
 {
     public class Stage : Container
     {
 		ContentManager content;
+		Tweener tweening;
+		SoundManager sound;
 
-		public Stage(ScalingManager scaling, ContentManager content) : base(scaling)
+		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound)
         {
+			Initialize(scaling);
 			this.content = content;
+			this.tweening = tweening;
+			this.sound = sound;
 
 			Color = new Color(40, 40, 40);
         }
@@ -31,19 +40,23 @@ namespace BareKit.Graphics
 
         public Stage NavigateTo(Type pageType)
         {
-			Page target = (Page)Activator.CreateInstance(pageType, Scaling);
-            Page current = null;
-
-            if (Children.Count > 0)
-                current = (Page)Children[Children.Count - 1];
-            
-            current?.Leave(false);
-
-            AddChild(target);
-			target.Enter(current);
-
-            return this;
+			return NavigateTo((Page)Activator.CreateInstance(pageType));
         }
+
+		public Stage NavigateTo(Page pageInstance)
+		{
+			Page current = null;
+
+			if (Children.Count > 0)
+				current = (Page)Children[Children.Count - 1];
+
+			current?.Leave(false);
+
+			AddChild(pageInstance);
+			pageInstance.Enter(current);
+
+			return this;
+		}
 
         public Stage NavigateBack()
         {
@@ -64,6 +77,16 @@ namespace BareKit.Graphics
 		public ContentManager Content
 		{
 			get { return content; }
+		}
+
+		public Tweener Tweening
+		{
+			get { return tweening; }
+		}
+
+		public SoundManager Sound
+		{
+			get { return sound; }
 		}
     }
 }
