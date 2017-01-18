@@ -1,13 +1,13 @@
-﻿<Properties StartupConfiguration="{0244C68A-AFFC-46F8-BF64-1B3B33FDF353}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Input/GamepadInput.cs">
+﻿<Properties StartupConfiguration="{26BEEB73-AB11-4B6B-A460-C48DDA97B14D}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Graphics/Sprite.cs">
     <Files>
-      <File FileName="Bare/Info.plist" />
-      <File FileName="Bare/Properties/AssemblyInfo.cs" Line="15" Column="31" />
-      <File FileName="Bare/Main.cs" Line="64" Column="1" />
-      <File FileName="Graphics/Stage.cs" Line="90" Column="4" />
-      <File FileName="Entrypoint.cs" Line="1" Column="1" />
-      <File FileName="Input/Input.cs" Line="1" Column="1" />
-      <File FileName="Input/GamepadInput.cs" Line="4" Column="24" />
+      <File FileName="Input/GamepadInput.cs" Line="14" Column="43" />
+      <File FileName="Graphics/Label.cs" Line="17" Column="3" />
+      <File FileName="Bare/Main.cs" Line="47" Column="46" />
+      <File FileName="Input/Input.cs" Line="12" Column="3" />
+      <File FileName="Graphics/Drawable.cs" Line="1" Column="1" />
+      <File FileName="Graphics/Container.cs" Line="1" Column="1" />
+      <File FileName="Graphics/Sprite.cs" Line="47" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
