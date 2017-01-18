@@ -25,6 +25,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Audio\SoundManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\Input.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Label.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\GamepadInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Input\" />

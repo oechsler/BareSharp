@@ -56,11 +56,11 @@ namespace BareKit.Graphics
 
 			float titleBarHeight = window.Window.Frame.Height - currentSize.Y;
 
-			PointF tempPosition = new PointF(newPosition.X, newPosition.Y);
-			SizeF tempSize = new SizeF(new PointF(currentSize.X, currentSize.Y + titleBarHeight));
-			RectangleF tempRect = new RectangleF(tempPosition, tempSize);
+			PointF drawPosition = new PointF(newPosition.X, newPosition.Y);
+			SizeF drawSize = new SizeF(new PointF(currentSize.X, currentSize.Y + titleBarHeight));
+			RectangleF drawRect = new RectangleF(drawPosition, drawSize);
 
-			window.Window.SetFrame(tempRect, true);
+			window.Window.SetFrame(drawRect, true);
 #endif
 		}
 
