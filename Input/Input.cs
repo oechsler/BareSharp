@@ -8,7 +8,9 @@ namespace BareKit.Input
 	{
 		Down = 0,
 		Pressed = 1,
-		Released = 2
+		Released = 2,
+
+		Unknown = 3
 	}
 
 	public class Input
