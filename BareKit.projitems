@@ -12,7 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entrypoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Container.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Drawable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Page.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Graphics\Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\ScalingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Stage.cs" />
@@ -27,6 +27,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Label.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\GamepadInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\TouchInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\KeyInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Input\" />

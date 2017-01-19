@@ -29,7 +29,7 @@ namespace BareKit.Graphics
         public void Update(GameTime delta)
         {
             if (Children.Count > 0)
-                ((Page)Children[Children.Count - 1]).Update(delta);
+				((Scene)Children[Children.Count - 1]).Update(delta);
         }
 
         public override void Draw(SpriteBatch buffer)
@@ -40,15 +40,15 @@ namespace BareKit.Graphics
 
         public Stage NavigateTo(Type pageType)
         {
-			return NavigateTo((Page)Activator.CreateInstance(pageType));
+			return NavigateTo((Scene)Activator.CreateInstance(pageType));
         }
 
-		public Stage NavigateTo(Page pageInstance)
+		public Stage NavigateTo(Scene pageInstance)
 		{
-			Page current = null;
+			Scene current = null;
 
 			if (Children.Count > 0)
-				current = (Page)Children[Children.Count - 1];
+				current = (Scene)Children[Children.Count - 1];
 
 			current?.Leave(false);
 
@@ -62,8 +62,8 @@ namespace BareKit.Graphics
         {
             if (Children.Count > 1)
             {
-                Page current = (Page)Children[Children.Count - 1];
-                Page target = (Page)Children[Children.Count - 2];
+                Scene current = (Scene)Children[Children.Count - 1];
+                Scene target = (Scene)Children[Children.Count - 2];
 
                 current.Leave(true);
                 target.Enter(current);
