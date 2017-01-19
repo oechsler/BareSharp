@@ -10,7 +10,9 @@ namespace BareKit.Graphics
     public class ScalingManager
     {
 		GameWindow window;
+#if MONOMAC
 		GraphicsDeviceManager graphics;
+#endif
 
         Vector2 initialSize;
         Vector2 currentSize;
@@ -21,7 +23,9 @@ namespace BareKit.Graphics
 
 		public ScalingManager(GraphicsDeviceManager graphics, GameWindow window, Vector3 size, float scale = 1, bool fullscreen = false)
         {
+#if MONOMAC
 			this.graphics = graphics;
+#endif
 			this.window = window;
 
             window.ClientSizeChanged += OnResized;

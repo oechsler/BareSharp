@@ -35,7 +35,7 @@ namespace Glide
         private List<Lerper> lerpers;
         private List<object> start, end;
         private Dictionary<string, int> varHash;
-        private TweenerImpl Parent;
+        //private TweenerImpl Parent;
         private IRemoveTweens Remover;
         
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Glide
             Target = target;
             Duration = duration;
             Delay = delay;
-            Parent = parent;
+            //Parent = parent;
             Remover = parent;
             
 			firstUpdate = true;

@@ -11,7 +11,7 @@ using BareKit.Input;
 
 namespace BareKit.Graphics
 {
-    public class Page : Container
+    public class Scene : Container
     {
 		InputManager input;
 
@@ -34,7 +34,7 @@ namespace BareKit.Graphics
 
 		}
 
-        public virtual void Enter(Page from)
+        public virtual void Enter(Scene from)
         {
 			if (!contentLoaded)
 			{
