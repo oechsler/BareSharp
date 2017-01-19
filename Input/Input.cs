@@ -6,11 +6,11 @@ namespace BareKit.Input
 {
 	public enum InputState
 	{
-		Down = 0,
-		Pressed = 1,
-		Released = 2,
-
-		Unknown = 3
+		Down,
+		Pressed,
+		Released,
+		Moved,
+		Unknown
 	}
 
 	public class Input
@@ -32,7 +32,7 @@ namespace BareKit.Input
 
 		public virtual void Update()
 		{
-			
+			// TODO: Checking code goes here ...
 		}
 
 		public void Trigger()
