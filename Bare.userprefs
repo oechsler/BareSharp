@@ -1,15 +1,22 @@
 ﻿<Properties StartupConfiguration="{AB98C82C-2C4F-4F38-87C2-53430F9BC9FA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Graphics/Sprite.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Utils/Glide/Tween.cs">
     <Files>
-      <File FileName="Bare/Main.cs" Line="38" Column="4" />
-      <File FileName="Bare/MainScene.cs" Line="42" Column="49" />
+      <File FileName="Bare/Main.cs" Line="20" Column="1" />
+      <File FileName="Bare/MainScene.cs" Line="51" Column="36" />
       <File FileName="Input/TouchInput.cs" Line="120" Column="4" />
       <File FileName="Graphics/Scene.cs" Line="64" Column="25" />
       <File FileName="Graphics/Stage.cs" Line="69" Column="39" />
-      <File FileName="Graphics/Sprite.cs" Line="46" Column="12" />
-      <File FileName="Graphics/Label.cs" Line="86" Column="8" />
-      <File FileName="Graphics/Drawable.cs" Line="1" Column="1" />
-      <File FileName="Graphics/ScalingManager.cs" Line="98" Column="82" />
+      <File FileName="Graphics/Sprite.cs" Line="51" Column="1" />
+      <File FileName="Graphics/Label.cs" Line="57" Column="12" />
+      <File FileName="Graphics/Drawable.cs" Line="134" Column="38" />
+      <File FileName="Graphics/ScalingManager.cs" Line="98" Column="100" />
+      <File FileName="Graphics/Container.cs" Line="32" Column="48" />
+      <File FileName="Utils/Primitives2D/Primitives2D.cs" Line="4" Column="27" />
+      <File FileName="Utils/Glide/Ease.cs" Line="3" Column="11" />
+      <File FileName="Utils/Glide/GlideInfo.cs" Line="5" Column="27" />
+      <File FileName="Utils/Glide/Lerper.cs" Line="3" Column="27" />
+      <File FileName="Utils/Glide/Tween.cs" Line="4" Column="8" />
+      <File FileName="Utils/Glide/Tweener.cs" Line="3" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />

@@ -30,10 +30,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Lerper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Tween.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Tweener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\Primitives2D.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Input\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\Glide\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\licence.txt" />
   </ItemGroup>
 </Project>
