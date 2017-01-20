@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using Glide;
 
-namespace Glide
+namespace Barekit.Tweening
 {
 	public partial class Tween
 	{

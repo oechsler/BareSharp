@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 
-namespace Glide
+namespace Barekit.Tweening
 {
 	internal class GlideInfo
 	{
