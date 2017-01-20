@@ -14,13 +14,14 @@ namespace BareKit.Graphics
         Vector2 assetScale;
         Vector2 screenScale;
         Texture2D texture;
+		bool isRendered;
 
         public Sprite(ContentManager content, string assetName)
         {
             this.content = content;
             this.assetName = assetName;
-
             texture = content.Load<Texture2D>(assetName + "_1x");
+			isRendered = true;
         }
 
 		public override void Initialize(ScalingManager scaling)
@@ -39,6 +40,7 @@ namespace BareKit.Graphics
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)
 			{
+				isRendered = true;
 				buffer.Draw(texture: texture,
 							position: Scaling.Size / 2 + Position,
 							origin: new Vector2(texture.Width, texture.Height) / 2 + Origin,
@@ -46,7 +48,14 @@ namespace BareKit.Graphics
 							scale: screenScale * Scale,
 							color: Color * Alpha
 						   );
+#if DEBUG
+				RotatedRectangle collisionBounds = Bounds;
+				collisionBounds.ChangePosition((int)(Scaling.Size.X / 2), (int)(Scaling.Size.Y / 2));
+				PrimitivesDebug.ColliderRect(buffer, collisionBounds, new Color(40, 40, 255), Scaling.Scale.X * .75f);
+#endif
 			}
+			else
+				isRendered = false;
         }
 
         void onResize(object sender, EventArgs e)
@@ -77,6 +86,11 @@ namespace BareKit.Graphics
         public RotatedRectangle Bounds
 		{
 			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); }
+		}
+
+		public bool IsRendered
+		{
+			get { return isRendered; }
 		}
     }
 }

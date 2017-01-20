@@ -14,6 +14,7 @@ namespace BareKit.Graphics
         Vector2 assetScale;
         Vector2 screenScale;
         SpriteFont font;
+		bool isRendered;
 
         string text;
 
@@ -21,8 +22,9 @@ namespace BareKit.Graphics
         {
 			this.content = content;
             this.assetName = assetName;
-
 			font = content.Load<SpriteFont>(assetName + "_1x");
+			isRendered = true;
+
             this.text = text;
         }
 
@@ -42,6 +44,7 @@ namespace BareKit.Graphics
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)
 			{
+				isRendered = true;
 				buffer.DrawString(spriteFont: font,
 								  text: text,
 								  position: Scaling.Size / 2 + Position,
@@ -53,6 +56,8 @@ namespace BareKit.Graphics
 								  layerDepth: 0
 								 );
 			}
+			else
+				isRendered = false;
         }
 
         void onResize(object sender, EventArgs e)
@@ -89,6 +94,11 @@ namespace BareKit.Graphics
 		public RotatedRectangle Bounds
         {
 			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); }
+		}
+
+		public bool IsRendered
+		{
+			get { return isRendered; }
 		}
     }
 }
