@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Glide;
-
 using BareKit.Audio;
 using BareKit.Graphics;
+using BareKit.Tweening;
 
 namespace BareKit
 {

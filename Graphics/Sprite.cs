@@ -48,11 +48,6 @@ namespace BareKit.Graphics
 							scale: screenScale * Scale,
 							color: Color * Alpha
 						   );
-#if DEBUG
-				RotatedRectangle collisionBounds = Bounds;
-				collisionBounds.ChangePosition((int)(Scaling.Size.X / 2), (int)(Scaling.Size.Y / 2));
-				PrimitivesDebug.ColliderRect(buffer, collisionBounds, new Color(40, 40, 255), Scaling.Scale.X * .75f);
-#endif
 			}
 			else
 				isRendered = false;
