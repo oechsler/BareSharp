@@ -16,11 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\ScalingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Stage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Glide\Ease.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Glide\GlideInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Glide\Lerper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Glide\Tween.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Glide\Tweener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\Sound.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\SoundManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\Input.cs" />
@@ -30,9 +25,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\TouchInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\RotatedRectangle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Ease.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\GlideInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Lerper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Tween.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Tweener.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Input\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Utils\Glide\" />
   </ItemGroup>
 </Project>

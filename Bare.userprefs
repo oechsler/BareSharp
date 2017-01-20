@@ -3,12 +3,11 @@
     <Files>
       <File FileName="Bare/Main.cs" Line="38" Column="4" />
       <File FileName="Bare/MainScene.cs" Line="27" Column="29" />
-      <File FileName="Input/TouchInput.cs" Line="93" Column="99" />
+      <File FileName="Input/TouchInput.cs" Line="110" Column="81" />
       <File FileName="Graphics/Scene.cs" Line="64" Column="25" />
       <File FileName="Graphics/Stage.cs" Line="69" Column="39" />
       <File FileName="Graphics/Sprite.cs" Line="74" Column="13" />
       <File FileName="Graphics/Label.cs" Line="84" Column="26" />
-      <File FileName="Utils/RotatedRectangle.cs" Line="7" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
