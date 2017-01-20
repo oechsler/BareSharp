@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Barekit.Tweening
+namespace BareKit.Tweening
 {
 	internal class GlideInfo
 	{

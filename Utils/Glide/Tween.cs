@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Barekit.Tweening
+namespace BareKit.Tweening
 {
 	public partial class Tween
 	{

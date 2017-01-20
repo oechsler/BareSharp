@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Barekit.Tweening
+namespace BareKit.Tweening
 {
 	public class Tweener : Tween.TweenerImpl {};
 	
