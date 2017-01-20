@@ -1,29 +1,25 @@
-﻿<Properties StartupConfiguration="{AB98C82C-2C4F-4F38-87C2-53430F9BC9FA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Entrypoint.cs">
-    <Files>
-      <File FileName="Bare/Main.cs" Line="20" Column="1" />
-      <File FileName="Bare/MainScene.cs" Line="6" Column="21" />
-      <File FileName="Input/TouchInput.cs" Line="120" Column="4" />
-      <File FileName="Graphics/Scene.cs" Line="64" Column="25" />
-      <File FileName="Graphics/Stage.cs" Line="69" Column="39" />
-      <File FileName="Graphics/Sprite.cs" Line="51" Column="1" />
-      <File FileName="Graphics/Label.cs" Line="57" Column="12" />
-      <File FileName="Graphics/Drawable.cs" Line="134" Column="38" />
-      <File FileName="Graphics/ScalingManager.cs" Line="98" Column="100" />
-      <File FileName="Graphics/Container.cs" Line="32" Column="48" />
-      <File FileName="Utils/Primitives2D/Primitives2D.cs" Line="4" Column="27" />
-      <File FileName="Utils/Glide/Ease.cs" Line="3" Column="16" />
-      <File FileName="Utils/Glide/GlideInfo.cs" Line="4" Column="16" />
-      <File FileName="Utils/Glide/Lerper.cs" Line="3" Column="16" />
-      <File FileName="Utils/Glide/Tween.cs" Line="4" Column="16" />
-      <File FileName="Utils/Glide/Tweener.cs" Line="5" Column="16" />
-      <File FileName="Entrypoint.cs" Line="3" Column="1" />
-    </Files>
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Bare" expanded="True">
+            <Node name="Bare" expanded="True" selected="True">
+              <Node name="Properties" expanded="True" />
+            </Node>
+            <Node name="BareKit" expanded="True">
+              <Node name="Input" expanded="True" />
+              <Node name="Utils" expanded="True">
+                <Node name="Glide" expanded="True" />
+                <Node name="Primitives2D" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Bare PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
