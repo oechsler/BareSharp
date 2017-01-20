@@ -35,9 +35,9 @@ namespace BareKit.Graphics
         {
             base.Draw(buffer);
 
-			Rectangle screenBounds = Scaling.Bounds;
-			screenBounds.Offset(-Scaling.Size.X / 2, -Scaling.Size.Y / 2);
-			if (screenBounds.Intersects(Bounds.CollisionRectangle) && Alpha > 0)
+			RotatedRectangle screenBounds = Scaling.Bounds;
+			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
+			if (screenBounds.Intersects(Bounds) && Alpha > 0)
 			{
 				buffer.Draw(texture: texture,
 							position: Scaling.Size / 2 + Position,
