@@ -93,6 +93,11 @@ namespace BareKit.Graphics
             get { return currentSize; }
         }
 
+		public Rectangle Bounds
+		{
+			get { return new Rectangle(0, 0, (int)currentSize.X, (int)currentSize.Y); }
+		}
+
         public Vector2 Scale
         {
             get { return new Vector2(contentScale); }

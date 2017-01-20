@@ -14,6 +14,7 @@ namespace BareKit.Graphics
 
         Color color;
         float alpha;
+		bool isVisible;
 
         Container parent;
 
@@ -26,6 +27,7 @@ namespace BareKit.Graphics
 
             color = Color.White;
             alpha = 1;
+			isVisible = true;
         }
 
 		public virtual void Initialize(ScalingManager scaling)
@@ -129,9 +131,15 @@ namespace BareKit.Graphics
 
         public float Alpha
         {
-            get { return alpha; }
+			get { return isVisible ? alpha : 0; }
             set { alpha = value; }
         }
+
+		public bool IsVisible
+		{
+			get { return isVisible; }
+			set { isVisible = value; }
+		}
 
         public Container Parent
         {

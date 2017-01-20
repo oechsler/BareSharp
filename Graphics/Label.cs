@@ -38,16 +38,21 @@ namespace BareKit.Graphics
         {
             base.Draw(buffer);
 
-            buffer.DrawString(spriteFont: font,
-		                      text: text,
-					          position: Scaling.Size / 2 + Position,
-			                  origin: font.MeasureString(text) / 2 + Origin,
-		                      rotation: Rotation,
-		                      scale: screenScale * Scale,
-		                      color: Color * Alpha,
-		                      effects: SpriteEffects.None,
-		                      layerDepth: 0
-                       		 );
+			Rectangle screenBounds = Scaling.Bounds;
+			screenBounds.Offset(-Scaling.Size.X / 2, -Scaling.Size.Y / 2);
+			if (screenBounds.Intersects(Bounds.CollisionRectangle) && Alpha > 0)
+			{
+				buffer.DrawString(spriteFont: font,
+								  text: text,
+								  position: Scaling.Size / 2 + Position,
+								  origin: font.MeasureString(text) / 2 + Origin,
+								  rotation: Rotation,
+								  scale: screenScale * Scale,
+								  color: Color * Alpha,
+								  effects: SpriteEffects.None,
+								  layerDepth: 0
+								 );
+			}
         }
 
         void onResize(object sender, EventArgs e)
@@ -81,12 +86,9 @@ namespace BareKit.Graphics
 			get { return font.MeasureString(text) * screenScale; }
 		}
 
-		public RotatedRectangle Area
+		public RotatedRectangle Bounds
         {
-			get 
-			{ 
-				return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); 
-			}
+			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); }
 		}
     }
 }
