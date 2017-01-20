@@ -1,13 +1,15 @@
 ﻿<Properties StartupConfiguration="{AB98C82C-2C4F-4F38-87C2-53430F9BC9FA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Input/TouchInput.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Graphics/Sprite.cs">
     <Files>
       <File FileName="Bare/Main.cs" Line="38" Column="4" />
-      <File FileName="Bare/MainScene.cs" Line="27" Column="29" />
-      <File FileName="Input/TouchInput.cs" Line="110" Column="81" />
+      <File FileName="Bare/MainScene.cs" Line="42" Column="49" />
+      <File FileName="Input/TouchInput.cs" Line="120" Column="4" />
       <File FileName="Graphics/Scene.cs" Line="64" Column="25" />
       <File FileName="Graphics/Stage.cs" Line="69" Column="39" />
-      <File FileName="Graphics/Sprite.cs" Line="74" Column="13" />
-      <File FileName="Graphics/Label.cs" Line="84" Column="26" />
+      <File FileName="Graphics/Sprite.cs" Line="46" Column="12" />
+      <File FileName="Graphics/Label.cs" Line="86" Column="8" />
+      <File FileName="Graphics/Drawable.cs" Line="1" Column="1" />
+      <File FileName="Graphics/ScalingManager.cs" Line="98" Column="82" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
