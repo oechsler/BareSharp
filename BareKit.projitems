@@ -40,5 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\licence.txt" />
+    <None Include="$(MSBuildThisFileDirectory)Utils\Glide\license.txt" />
+    <None Include="$(MSBuildThisFileDirectory)Utils\Glide\readme.md" />
   </ItemGroup>
 </Project>
