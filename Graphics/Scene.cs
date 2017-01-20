@@ -61,7 +61,7 @@ namespace BareKit.Graphics
 			input.Update();
         }
 
-		public sealed override void Draw(SpriteBatch buffer)
+		public override sealed void Draw(SpriteBatch buffer)
 		{
 			base.Draw(buffer);
 		}

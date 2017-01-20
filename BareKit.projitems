@@ -29,8 +29,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\GamepadInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\TouchInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\RotatedRectangle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Input\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
   </ItemGroup>
 </Project>

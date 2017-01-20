@@ -81,9 +81,12 @@ namespace BareKit.Graphics
 			get { return font.MeasureString(text) * screenScale; }
 		}
 
-        public Rectangle Area
+		public RotatedRectangle Area
         {
-			get { return new Rectangle((int) (Position.X - Size.X / 2), (int) (Position.Y - Size.Y / 2),  (int) Size.X, (int) Size.Y); }
-        }
+			get 
+			{ 
+				return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); 
+			}
+		}
     }
 }

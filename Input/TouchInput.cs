@@ -23,7 +23,7 @@ namespace BareKit.Input
 		MouseState currentState;
 		Finger finger;
 
-		Rectangle area;
+		RotatedRectangle area;
 		Vector2 position;
 
 		public TouchInput(InputState inputState, Finger finger) : base(inputState)
@@ -32,7 +32,7 @@ namespace BareKit.Input
 			previousState = currentState = Mouse.GetState();
 			this.finger = finger;
 
-			area = new Rectangle(int.MinValue / 2, int.MinValue / 2, int.MaxValue, int.MaxValue);
+			area = new RotatedRectangle(new Rectangle(int.MinValue / 2, int.MinValue / 2, int.MaxValue, int.MaxValue), 0);
 			position = new Vector2(0, 0);
 		}
 
@@ -71,7 +71,7 @@ namespace BareKit.Input
 					{
 						position = -Scaling.Size / 2 + touch.Position / panelSize * Scaling.Size;
 
-						if (area.Contains(position.X, position.Y))
+						if (area.Intersects(new Rectangle((int)position.X, (int)position.Y, 1, 1)))
 							Trigger();
 					}
 					currentFinger++;
@@ -107,7 +107,7 @@ namespace BareKit.Input
 				{
 					position = currentState.Position.ToVector2() - Scaling.Size / 2;
 
-					if (area.Contains(position.X, position.Y))
+					if (area.Intersects(new Rectangle((int)position.X, (int)position.Y, 1, 1)))
 						Trigger();
 				}
 
@@ -116,7 +116,7 @@ namespace BareKit.Input
 			}
 		}
 
-		public Rectangle Area
+		public RotatedRectangle Area
 		{
 			get { return area; }
 			set { area = value; }
