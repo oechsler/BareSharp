@@ -25,10 +25,10 @@ namespace BareKit.Graphics
 			Color = new Color(40, 40, 40);
         }
 
-        public void Update(GameTime delta)
+		public void Update(GameTime gameTime)
         {
             if (Children.Count > 0)
-				((Scene)Children[Children.Count - 1]).Update(delta);
+				((Scene)Children[Children.Count - 1]).Update(gameTime);
         }
 
         public override void Draw(SpriteBatch buffer)

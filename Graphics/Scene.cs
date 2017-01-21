@@ -55,7 +55,7 @@ namespace BareKit.Graphics
 			Tweening.CancelAndComplete();
         }
 
-        public virtual void Update(GameTime delta)
+		public virtual void Update(GameTime gameTime)
         {
 			input.Update();
         }
