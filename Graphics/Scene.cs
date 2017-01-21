@@ -4,10 +4,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-using Glide;
-
 using BareKit.Audio;
 using BareKit.Input;
+using BareKit.Tweening;
 
 namespace BareKit.Graphics
 {
@@ -56,12 +55,12 @@ namespace BareKit.Graphics
 			Tweening.CancelAndComplete();
         }
 
-        public virtual void Update(GameTime delta)
+		public virtual void Update(float delta)
         {
 			input.Update();
         }
 
-		public sealed override void Draw(SpriteBatch buffer)
+		public override sealed void Draw(SpriteBatch buffer)
 		{
 			base.Draw(buffer);
 		}

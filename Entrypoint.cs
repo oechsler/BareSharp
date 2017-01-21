@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Glide;
-
 using BareKit.Audio;
 using BareKit.Graphics;
+using BareKit.Tweening;
 
 namespace BareKit
 {
@@ -17,7 +16,11 @@ namespace BareKit
 
         SpriteBatch buffer;
 		Tweener tweening;
-        Stage stage;	
+        Stage stage;
+
+		float oneSecond;
+		static int frames;
+		static int fps;
 
         public Entrypoint()
         {
@@ -47,7 +50,15 @@ namespace BareKit
 			sound.Update();
 
 			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            stage.Update(gameTime);
+            stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+
+			if (oneSecond >= 1)
+			{
+				fps = frames;
+				frames = 0;
+				oneSecond--;
+			}
+			oneSecond += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             base.Update(gameTime);
         }
@@ -61,6 +72,8 @@ namespace BareKit
             buffer.End();
 
             base.Draw(gameTime);
+
+			frames++;
         }
 
 		protected GraphicsDeviceManager Graphics
@@ -82,6 +95,11 @@ namespace BareKit
 		protected Stage Stage
 		{
 			get { return stage; }
+		}
+
+		public static int FramesPerSecond
+		{
+			get { return fps; }
 		}
     }
 }

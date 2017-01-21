@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-using Glide;
-
 using BareKit.Audio;
+using BareKit.Tweening;
 
 namespace BareKit.Graphics
 {
@@ -26,7 +25,7 @@ namespace BareKit.Graphics
 			Color = new Color(40, 40, 40);
         }
 
-        public void Update(GameTime delta)
+		public void Update(float delta)
         {
             if (Children.Count > 0)
 				((Scene)Children[Children.Count - 1]).Update(delta);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glide
+namespace BareKit.Tweening
 {
 	public abstract class Lerper
 	{

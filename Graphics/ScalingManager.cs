@@ -93,6 +93,11 @@ namespace BareKit.Graphics
             get { return currentSize; }
         }
 
+		public RotatedRectangle Bounds
+		{
+			get { return new RotatedRectangle(new Rectangle(0, 0, (int)currentSize.X, (int)currentSize.Y), 0); }
+		}
+
         public Vector2 Scale
         {
             get { return new Vector2(contentScale); }
