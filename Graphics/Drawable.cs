@@ -66,7 +66,7 @@ namespace BareKit.Graphics
         public float Rotation 
         {
             get { return rotation; }
-			set { rotation = MathHelper.ToRadians(value); }
+			set { rotation = value; }
         }
 
         public Vector2 Scale
