@@ -88,7 +88,7 @@ namespace BareKit.Audio
 			set { sound.Pitch = value; }
 		}
 
-		public bool Loop
+		public bool IsLooped
 		{
 			get { return sound.IsLooped; }
 			set { sound.IsLooped = value; }

@@ -32,4 +32,9 @@ Global
 		{2411A1A6-AD6F-4105-8B16-FBC0FC1C088F}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{2411A1A6-AD6F-4105-8B16-FBC0FC1C088F}.Debug|iPhone.Build.0 = Debug|iPhone
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.VersionControlPolicy = $1
+		$1.inheritsSet = Mono
+	EndGlobalSection
 EndGlobal
