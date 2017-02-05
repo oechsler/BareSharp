@@ -18,6 +18,12 @@ namespace BareKit.Graphics
 
         string text;
 
+		/// <summary>
+		/// Initializes a new instance of the Label class.
+		/// </summary>
+		/// <param name="content">The content pipeline form which the asset will be loaded.</param>
+		/// <param name="assetName">The assigned asset name from the content pipeline.</param>
+		/// <param name="text">The text displayed onscreen.</param>
         public Label(ContentManager content, string assetName, string text = "")
         {
 			this.content = content;
@@ -40,6 +46,7 @@ namespace BareKit.Graphics
         {
             base.Draw(buffer);
 
+			// Determine wether the Label should be rendered 
 			RotatedRectangle screenBounds = Scaling.Bounds;
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)
@@ -62,6 +69,7 @@ namespace BareKit.Graphics
 
         void onResize(object sender, EventArgs e)
         {
+			// Scaling factor the font asset is optimaly displayed with
             Vector2 targetAssetScale = new Vector2((float)Math.Max(1, Math.Round(Scaling.Scale.X*2)));
             if (assetScale != targetAssetScale)
             {
@@ -70,32 +78,54 @@ namespace BareKit.Graphics
                 {
                     try
                     {
+						// Try loading the optimal font asset from the content pipeline
 						font = content.Load<SpriteFont>(assetName + "_" + i + "x");
                         break;
                     }
-                    catch (Exception) { assetScale = new Vector2(i - 1); }
+                    catch (Exception) 
+					{
+						// Fallback to less optimal font asset and retry
+						assetScale = new Vector2(i - 1); 
+					}
                 }
             }
 
+			// Actual scaling factor the font asset is displayed onscreen
             screenScale = new Vector2(.5f) / assetScale * Scaling.Scale;
         }
 
+		/// <summary>
+		/// Gets or sets the text displayed onscreen.
+		/// </summary>
+		/// <value>The text displayed onscreen.</value>
         public string Text
         {
             get { return text; }
             set { text = value; }
         }
 
+		/// <summary>
+		/// Gets the size vector.
+		/// </summary>
+		/// <returns>The size vector.</returns>
         public Vector2 Size
 		{
 			get { return font.MeasureString(text) * screenScale; }
 		}
 
+		/// <summary>
+		/// Gets the bounds rectangle.
+		/// </summary>
+		/// <value>The bounds rectangle.</value>
 		public RotatedRectangle Bounds
         {
 			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); }
 		}
 
+		/// <summary>
+		/// Gets the value indicating whether the Label is rendered.
+		/// </summary>
+		/// <value>The render indicating value.</value>
 		public bool IsRendered
 		{
 			get { return isRendered; }
