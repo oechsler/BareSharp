@@ -31,16 +31,16 @@ namespace BareKit.Graphics
         }
 
 		/// <summary>
-		/// Used to initialize the Drawable instance.
+		/// Initializes the Drawable instance.
 		/// </summary>
-		/// <param name="scaling">ScalingManager the instance is being scaled by.</param>
+		/// <param name="scaling">ScalingManager the instance scale is being controled by.</param>
 		public virtual void Initialize(ScalingManager scaling)
 		{
 			this.scaling = scaling;
 		}		
 
 		/// <summary>
-		/// Used to send drawcalls to a specific SpriteBatch buffer.
+		/// Sends drawcalls to a specific SpriteBatch buffer.
 		/// </summary>
 		/// <param name="buffer">SpriteBatch buffer to which the calls are being send.</param>
         public virtual void Draw(SpriteBatch buffer)
