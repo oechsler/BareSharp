@@ -28,11 +28,18 @@ namespace BareKit.Graphics
 			};
 		}
 
+		/// <summary>
+		/// Loads the drawables and other components used in the Scene.
+		/// </summary>
 		protected virtual void LoadContent()
 		{
 
 		}
 
+		/// <summary>
+		/// Enters the Scene.
+		/// </summary>
+		/// <param name="from">The Scene which the was triggered from.</param>
         public virtual void Enter(Scene from)
         {
 			if (!contentLoaded)
@@ -42,11 +49,18 @@ namespace BareKit.Graphics
 			}
         }
 
+		/// <summary>
+		/// Unloads the drawables and other components used in the Scene.
+		/// </summary>
 		protected virtual void UnloadContent()
 		{
 
 		}
 
+		/// <summary>
+		/// Leave the Scene.
+		/// </summary>
+		/// <param name="terminate">The value indicating whether the Scene is removed from memory.</param>
         public virtual void Leave(bool terminate)
         {
 			if (terminate)
@@ -55,6 +69,9 @@ namespace BareKit.Graphics
 			Tweening.CancelAndComplete();
         }
 
+		/// <summary>
+		/// Updates the logic components of the Scene.
+		/// </summary>
 		public virtual void Update(float delta)
         {
 			input.Update();
@@ -65,6 +82,9 @@ namespace BareKit.Graphics
 			base.Draw(buffer);
 		}
 
+		/// <summary>
+		/// Resizes the Scenes other components
+		/// </summary>
 		protected virtual void Resized()
         {
 			
