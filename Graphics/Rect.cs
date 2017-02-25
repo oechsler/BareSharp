@@ -12,6 +12,10 @@ namespace BareKit.Graphics
 		float thickness;
 		bool isRendered;
 
+        /// <summary>
+        /// Initializes a new instance of the Rect class.
+        /// </summary>
+        /// <param name="filled">Whether the Rect is filled.</param>
 		public Rect(bool filled = true)
 		{
 			this.filled = filled;

@@ -18,13 +18,13 @@ namespace BareKit.Graphics
 
         string text;
 
-		/// <summary>
-		/// Initializes a new instance of the Label class.
-		/// </summary>
-		/// <param name="content">The content pipeline form which the asset will be loaded.</param>
-		/// <param name="assetName">The assigned asset name from the content pipeline.</param>
-		/// <param name="text">The text displayed onscreen.</param>
-		public Label(ContentManager content, string assetName, string text = "")
+        /// <summary>
+        /// Initializes a new instance of the Label class.
+        /// </summary>
+        /// <param name="content">The content pipeline which the asset will be loaded from.</param>
+        /// <param name="assetName">The within the content pipeline assigned name.</param>
+        /// <param name="text">The text displayed onscreen.</param>
+        public Label(ContentManager content, string assetName, string text = "")
         {
 			this.content = content;
             this.assetName = assetName;
