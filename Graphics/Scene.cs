@@ -90,26 +90,41 @@ namespace BareKit.Graphics
 			
         }
 
+        /// <summary>
+        /// Gets the Stage the Scene is a child of.
+        /// </summary>
 		protected Stage Stage
 		{
 			get { return (Stage)Parent; }
 		}
 
+        /// <summary>
+        /// Gets the attached content pipeline.
+        /// </summary>
 		protected ContentManager Content
 		{
 			get { return ((Stage)Parent).Content; }
 		}
 
+        /// <summary>
+        /// Gets the attached Glide tweening instance.
+        /// </summary>
 		protected Tweener Tweening
 		{
 			get { return ((Stage)Parent).Tweening; }
 		}
 
+        /// <summary>
+        /// Gets the attached SoundManager.
+        /// </summary>
 		protected SoundManager Sound 
 		{
 			get { return ((Stage)Parent).Sound; }
 		}
 
+        /// <summary>
+        /// Gets the Scenes InputManager.
+        /// </summary>
 		protected InputManager Input
 		{
 			get { return input; }
