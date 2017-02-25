@@ -20,7 +20,7 @@ namespace BareKit.Graphics
             base.Draw(buffer);
 
 			// Allocate a offscreen SpriteBatch buffer for the Container
-			// if none existed to this point
+			// if none exists to this point
             if (containerBuffer == null)
                 containerBuffer = new SpriteBatch(buffer.GraphicsDevice);
 

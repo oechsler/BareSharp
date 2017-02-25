@@ -24,7 +24,7 @@ namespace BareKit.Graphics
 		/// <param name="content">The content pipeline form which the asset will be loaded.</param>
 		/// <param name="assetName">The assigned asset name from the content pipeline.</param>
 		/// <param name="text">The text displayed onscreen.</param>
-        public Label(ContentManager content, string assetName, string text = "")
+		public Label(ContentManager content, string assetName, string text = "")
         {
 			this.content = content;
             this.assetName = assetName;
@@ -46,7 +46,7 @@ namespace BareKit.Graphics
         {
             base.Draw(buffer);
 
-			// Determine wether the Label should be rendered 
+			// Determine whether the Label should be rendered 
 			RotatedRectangle screenBounds = Scaling.Bounds;
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)

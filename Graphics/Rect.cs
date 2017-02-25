@@ -23,7 +23,7 @@ namespace BareKit.Graphics
 		{
 			base.Draw(buffer);
 
-			// Determine wether the Rect should be rendered 
+			// Determine whether the Rect should be rendered 
 			RotatedRectangle screenBounds = Scaling.Bounds;
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)
@@ -31,7 +31,7 @@ namespace BareKit.Graphics
 				isRendered = true;
 
 				// Allocate a offscreen SpriteBatch buffer for the Rect
-				// if none existed to this point
+				// if none exists to this point
 				if (primitiveBuffer == null)
 					primitiveBuffer = new SpriteBatch(buffer.GraphicsDevice);
 

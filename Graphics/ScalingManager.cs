@@ -20,7 +20,7 @@ namespace BareKit.Graphics
         DisplayOrientation orientation;
 
 		/// <summary>
-		/// Occurs when a resize is made to the controlled window.
+		/// Occurs when a resizement is made to the controlled window.
 		/// </summary>
         public event EventHandler<EventArgs> Resized;
 
@@ -30,7 +30,7 @@ namespace BareKit.Graphics
 		/// <param name="graphics">The GraphicsDeviceManager used by the ScalingManager.</param>
 		/// <param name="window">The window the ScalingManger is controlling.</param>
 		/// <param name="size">The initial size of the controlled window.</param>
-		/// <param name="scale">Scaling factor applyed to the size of the controlled window.</param>
+		/// <param name="scale">Scaling factor applied to the size of the controlled window.</param>
 		/// <param name="fullscreen">Whether the controlled window is in fullscreen.</param>
 		public ScalingManager(GraphicsDeviceManager graphics, GameWindow window, Vector3 size, float scale = 1, bool fullscreen = false)
         {
