@@ -32,14 +32,14 @@ namespace Microsoft.Xna.Framework
 		public float Rotation;
 		public Vector2 Origin;
 
-		public RotatedRectangle(Rectangle theRectangle, float theInitialRotation)
+		public RotatedRectangle(Rectangle theRectangle, float theInitialRotation, Vector2 theOrigin = null)
 		{
 			CollisionRectangle = theRectangle;
 			Rotation = theInitialRotation;
 
 			//Calculate the Rectangles origin. We assume the center of the Rectangle will
 			//be the point that we will be rotating around and we use that for the origin
-			Origin = new Vector2(theRectangle.Width / 2, theRectangle.Height / 2);
+			Origin = theOrigin ? theOrigin : new Vector2(theRectangle.Width / 2, theRectangle.Height / 2);
 		}
 
 		/// <summary>
