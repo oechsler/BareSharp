@@ -11,11 +11,19 @@ namespace BareKit.Input
 		GamePadState currentState;
 		Buttons button;
 
+        /// <summary>
+        /// Initializes a new instance of the GamepadInput class.
+        /// </summary>
 		public GamepadInput() : base(InputState.Unknown)
 		{
 			previousState = currentState = GamePad.GetState(PlayerIndex.One);
 		}
 
+        /// <summary>
+        /// Initializes a new instance of the GamepadInput class.
+        /// </summary>
+        /// <param name="inputState">The state the input device needs to be in for the event to trigger.</param>
+        /// <param name="button">The button the GampadInput is listening to.</param>
 		public GamepadInput(InputState inputState, Buttons button) : base(inputState)
 		{
 			previousState = currentState = GamePad.GetState(PlayerIndex.One);
@@ -49,11 +57,17 @@ namespace BareKit.Input
 			currentState = GamePad.GetState(PlayerIndex.One);
 		}
 
+        /// <summary>
+        /// Returns the value indicating whether the gampad is connected.
+        /// </summary>
 		public bool IsConnected
 		{
 			get { return currentState.IsConnected; }
 		}
 
+        /// <summary>
+        /// Returns the gampads left stick position vector.
+        /// </summary>
 		public Vector2 LeftStick
 		{
 			get {
@@ -63,6 +77,9 @@ namespace BareKit.Input
 			}
 		}
 
+        /// <summary>
+        /// Returns the gampads right stick position vector.
+        /// </summary>
 		public Vector2 RightStick
 		{
 			get
@@ -73,6 +90,9 @@ namespace BareKit.Input
 			}
 		}
 
+        /// <summary>
+        /// Returns the gampads left trigger position value.
+        /// </summary>
 		public float LeftTrigger
 		{
 			get
@@ -83,6 +103,9 @@ namespace BareKit.Input
 			}
 		}
 
+        /// <summary>
+        /// Returns the gampads right trigger position value.
+        /// </summary>
 		public float RightTrigger
 		{
 			get
