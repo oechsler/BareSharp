@@ -11,6 +11,11 @@ namespace BareKit.Input
 		KeyboardState currentState;
 		Keys key;
 
+        /// <summary>
+        /// Initializes a new instance of the KeyInput class.
+        /// </summary>
+        /// <param name="inputState">The state the input device needs to be in for the event to trigger.</param>
+        /// <param name="key">The key the KeyboardInput is listening to.</param>
 		public KeyInput(InputState inputState, Keys key) : base(inputState)
 		{
 			previousState = currentState = Keyboard.GetState();
