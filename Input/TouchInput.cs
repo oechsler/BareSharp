@@ -26,6 +26,11 @@ namespace BareKit.Input
 		RotatedRectangle bounds;
 		Vector2 position;
 
+        /// <summary>
+        /// Initializes a new instance of the TouchInput class.
+        /// </summary>
+        /// <param name="inputState">The state the input device needs to be in for the event to trigger.</param>
+        /// <param name="finger">The finger id the TouchInput is listening to.</param>
 		public TouchInput(InputState inputState, Finger finger) : base(inputState)
 		{
 			touches = TouchPanel.GetState();
@@ -116,12 +121,18 @@ namespace BareKit.Input
 			}
 		}
 
+        /// <summary>
+		/// Gets or sets the triggering bounds rectangle.
+		/// </summary>
 		public RotatedRectangle Bounds
 		{
 			get { return bounds; }
 			set { bounds = value; }
 		}
 
+        /// <summary>
+        /// Gets the (cursor-)postition vector.
+        /// </summary>
 		public Vector2 Position
 		{
 			get { return position; }
