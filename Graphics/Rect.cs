@@ -62,7 +62,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets a value indicating whether the Rect is filled.
 		/// </summary>
-		/// <value>The fill indicating value.</value>
 		public bool Filled
 		{
 			get { return filled; }
@@ -72,7 +71,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the tickness displayed onscreen.
 		/// </summary>
-		/// <value>The tickness displayed onscreen.</value>
 		public float Tickness
 		{
 			get { return thickness; }
@@ -82,7 +80,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the size vector.
 		/// </summary>
-		/// <returns>The size vector.</return
 		public Vector2 Size
 		{
 			get { return Scale * Scaling.Scale; }
@@ -91,16 +88,14 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the bounds rectangle.
 		/// </summary>
-		/// <value>The bounds rectangle.</value>
 		public RotatedRectangle Bounds
 		{
-			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); }
+			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin); }
 		}
 
 		/// <summary>
 		/// Gets the value indicating whether the Rect is rendered.
 		/// </summary>
-		/// <value>The render indicating value.</value>
 		public bool IsRendered
 		{
 			get { return isRendered; }

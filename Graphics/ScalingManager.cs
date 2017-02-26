@@ -103,7 +103,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Unfits the specified number from the current scale.
 		/// </summary>
-		/// <value>The scaled number.</value>
 		public float UnFit(float number)
 		{
 			return number / contentScale;
@@ -112,7 +111,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Unfits the specified vector from the current scale.
 		/// </summary>
-		/// <value>The scaled vector.</value>
 		public Vector2 UnFit(Vector2 vector)
 		{
 			return vector / contentScale;
@@ -121,7 +119,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the controlled windows size vector.
 		/// </summary>
-		/// <returns>The size vector.</returns>
         public Vector2 Size
         {
             get { return currentSize; }
@@ -130,7 +127,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the controlled windows bounds rectangle.
 		/// </summary>
-		/// <value>The sbounds rectangle.</value>
 		public RotatedRectangle Bounds
 		{
 			get { return new RotatedRectangle(new Microsoft.Xna.Framework.Rectangle(0, 0, (int)currentSize.X, (int)currentSize.Y), 0); }
@@ -139,7 +135,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the current scale.
 		/// </summary>
-		/// <value>The current scale.</value>
         public Vector2 Scale
         {
             get { return new Vector2(contentScale); }
@@ -148,7 +143,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the current display orientation.
 		/// </summary>
-		/// <value>The current display orientation.</value>
         public DisplayOrientation Orientation
         {
             get { return orientation; }

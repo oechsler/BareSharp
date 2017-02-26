@@ -52,7 +52,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the attached ScalingManager.
 		/// </summary>
-		/// <value>The attached ScalingManger.</value>
         protected ScalingManager Scaling
         {
             get { return scaling; }
@@ -61,7 +60,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the position vector.
 		/// </summary>
-		/// <value>The position vector.</value>
         public Vector2 Position
         {
             get { return position; }
@@ -71,7 +69,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the x-coordinate of the position vector.
 		/// </summary>
-		/// <value>The x-coordinate of the position vector.</value>
         public float PositionX
         {
             get { return position.X; }
@@ -81,7 +78,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the y-coordinate of the position vector.
 		/// </summary>
-		/// <value>The y-coordinate of the position vector.</value>
         public float PositionY
         {
             get { return position.Y; }
@@ -91,7 +87,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the rotation.
 		/// </summary>
-		/// <value>The rotation.</value>
         public float Rotation 
         {
             get { return rotation; }
@@ -101,7 +96,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the scale vector.
 		/// </summary>
-		/// <value>The scale vector.</value>
         public Vector2 Scale
         {
             get { return scale; }
@@ -111,7 +105,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the x-coordinate of the scale vector.
 		/// </summary>
-		/// <value>The x-coordinate of the scale vector.</value>
         public float ScaleX
         {
             get { return scale.X; }
@@ -121,7 +114,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the y-coordinate of the scale vector.
 		/// </summary>
-		/// <value>The y-coordinate of the scale vector.</value>
         public float ScaleY
         {
             get { return scale.Y; }
@@ -131,7 +123,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the origin vector.
 		/// </summary>
-		/// <value>The origin vector.</value>
         public Vector2 Origin
         {
             get { return origin; }
@@ -141,7 +132,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the x-coordinate of the origin vector.
 		/// </summary>
-		/// <value>The x-coordinate of the origin vector.</value>
         public float OriginX
         {
             get { return origin.X; }
@@ -151,7 +141,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the y-coordinate of the origin vector.
 		/// </summary>
-		/// <value>The y-coordinate of the origin vector.</value>
         public float OriginY
         {
             get { return origin.Y; }
@@ -161,7 +150,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the displayed color.
 		/// </summary>
-		/// <value>The displayed color.</value>
         public Color Color
         {
             get { return color; }
@@ -171,7 +159,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the red value of the displayed color.
 		/// </summary>
-		/// <value>The red value of the displayed color.</value>
         public int ColorR
         {
             get { return color.R; }
@@ -181,7 +168,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the green value of the displayed color.
 		/// </summary>
-		/// <value>The green value of the displayed color.</value>
         public int ColorG
         {
             get { return color.G; }
@@ -191,7 +177,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the blue value of the displayed color.
 		/// </summary>
-		/// <value>The blue value of the displayed color.</value>
         public int ColorB
         {
             get { return color.B; }
@@ -201,7 +186,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the alpha value of the displayed color.
 		/// </summary>
-		/// <value>The alpha value of the displayed color.</value>
         public float Alpha
         {
 			get { return isVisible ? alpha : 0; }
@@ -211,7 +195,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets a value indicating whether the Drawable is visible.
 		/// </summary>
-		/// <value>The visibility indicating value.</value>
 		public bool IsVisible
 		{
 			get { return isVisible; }
@@ -221,7 +204,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the parent component.
 		/// </summary>
-		/// <value>The parent component.</value>
         public Container Parent
         {
             get { return parent; }

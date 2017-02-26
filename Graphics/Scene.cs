@@ -33,13 +33,14 @@ namespace BareKit.Graphics
 		/// </summary>
 		protected virtual void LoadContent()
 		{
-
+            // Load your Drawables here
+            // ex.: sprite = new Sprite(Content, "example");
 		}
 
 		/// <summary>
 		/// Enters the Scene.
 		/// </summary>
-		/// <param name="from">The Scene which the was triggered from.</param>
+		/// <param name="from">The Scene which the navigation was triggered from.</param>
         public virtual void Enter(Scene from)
         {
 			if (!contentLoaded)
@@ -47,34 +48,44 @@ namespace BareKit.Graphics
 				LoadContent();
 				contentLoaded = true;
 			}
+
+            // Add your drawables here
+            // ex.: AddChild(sprite);
         }
-
-		/// <summary>
-		/// Unloads the drawables and other components used in the Scene.
-		/// </summary>
-		protected virtual void UnloadContent()
-		{
-
-		}
 
 		/// <summary>
 		/// Leave the Scene.
 		/// </summary>
-		/// <param name="terminate">The value indicating whether the Scene is removed from memory.</param>
+		/// <param name="terminate">The value indicating whether the Scene will be removed from memory.</param>
         public virtual void Leave(bool terminate)
         {
-			if (terminate)
+            // Remove your drawables here
+            // ex.: RemoveChild(sprite);
+
+            if (terminate)
 				UnloadContent();
 
 			Tweening.CancelAndComplete();
         }
 
-		/// <summary>
-		/// Updates the logic components of the Scene.
+        /// <summary>
+		/// Unloads the drawables and other components used in the Scene.
 		/// </summary>
-		public virtual void Update(float delta)
+		protected virtual void UnloadContent()
+        {
+            // Unload your Drawables here (mark for gc)
+            // ex.: sprite = null;
+        }
+
+        /// <summary>
+        /// Updates the logic components of the Scene.
+        /// </summary>
+        public virtual void Update(float delta)
         {
 			input.Update();
+
+            // Update needed components and others here
+            // ex.: sprite.Position.X += 10 * delta;
         }
 
 		public override sealed void Draw(SpriteBatch buffer)
@@ -87,7 +98,8 @@ namespace BareKit.Graphics
 		/// </summary>
 		protected virtual void Resized()
         {
-			
+            // Resize and/or reposition needed components here
+            // ex.: sprite.Scale = Scaling.UnFit(Scaling.Size / new Vector(2));
         }
 
         /// <summary>

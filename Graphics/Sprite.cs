@@ -89,7 +89,6 @@ namespace BareKit.Graphics
         /// <summary>
 		/// Gets the size vector.
 		/// </summary>
-		/// <returns>The size vector.</returns
         public Vector2 Size
         {
             get { return new Vector2(texture.Width, texture.Height) * screenScale; }
@@ -98,16 +97,14 @@ namespace BareKit.Graphics
         /// <summary>
 		/// Gets the bounds rectangle.
 		/// </summary>
-		/// <value>The bounds rectangle.</value>
         public RotatedRectangle Bounds
 		{
-			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation); }
+			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin); }
 		}
 
         /// <summary>
 		/// Gets the value indicating whether the Label is rendered.
 		/// </summary>
-		/// <value>The render indicating value.</value>
 		public bool IsRendered
 		{
 			get { return isRendered; }
