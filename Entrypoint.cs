@@ -22,6 +22,9 @@ namespace BareKit
 		static int frames;
 		static int fps;
 
+        /// <summary>
+        /// Initializes a new instance of the Entrypoint class.
+        /// </summary>
         public Entrypoint()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -76,27 +79,42 @@ namespace BareKit
 			frames++;
         }
 
+        /// <summary>
+        /// Gets the attached GraphicsDeviceManager.
+        /// </summary>
 		protected GraphicsDeviceManager Graphics
 		{
 			get { return graphics; }
 		}
 
+        /// <summary>
+        /// Gets or sets the attached ScalingManager.
+        /// </summary>
 		protected ScalingManager Scaling
 		{
 			get { return scaling; }
 			set { scaling = value; } 
 		}
 
+        /// <summary>
+        /// Gets the attached SpriteBatch buffer.
+        /// </summary>
 		protected SpriteBatch Buffer
 		{
 			get { return buffer; }
 		}
 
+        /// <summary>
+        /// Gets the attached Stage.
+        /// </summary>
 		protected Stage Stage
 		{
 			get { return stage; }
 		}
 
+        /// <summary>
+        /// Gets the current Frames/s count.
+        /// </summary>
 		public static int FramesPerSecond
 		{
 			get { return fps; }
