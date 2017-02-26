@@ -15,6 +15,13 @@ namespace BareKit.Graphics
 		Tweener tweening;
 		SoundManager sound;
 
+        /// <summary>
+        /// Initializes a new instance of the Stage class.
+        /// </summary>
+        /// <param name="scaling">The ScalingManager attached to the Scenes.</param>
+        /// <param name="content">The content pipline attached to the Scenes.</param>
+        /// <param name="tweening">The Glide tweening instacne attached to the Scenes.</param>
+        /// <param name="sound">The SoundManager attached to the Scenes.</param>
 		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound)
         {
 			Initialize(scaling);
@@ -22,9 +29,14 @@ namespace BareKit.Graphics
 			this.tweening = tweening;
 			this.sound = sound;
 
-			Color = new Color(40, 40, 40);
+            // Default background color (hex #282828)
+            Color = new Color(40, 40, 40);
         }
 
+        /// <summary>
+        /// Sends an updatecall to the current Scene.
+        /// </summary>
+        /// <param name="delta">The time it took since the last updatecall in seconds.</param>
 		public void Update(float delta)
         {
             if (Children.Count > 0)
@@ -37,12 +49,20 @@ namespace BareKit.Graphics
                 Children[Children.Count - 1].Draw(buffer);
         }
 
-        public Stage NavigateTo(Type pageType)
+        /// <summary>
+        /// Navigates to a specific Scene by its type.
+        /// </summary>
+        /// <param name="sceneType">The type of the Scene.</param>
+        public Stage NavigateTo(Type sceneType)
         {
-			return NavigateTo((Scene)Activator.CreateInstance(pageType));
+			return NavigateTo((Scene)Activator.CreateInstance(sceneType));
         }
 
-		public Stage NavigateTo(Scene pageInstance)
+        /// <summary>
+        /// Navigates to a specific Scene by its instance.
+        /// </summary>
+        /// <param name="sceneInstance">The instance of the Scene.</param>
+		public Stage NavigateTo(Scene sceneInstance)
 		{
 			Scene current = null;
 
@@ -51,15 +71,18 @@ namespace BareKit.Graphics
 
 			current?.Leave(false);
 
-			AddChild(pageInstance);
+			AddChild(sceneInstance);
 			pageInstance.Enter(current);
 
 			return this;
 		}
 
+        /// <summary>
+        /// Navigates back to the previous Scene.
+        /// </summary>
         public Stage NavigateBack()
         {
-            if (Children.Count > 1)
+            if (CanNavigateBack)
             {
                 Scene current = (Scene)Children[Children.Count - 1];
                 Scene target = (Scene)Children[Children.Count - 2];
@@ -73,16 +96,33 @@ namespace BareKit.Graphics
             return this;
         }
 
+        /// <summary>
+        /// Gets the value indicating whether a backwards navigation is posssible.
+        /// </summary>
+        public bool CanNavigateBack
+        {
+            get { return Children.Count > 1 ? true : false; }
+        }
+
+        /// <summary>
+        /// Gets the attached content pipline.
+        /// </summary>
 		public ContentManager Content
 		{
 			get { return content; }
 		}
 
+        /// <summary>
+        /// Gets the attached Glide tweening instance.
+        /// </summary>
 		public Tweener Tweening
 		{
 			get { return tweening; }
 		}
 
+        /// <summary>
+        /// Gets the attached SoundManager.
+        /// </summary>
 		public SoundManager Sound
 		{
 			get { return sound; }
