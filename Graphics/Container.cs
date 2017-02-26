@@ -38,10 +38,26 @@ namespace BareKit.Graphics
             containerBuffer.End();
         }
 
-		/// <summary>
-		/// Adds a child Drawable to the Container.
+        /// <summary>
+		/// Gets the size vector.
 		/// </summary>
-		/// <param name="child">The child Drawable being added.</param>
+        public Vector2 Size
+        {
+            get { return Scaling.Size * Scale; }
+        }
+
+        /// <summary>
+		/// Gets the bounds rectangle.
+		/// </summary>
+        public RotatedRectangle Bounds
+        {
+            get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin); }
+        }
+
+        /// <summary>
+        /// Adds a child Drawable to the Container.
+        /// </summary>
+        /// <param name="child">The child Drawable being added.</param>
         public Container AddChild(Drawable child)
         {
 			child.Initialize(Scaling);
@@ -66,7 +82,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Returs a copy of the contianed child Drawables.
 		/// </summary>
-		/// <value>The list of child Drawables.</value>
         public List<Drawable> Children
         {
             get { return new List<Drawable>(drawables); }
