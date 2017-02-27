@@ -85,7 +85,7 @@ namespace BareKit.Graphics
         }
 
 		/// <summary>
-		/// Gets or sets the rotation.
+		/// Gets or sets the rotation in radiants.
 		/// </summary>
         public float Rotation 
         {
