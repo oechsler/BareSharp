@@ -72,7 +72,7 @@ namespace BareKit.Graphics
 			current?.Leave(false);
 
 			AddChild(sceneInstance);
-			pageInstance.Enter(current);
+			sceneInstance.Enter(current);
 
 			return this;
 		}
