@@ -2,6 +2,8 @@
 
 For further information on how MonoGame works, please checkout their online [documentation](http://www.monogame.net/documentation/?page=main).
 
+*To install the Bare framework simply add all the files from this repos master branch to your project and reference the BareKit shared project in your MonoGame application.*
+
 To begin, you want to create a custom Entypoint for your game. Bares Entrypoint is what is known as the Game class in MonoGame.
 
 ~~~csharp
@@ -21,13 +23,13 @@ window with dark-grey background.
 
 ![empty_window](./Assets/empty_window.tiff)
 
-Although the window seems perfect, the resolution borthers you, right? No problem! Simply change the default ScalingManager via the Scaling field. *It is necessary that this is done before calling the base class Initialize method of your Entrypoint.*
+Although the window seems perfect, the resolution borthers you? Alright, no problem! Simply change the default ScalingManager via the Scaling field. *It is necessary that this is done before calling the base class Initialize method of your Entrypoint.*
 
 ~~~csharp
 Scaling = new ScalingManager(graphics, window, size, [scale], [fullscreen]);
 ~~~
 
-The size vector is of type Vecor3. Because it is used to determine the siez of a window, you might wonder why we are not using a Vector2. This is because we are using the. first argument to determine the width of the window and the second and third for the aspect ratio. 
+The size vector is of type Vecor3. Because it is used to determine the size of a window, you might wonder why we are not using a Vector2. This is because we are using the first argument to determine the width of the window and the second and third for the aspect ratio. 
 
 The correct vector for an 800x600 window therefor would be:
 
@@ -92,6 +94,14 @@ public override Initialize()
 Once you build and run the application agian, you will see your snowball Sprite displayed right in the center of the window.
 
 ![window_snowball](./Assets/window_snowball.tiff)
+
+Now that you have got your Sprite displayed you might want to change its atribute fileds like for example Rotation and Position. Please checkout the class reference in the Drawable class file for further information on this topic. 
+
+If your are interested in animating your Sprite using the Gilde tweening engine however, please visit their online [documentation](https://bitbucket.org/jacobalbano/glide). The engine itself is implemented under the Bare.Tweening namespace and the Tweening field inside each Scene class (see class reference).
+
+For information on playing Sound and handling Input calls checkout their respective class references.
+
+*Copyright © 2017 - Samuel Oechsler* 
 
 
 
