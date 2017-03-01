@@ -50,6 +50,14 @@ namespace BareKit.Graphics
         }
 
 		/// <summary>
+		/// Creates a clone of this instance.
+		/// </summary>
+		public Drawable Clone()
+		{
+			return (Drawable)MemberwiseClone();
+		}
+
+		/// <summary>
 		/// Gets the attached ScalingManager.
 		/// </summary>
         protected ScalingManager Scaling
