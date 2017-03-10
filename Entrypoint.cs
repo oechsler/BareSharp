@@ -1,14 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using MoonSharp.Interpreter;
+
 using BareKit.Audio;
 using BareKit.Graphics;
 using BareKit.Tweening;
-#if !WINDOWS_UAP
-using BareKit.Lua;
-#else
-using MoonSharp.Interpreter;
-#endif
 
 namespace BareKit
 {
@@ -23,8 +20,6 @@ namespace BareKit
 		Tweener tweening;
         Stage stage;
 
-        Script script;
-
 		float oneSecond;
 		static int frames;
 		static int fps;
@@ -38,6 +33,7 @@ namespace BareKit
 			scaling = new ScalingManager(graphics, Window, new Vector3(720, 16, 9), 1.25f);
 
             Content.RootDirectory = "Content";
+            Scripting.RootDirectory = "Scripts";
 
             IsMouseVisible = true;
         }
@@ -55,9 +51,12 @@ namespace BareKit
             buffer = new SpriteBatch(GraphicsDevice);
 			tweening = new Tweener();
 			stage = new Stage(scaling, Content, tweening, sound);
+            
+            Scripting.Initialize(this, "main");
+            Scripting.Global.Set("stage", UserData.Create(stage));
 
-            script = new Script();
-            script.Globals["bare"] = new Table(script);
+            if (Scripting.Global != null && Scripting.Global.Get("init").IsNotNil())
+                Scripting.Global.Get("init").Function.Call();
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,7 +66,10 @@ namespace BareKit
 			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-			if (oneSecond >= 1)
+            if (Scripting.Global != null && Scripting.Global.Get("update").IsNotNil())
+                Scripting.Global.Get("update").Function.Call((float)gameTime.ElapsedGameTime.TotalSeconds);
+
+            if (oneSecond >= 1)
 			{
 				fps = frames;
 				frames = 0;

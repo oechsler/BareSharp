@@ -1,8 +1,9 @@
 ﻿using System;
 
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+
+using MoonSharp.Interpreter.Interop;
 
 using BareKit.Audio;
 using BareKit.Input;
@@ -16,7 +17,12 @@ namespace BareKit.Graphics
 
 		bool contentLoaded;
 
-		public sealed override void Initialize(ScalingManager scaling)
+        public event EventHandler<EventArgs> Entered;
+        public event EventHandler<EventArgs> Left;
+        public event EventHandler<EventArgs> Updated;
+        public event EventHandler<EventArgs> Resized;
+
+        public sealed override void Initialize(ScalingManager scaling)
 		{
 			base.Initialize(scaling);
 
@@ -24,7 +30,7 @@ namespace BareKit.Graphics
 
 			scaling.Resized += (object sender, EventArgs e) =>
 			{
-				Resized();
+				Resize();
 			};
 		}
 
@@ -49,6 +55,8 @@ namespace BareKit.Graphics
 				contentLoaded = true;
 			}
 
+            Entered?.Invoke(this, EventArgs.Empty);
+
             // Add your drawables here
             // ex.: AddChild(sprite);
         }
@@ -66,6 +74,8 @@ namespace BareKit.Graphics
 				UnloadContent();
 
 			Tweening.CancelAndComplete();
+
+            Left?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -84,6 +94,8 @@ namespace BareKit.Graphics
         {
 			input.Update();
 
+            Updated?.Invoke(this, EventArgs.Empty);
+
             // Update needed components and others here
             // ex.: sprite.Position.X += 10 * delta;
         }
@@ -96,8 +108,10 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Resizes the Scenes other components
 		/// </summary>
-		protected virtual void Resized()
+		protected virtual void Resize()
         {
+            Resized?.Invoke(this, EventArgs.Empty);
+
             // Resize and/or reposition needed components here
             // ex.: sprite.Scale = Scaling.UnFit(Scaling.Size / new Vector(2));
         }
@@ -105,7 +119,8 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the Stage the Scene is a child of.
         /// </summary>
-		protected Stage Stage
+        [MoonSharpVisible(true)]
+        protected Stage Stage
 		{
 			get { return (Stage)Parent; }
 		}
@@ -113,7 +128,8 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the attached content pipeline.
         /// </summary>
-		protected ContentManager Content
+        [MoonSharpVisible(true)]
+        protected ContentManager Content
 		{
 			get { return ((Stage)Parent).Content; }
 		}
@@ -121,7 +137,8 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the attached Glide tweening instance.
         /// </summary>
-		protected Tweener Tweening
+        [MoonSharpVisible(true)]
+        protected Tweener Tweening
 		{
 			get { return ((Stage)Parent).Tweening; }
 		}
@@ -129,7 +146,8 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the attached SoundManager.
         /// </summary>
-		protected SoundManager Sound 
+        [MoonSharpVisible(true)]
+        protected SoundManager Sound 
 		{
 			get { return ((Stage)Parent).Sound; }
 		}
@@ -137,7 +155,8 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the Scenes InputManager.
         /// </summary>
-		protected InputManager Input
+        [MoonSharpVisible(true)]
+        protected InputManager Input
 		{
 			get { return input; }
 		}

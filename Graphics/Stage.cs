@@ -4,11 +4,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using MoonSharp.Interpreter;
+
 using BareKit.Audio;
 using BareKit.Tweening;
 
 namespace BareKit.Graphics
 {
+    [MoonSharpUserData]
     public class Stage : Container
     {
 		ContentManager content;
