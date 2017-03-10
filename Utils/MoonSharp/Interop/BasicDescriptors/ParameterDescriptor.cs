@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using BareKit.Lua.Interpreter.Compatibility;
+using BareKit.Lua.Compatibility;
 
-namespace BareKit.Lua.Interpreter.Interop.BasicDescriptors
+namespace BareKit.Lua.Interop.BasicDescriptors
 {
 	/// <summary>
 	/// Descriptor of parameters used in <see cref="IOverloadableMemberDescriptor"/> implementations.

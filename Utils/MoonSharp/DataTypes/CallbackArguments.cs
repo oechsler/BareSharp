@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.DataStructs;
+using BareKit.Lua.DataStructs;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// This class is a container for arguments received by a CallbackFunction

@@ -6,7 +6,7 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// Class providing the IPlatformAccessor interface for .NET Core builds

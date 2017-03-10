@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Exception thrown when a dynamic expression is invalid

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Interop.BasicDescriptors
+namespace BareKit.Lua.Interop.BasicDescriptors
 {
 	/// <summary>
 	/// Specialized <see cref="IMemberDescriptor"/> for members supporting overloads resolution.

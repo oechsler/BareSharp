@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Enumeration of the types of SymbolRef

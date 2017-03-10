@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Exception thrown when an inconsistent state is reached in the interpreter

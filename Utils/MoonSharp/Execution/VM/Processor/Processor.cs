@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using BareKit.Lua.Interpreter.DataStructs;
-using BareKit.Lua.Interpreter.Debugging;
+using BareKit.Lua.DataStructs;
+using BareKit.Lua.Debugging;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	sealed partial class Processor
 	{
@@ -145,7 +145,7 @@ namespace BareKit.Lua.Interpreter.Execution.VM
 
 			if (m_OwningThreadID >= 0 && m_OwningThreadID != threadID && m_Script.Options.CheckThreadAccess)
 			{
-				string msg = string.Format("Cannot enter the same BareKit.Lua processor from two different threads : {0} and {1}", m_OwningThreadID, threadID);
+				string msg = string.Format("Cannot enter the same MoonSharp processor from two different threads : {0} and {1}", m_OwningThreadID, threadID);
 				throw new InvalidOperationException(msg);
 			}
 

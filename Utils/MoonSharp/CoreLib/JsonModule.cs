@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BareKit.Lua.Interpreter.Serialization.Json;
+using BareKit.Lua.Serialization.Json;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
-	[BareKit.LuaModule(Namespace = "json")]
+	[MoonSharpModule(Namespace = "json")]
 	public class JsonModule
 	{
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue parse(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			try
@@ -24,7 +24,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue serialize(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			try
@@ -39,14 +39,14 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue isnull(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue vs = args[0];
 			return DynValue.NewBoolean((JsonNull.IsJsonNull(vs)) || (vs.IsNil()));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue @null(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return JsonNull.Create();

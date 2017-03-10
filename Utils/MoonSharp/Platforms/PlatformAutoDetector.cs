@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using BareKit.Lua.Interpreter.Interop;
-using BareKit.Lua.Interpreter.Loaders;
+using BareKit.Lua.Interop;
+using BareKit.Lua.Loaders;
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// A static class offering properties for autodetection of system/platform details

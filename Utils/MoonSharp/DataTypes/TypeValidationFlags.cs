@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Flags to alter the way the DynValue.CheckType and other related functions operate on data types for

@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// A watch item for the debugger to consume.

@@ -1,7 +1,7 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Interop.RegistrationPolicies;
+using BareKit.Lua.Interop.RegistrationPolicies;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Collection of the standard policies to handle UserData type registrations.
@@ -11,7 +11,7 @@ namespace BareKit.Lua.Interpreter.Interop
 	public static class InteropRegistrationPolicy
 	{
 		/// <summary>
-		/// The default registration policy used by BareKit.Lua unless explicitely replaced.
+		/// The default registration policy used by MoonSharp unless explicitely replaced.
 		/// Deregistrations are allowed, but registration of a new descriptor are not allowed
 		/// if a descriptor is already registered for that type.
 		/// 
@@ -20,7 +20,7 @@ namespace BareKit.Lua.Interpreter.Interop
 		public static IRegistrationPolicy Default { get { return new DefaultRegistrationPolicy(); }}
 
 		/// <summary>
-		/// The default registration policy used by BareKit.Lua unless explicitely replaced.
+		/// The default registration policy used by MoonSharp unless explicitely replaced.
 		/// Deregistrations are allowed, but registration of a new descriptor are not allowed
 		/// if a descriptor is already registered for that type.
 		/// 

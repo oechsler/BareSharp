@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace BareKit.Lua.Interpreter.Loaders
+namespace BareKit.Lua.Loaders
 {
 	/// <summary>
 	/// A script loader loading scripts from an assembly resources

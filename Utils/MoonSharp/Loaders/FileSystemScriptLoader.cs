@@ -1,7 +1,7 @@
 ﻿#if DOTNET_CORE || (!(PCL || ENABLE_DOTNET || NETFX_CORE))
 using System.IO;
 
-namespace BareKit.Lua.Interpreter.Loaders
+namespace BareKit.Lua.Loaders
 {
 	/// <summary>
 	/// A script loader loading scripts directly from the file system (does not go through platform object)

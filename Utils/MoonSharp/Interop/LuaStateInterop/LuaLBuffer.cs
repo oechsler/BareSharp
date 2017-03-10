@@ -3,7 +3,7 @@
 
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Interop.LuaStateInterop
+namespace BareKit.Lua.Interop.LuaStateInterop
 {
 	public class LuaLBuffer 
 	{

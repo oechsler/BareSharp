@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// An interface for type descriptors having the ability to generate other descriptors on the fly.

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.CoreLib;
-using BareKit.Lua.Interpreter.Platforms;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.CoreLib;
+using BareKit.Lua.Platforms;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Class managing modules (mostly as extension methods)
@@ -57,7 +57,7 @@ namespace BareKit.Lua.Interpreter
 			Table m = moonsharp_table.Table;
 
 			table.Set("_G", DynValue.NewTable(table));
-			table.Set("_VERSION", DynValue.NewString(string.Format("BareKit.Lua {0}", Script.VERSION)));
+			table.Set("_VERSION", DynValue.NewString(string.Format("MoonSharp {0}", Script.VERSION)));
 			table.Set("_MOONSHARP", moonsharp_table);
 
 			m.Set("version", DynValue.NewString(Script.VERSION));
@@ -88,9 +88,9 @@ namespace BareKit.Lua.Interpreter
 
 			foreach (MethodInfo mi in Framework.Do.GetMethods(t).Where(__mi => __mi.IsStatic))
 			{
-				if (mi.GetCustomAttributes(typeof(BareKit.LuaModuleMethodAttribute), false).ToArray().Length > 0)
+				if (mi.GetCustomAttributes(typeof(MoonSharpModuleMethodAttribute), false).ToArray().Length > 0)
 				{
-					BareKit.LuaModuleMethodAttribute attr = (BareKit.LuaModuleMethodAttribute)mi.GetCustomAttributes(typeof(BareKit.LuaModuleMethodAttribute), false).First();
+					MoonSharpModuleMethodAttribute attr = (MoonSharpModuleMethodAttribute)mi.GetCustomAttributes(typeof(MoonSharpModuleMethodAttribute), false).First();
 
 					if (!CallbackFunction.CheckCallbackSignature(mi, true))
 							throw new ArgumentException(string.Format("Method {0} does not have the right signature.", mi.Name));
@@ -109,24 +109,24 @@ namespace BareKit.Lua.Interpreter
 
 					table.Set(name, DynValue.NewCallback(func, name));
 				}
-				else if (mi.Name == "BareKit.LuaInit")
+				else if (mi.Name == "MoonSharpInit")
 				{
 					object[] args = new object[2] { gtable, table };
 					mi.Invoke(null, args);
 				}
 			}
 
-			foreach (FieldInfo fi in Framework.Do.GetFields(t).Where(_mi => _mi.IsStatic && _mi.GetCustomAttributes(typeof(BareKit.LuaModuleMethodAttribute), false).ToArray().Length > 0))
+			foreach (FieldInfo fi in Framework.Do.GetFields(t).Where(_mi => _mi.IsStatic && _mi.GetCustomAttributes(typeof(MoonSharpModuleMethodAttribute), false).ToArray().Length > 0))
 			{
-				BareKit.LuaModuleMethodAttribute attr = (BareKit.LuaModuleMethodAttribute)fi.GetCustomAttributes(typeof(BareKit.LuaModuleMethodAttribute), false).First();
+				MoonSharpModuleMethodAttribute attr = (MoonSharpModuleMethodAttribute)fi.GetCustomAttributes(typeof(MoonSharpModuleMethodAttribute), false).First();
 				string name = (!string.IsNullOrEmpty(attr.Name)) ? attr.Name : fi.Name;
 
 				RegisterScriptField(fi, null, table, t, name);
 			}
 
-			foreach (FieldInfo fi in Framework.Do.GetFields(t).Where(_mi => _mi.IsStatic && _mi.GetCustomAttributes(typeof(BareKit.LuaModuleConstantAttribute), false).ToArray().Length > 0))
+			foreach (FieldInfo fi in Framework.Do.GetFields(t).Where(_mi => _mi.IsStatic && _mi.GetCustomAttributes(typeof(MoonSharpModuleConstantAttribute), false).ToArray().Length > 0))
 			{
-				BareKit.LuaModuleConstantAttribute attr = (BareKit.LuaModuleConstantAttribute)fi.GetCustomAttributes(typeof(BareKit.LuaModuleConstantAttribute), false).First();
+				MoonSharpModuleConstantAttribute attr = (MoonSharpModuleConstantAttribute)fi.GetCustomAttributes(typeof(MoonSharpModuleConstantAttribute), false).First();
 				string name = (!string.IsNullOrEmpty(attr.Name)) ? attr.Name : fi.Name;
 
 				RegisterScriptFieldAsConst(fi, null, table, t, name);
@@ -170,7 +170,7 @@ namespace BareKit.Lua.Interpreter
 
 		private static Table CreateModuleNamespace(Table gtable, Type t)
 		{
-			BareKit.LuaModuleAttribute attr = (BareKit.LuaModuleAttribute)(Framework.Do.GetCustomAttributes(t, typeof(BareKit.LuaModuleAttribute), false).First());
+			MoonSharpModuleAttribute attr = (MoonSharpModuleAttribute)(Framework.Do.GetCustomAttributes(t, typeof(MoonSharpModuleAttribute), false).First());
 
 			if (string.IsNullOrEmpty(attr.Namespace))
 			{

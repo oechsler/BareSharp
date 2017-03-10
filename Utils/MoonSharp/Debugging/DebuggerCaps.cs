@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// Enumeration of capabilities for a debugger

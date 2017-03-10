@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Diagnostics
+namespace BareKit.Lua.Diagnostics
 {
 	/// <summary>
 	/// The result of a performance counter

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Debugging;
+using BareKit.Lua.Debugging;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	sealed partial class Processor
 	{

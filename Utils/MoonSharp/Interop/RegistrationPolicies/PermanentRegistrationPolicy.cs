@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Interop.RegistrationPolicies
+namespace BareKit.Lua.Interop.RegistrationPolicies
 {
 	/// <summary>
 	/// A registration policy which makes registration permanent and not deletable.

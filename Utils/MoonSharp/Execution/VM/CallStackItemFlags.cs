@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	[Flags]
 	internal enum CallStackItemFlags

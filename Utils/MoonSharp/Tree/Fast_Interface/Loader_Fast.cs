@@ -1,10 +1,10 @@
-﻿using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Execution.VM;
-using BareKit.Lua.Interpreter.Tree.Expressions;
-using BareKit.Lua.Interpreter.Tree.Statements;
+﻿using BareKit.Lua.Debugging;
+using BareKit.Lua.Execution;
+using BareKit.Lua.Execution.VM;
+using BareKit.Lua.Tree.Expressions;
+using BareKit.Lua.Tree.Statements;
 
-namespace BareKit.Lua.Interpreter.Tree.Fast_Interface
+namespace BareKit.Lua.Tree.Fast_Interface
 {
 	internal static class Loader_Fast
 	{

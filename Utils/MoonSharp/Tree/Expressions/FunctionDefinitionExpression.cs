@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Execution.VM;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Execution;
+using BareKit.Lua.Execution.VM;
 
-using BareKit.Lua.Interpreter.Tree.Statements;
+using BareKit.Lua.Tree.Statements;
 
-namespace BareKit.Lua.Interpreter.Tree.Expressions
+namespace BareKit.Lua.Tree.Expressions
 {
 	class FunctionDefinitionExpression : Expression, IClosureBuilder
 	{

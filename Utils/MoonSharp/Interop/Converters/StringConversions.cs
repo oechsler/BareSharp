@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Interop.Converters
+namespace BareKit.Lua.Interop.Converters
 {
 	internal static class StringConversions
 	{

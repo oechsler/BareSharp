@@ -1,6 +1,6 @@
-﻿using BareKit.Lua.Interpreter.Tree.Statements;
+﻿using BareKit.Lua.Tree.Statements;
 
-namespace BareKit.Lua.Interpreter.Execution.Scopes
+namespace BareKit.Lua.Execution.Scopes
 {
 	internal class BuildTimeScopeFrame
 	{

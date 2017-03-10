@@ -4,6 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using BareKit.Audio;
 using BareKit.Graphics;
 using BareKit.Tweening;
+#if !WINDOWS_UAP
+using BareKit.Lua;
+#else
+using MoonSharp.Interpreter;
+#endif
 
 namespace BareKit
 {
@@ -17,6 +22,8 @@ namespace BareKit
         SpriteBatch buffer;
 		Tweener tweening;
         Stage stage;
+
+        Script script;
 
 		float oneSecond;
 		static int frames;
@@ -39,13 +46,18 @@ namespace BareKit
         {
             base.Initialize();
 
+#if MONOMAC
 			scaling.Center();
+#endif
 
 			sound = new SoundManager();
 
             buffer = new SpriteBatch(GraphicsDevice);
 			tweening = new Tweener();
 			stage = new Stage(scaling, Content, tweening, sound);
+
+            script = new Script();
+            script.Globals["bare"] = new Table(script);
         }
 
         protected override void Update(GameTime gameTime)

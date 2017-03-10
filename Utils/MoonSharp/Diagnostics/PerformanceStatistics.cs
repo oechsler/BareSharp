@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
-using BareKit.Lua.Interpreter.Diagnostics.PerformanceCounters;
+using BareKit.Lua.Diagnostics.PerformanceCounters;
 
-namespace BareKit.Lua.Interpreter.Diagnostics
+namespace BareKit.Lua.Diagnostics
 {
 	/// <summary>
 	/// A single object of this type exists for every script and gives access to performance statistics.

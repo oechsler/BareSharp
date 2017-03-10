@@ -60,9 +60,9 @@ namespace BareKit.Graphics
             Resized?.Invoke(this, EventArgs.Empty);
         }
 
+#if MONOMAC
 		public void Center()
 		{
-#if MONOMAC
 			// Centers the controlled window
 			// Only neccesarry under MonoMac due to a missplaced window if non standard size
 
@@ -79,14 +79,14 @@ namespace BareKit.Graphics
 			RectangleF drawRect = new RectangleF(drawPosition, drawSize);
 
 			window.Window.SetFrame(drawRect, true);
+    }
 #endif
-		}
 
-		/// <summary>
-		/// Fits the specified number to the current scale.
-		/// </summary>
-		/// <param name="number">The non scaled number.</param>
-		public float Fit(float number)
+        /// <summary>
+        /// Fits the specified number to the current scale.
+        /// </summary>
+        /// <param name="number">The non scaled number.</param>
+        public float Fit(float number)
 		{
 			return number * contentScale;
 		}

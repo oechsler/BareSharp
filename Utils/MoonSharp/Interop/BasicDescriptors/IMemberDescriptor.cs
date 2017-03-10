@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Interop.BasicDescriptors
+namespace BareKit.Lua.Interop.BasicDescriptors
 {
 	/// <summary>
 	/// Base interface to describe access to members of a given type.

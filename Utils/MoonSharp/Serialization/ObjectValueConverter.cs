@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop.Converters;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop.Converters;
 
-namespace BareKit.Lua.Interpreter.Serialization
+namespace BareKit.Lua.Serialization
 {
 	public static class ObjectValueConverter
 	{

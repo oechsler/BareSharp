@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Diagnostics.PerformanceCounters
+namespace BareKit.Lua.Diagnostics.PerformanceCounters
 {
 	class DummyPerformanceStopwatch : IPerformanceStopwatch, IDisposable
 	{

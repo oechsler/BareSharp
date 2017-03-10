@@ -1,7 +1,7 @@
-﻿using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Execution.VM;
+﻿using BareKit.Lua.Execution;
+using BareKit.Lua.Execution.VM;
 
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	abstract class NodeBase
 	{

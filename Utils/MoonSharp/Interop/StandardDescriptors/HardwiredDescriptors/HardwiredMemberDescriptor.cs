@@ -1,8 +1,8 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
-using BareKit.Lua.Interpreter.Interop.Converters;
+using BareKit.Lua.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.Converters;
 
-namespace BareKit.Lua.Interpreter.Interop.StandardDescriptors.HardwiredDescriptors
+namespace BareKit.Lua.Interop.StandardDescriptors.HardwiredDescriptors
 {
 	public abstract class HardwiredMemberDescriptor : IMemberDescriptor
 	{

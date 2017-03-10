@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Interop.RegistrationPolicies
+namespace BareKit.Lua.Interop.RegistrationPolicies
 {
 	/// <summary>
 	/// Similar to <see cref="DefaultRegistrationPolicy"/>, but with automatic type registration is disabled.

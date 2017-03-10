@@ -1,8 +1,8 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Tree;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Tree;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Exception for all parsing/lexing errors. 

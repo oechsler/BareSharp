@@ -1,7 +1,7 @@
-﻿using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Tree;
+﻿using BareKit.Lua.Debugging;
+using BareKit.Lua.Tree;
 
-namespace BareKit.Lua.Interpreter.Execution
+namespace BareKit.Lua.Execution
 {
 	class ScriptLoadingContext
 	{

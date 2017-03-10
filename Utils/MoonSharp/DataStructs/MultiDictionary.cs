@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.DataStructs
+namespace BareKit.Lua.DataStructs
 {
 	/// <summary>
 	/// A Dictionary where multiple values can be associated to the same key

@@ -1,6 +1,6 @@
-﻿using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
+﻿using BareKit.Lua.Interop.BasicDescriptors;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Class providing a simple descriptor for constant DynValues in userdata

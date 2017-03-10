@@ -1,8 +1,8 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Execution.VM;
+using BareKit.Lua.Execution;
+using BareKit.Lua.Execution.VM;
 
-namespace BareKit.Lua.Interpreter.Tree.Expressions
+namespace BareKit.Lua.Tree.Expressions
 {
 	/// <summary>
 	/// 

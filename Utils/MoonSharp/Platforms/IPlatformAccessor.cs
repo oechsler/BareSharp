@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// Interface to abstract all accesses made to the underlying platform (OS, framework) by the scripting engine.

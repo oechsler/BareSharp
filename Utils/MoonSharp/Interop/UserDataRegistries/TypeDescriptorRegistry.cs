@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
-using BareKit.Lua.Interpreter.Interop.RegistrationPolicies;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.RegistrationPolicies;
 
-namespace BareKit.Lua.Interpreter.Interop.UserDataRegistries
+namespace BareKit.Lua.Interop.UserDataRegistries
 {
 	/// <summary>
 	/// Registry of all type descriptors. Use UserData statics to access these.
@@ -21,7 +21,7 @@ namespace BareKit.Lua.Interpreter.Interop.UserDataRegistries
 		private static InteropAccessMode s_DefaultAccessMode;
 
 		/// <summary>
-		/// Registers all types marked with a BareKit.LuaUserDataAttribute that ar contained in an assembly.
+		/// Registers all types marked with a MoonSharpUserDataAttribute that ar contained in an assembly.
 		/// </summary>
 		/// <param name="asm">The assembly.</param>
 		/// <param name="includeExtensionTypes">if set to <c>true</c> extension types are registered to the appropriate registry.</param>
@@ -51,14 +51,14 @@ namespace BareKit.Lua.Interpreter.Interop.UserDataRegistries
 
 
 			var userDataTypes = from t in asm.SafeGetTypes()
-								let attributes = Framework.Do.GetCustomAttributes(t, typeof(BareKit.LuaUserDataAttribute), true)
+								let attributes = Framework.Do.GetCustomAttributes(t, typeof(MoonSharpUserDataAttribute), true)
 								where attributes != null && attributes.Length > 0
 								select new { Attributes = attributes, DataType = t };
 
 			foreach (var userDataType in userDataTypes)
 			{
 				UserData.RegisterType(userDataType.DataType, userDataType.Attributes
-					.OfType<BareKit.LuaUserDataAttribute>()
+					.OfType<MoonSharpUserDataAttribute>()
 					.First()
 					.AccessMode);
 			}
@@ -221,7 +221,7 @@ namespace BareKit.Lua.Interpreter.Interop.UserDataRegistries
 		{
 			if (accessMode == InteropAccessMode.Default)
 			{
-				BareKit.LuaUserDataAttribute attr = Framework.Do.GetCustomAttributes(type, true).OfType<BareKit.LuaUserDataAttribute>()
+				MoonSharpUserDataAttribute attr = Framework.Do.GetCustomAttributes(type, true).OfType<MoonSharpUserDataAttribute>()
 					.SingleOrDefault();
 
 				if (attr != null)

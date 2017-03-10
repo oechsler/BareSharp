@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	class Lexer
 	{

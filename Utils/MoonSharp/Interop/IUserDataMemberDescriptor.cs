@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Interface used by standard descriptors to access members of a given type from scripts.

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace BareKit.Lua.Interpreter.CoreLib.IO
+namespace BareKit.Lua.CoreLib.IO
 {
 	class BinaryEncoding : Encoding
 	{

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
-using BareKit.Lua.Interpreter.Interop.RegistrationPolicies;
+using BareKit.Lua.Interop.RegistrationPolicies;
 
-namespace BareKit.Lua.Interpreter.Interop.Converters
+namespace BareKit.Lua.Interop.Converters
 {
 	internal static class ClrToScriptConversions
 	{
 		/// <summary>
-		/// Tries to convert a CLR object to a BareKit.Lua value, using "trivial" logic.
+		/// Tries to convert a CLR object to a MoonSharp value, using "trivial" logic.
 		/// Skips on custom conversions, etc.
 		/// Does NOT throw on failure.
 		/// </summary>
@@ -39,7 +39,7 @@ namespace BareKit.Lua.Interpreter.Interop.Converters
 
 
 		/// <summary>
-		/// Tries to convert a CLR object to a BareKit.Lua value, using "simple" logic.
+		/// Tries to convert a CLR object to a MoonSharp value, using "simple" logic.
 		/// Does NOT throw on failure.
 		/// </summary>
 		internal static DynValue TryObjectToSimpleDynValue(Script script, object obj)
@@ -99,7 +99,7 @@ namespace BareKit.Lua.Interpreter.Interop.Converters
 
 
 		/// <summary>
-		/// Tries to convert a CLR object to a BareKit.Lua value, using more in-depth analysis
+		/// Tries to convert a CLR object to a MoonSharp value, using more in-depth analysis
 		/// </summary>
 		internal static DynValue ObjectToDynValue(Script script, object obj)
 		{

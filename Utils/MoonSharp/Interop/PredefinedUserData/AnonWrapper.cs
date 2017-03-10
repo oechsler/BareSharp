@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Internal type used by <see cref="AnonWrapper{T}"/> for registration

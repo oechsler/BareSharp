@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using BareKit.Lua.Interpreter.REPL;
+using BareKit.Lua.REPL;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// This class contains extension methods providing async wrappers of many methods.
@@ -72,7 +72,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// Asynchronously loads and executes a string containing a Lua/BareKit.Lua script.
+		/// Asynchronously loads and executes a string containing a Lua/MoonSharp script.
 		/// 
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
@@ -90,7 +90,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Asynchronously loads and executes a stream containing a Lua/BareKit.Lua script.
+		/// Asynchronously loads and executes a stream containing a Lua/MoonSharp script.
 		/// 
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
@@ -108,7 +108,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Asynchronously loads and executes a file containing a Lua/BareKit.Lua script.
+		/// Asynchronously loads and executes a file containing a Lua/MoonSharp script.
 		/// 
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
@@ -125,7 +125,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// Asynchronously loads a string containing a Lua/BareKit.Lua function.
+		/// Asynchronously loads a string containing a Lua/MoonSharp function.
 		/// 
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
@@ -144,7 +144,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Asynchronously loads a string containing a Lua/BareKit.Lua script.
+		/// Asynchronously loads a string containing a Lua/MoonSharp script.
 		/// 
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
@@ -163,7 +163,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Asynchronously loads a Lua/BareKit.Lua script from a System.IO.Stream. NOTE: This will *NOT* close the stream!
+		/// Asynchronously loads a Lua/MoonSharp script from a System.IO.Stream. NOTE: This will *NOT* close the stream!
 		/// 
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
@@ -201,7 +201,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Asynchronously loads a string containing a Lua/BareKit.Lua script.
+		/// Asynchronously loads a string containing a Lua/MoonSharp script.
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
 		/// <param name="script">The script.</param>
@@ -223,7 +223,7 @@ namespace BareKit.Lua.Interpreter
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
 		/// <param name="script">The script.</param>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <returns>
 		/// The return value(s) of the function call.
 		/// </returns>
@@ -239,7 +239,7 @@ namespace BareKit.Lua.Interpreter
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
 		/// <param name="script">The script.</param>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <param name="args">The arguments to pass to the function.</param>
 		/// <returns>
 		/// The return value(s) of the function call.
@@ -257,7 +257,7 @@ namespace BareKit.Lua.Interpreter
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
 		/// <param name="script">The script.</param>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <param name="args">The arguments to pass to the function.</param>
 		/// <returns>
 		/// The return value(s) of the function call.
@@ -275,7 +275,7 @@ namespace BareKit.Lua.Interpreter
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
 		/// <param name="script">The script.</param>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <returns></returns>
 		/// <exception cref="System.ArgumentException">Thrown if function is not of DataType.Function</exception>
 		public static Task<DynValue> CallAsync(this Script script, object function)
@@ -290,7 +290,7 @@ namespace BareKit.Lua.Interpreter
 		/// This method is supported only on .NET 4.x and .NET 4.x PCL targets.
 		/// </summary>
 		/// <param name="script">The script.</param>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <param name="args">The arguments to pass to the function.</param>
 		/// <returns></returns>
 		/// <exception cref="System.ArgumentException">Thrown if function is not of DataType.Function</exception>

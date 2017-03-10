@@ -2,7 +2,7 @@
 #pragma warning disable 1591
 
 
-namespace BareKit.Lua.Interpreter.CoreLib.StringLib
+namespace BareKit.Lua.CoreLib.StringLib
 {
 	internal class StringRange
 	{

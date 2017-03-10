@@ -1,7 +1,7 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Execution;
+using BareKit.Lua.Execution;
 
-namespace BareKit.Lua.Interpreter.Tree.Expressions
+namespace BareKit.Lua.Tree.Expressions
 {
 	class DynamicExprExpression : Expression
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Execution.VM;
-using BareKit.Lua.Interpreter.Tree.Expressions;
+using BareKit.Lua.Execution;
+using BareKit.Lua.Execution.VM;
+using BareKit.Lua.Tree.Expressions;
 
-namespace BareKit.Lua.Interpreter.Tree.Statements
+namespace BareKit.Lua.Tree.Statements
 {
 	class FunctionCallStatement : Statement
 	{

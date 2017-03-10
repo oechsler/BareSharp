@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	enum TokenType
 	{

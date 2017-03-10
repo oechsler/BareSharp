@@ -1,8 +1,8 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
-using BareKit.Lua.Interpreter.Interop.Converters;
+using BareKit.Lua.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.Converters;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Member descriptor which allows to define new members which behave similarly to class instance members

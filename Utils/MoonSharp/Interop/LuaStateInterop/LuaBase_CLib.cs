@@ -4,7 +4,7 @@
 using System;
 using lua_Integer = System.Int32;
 
-namespace BareKit.Lua.Interpreter.Interop.LuaStateInterop
+namespace BareKit.Lua.Interop.LuaStateInterop
 {
 	public partial class LuaBase
 	{

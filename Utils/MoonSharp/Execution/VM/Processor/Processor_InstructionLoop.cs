@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BareKit.Lua.Interpreter.DataStructs;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Interop;
+using BareKit.Lua.DataStructs;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Interop;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	sealed partial class Processor
 	{
@@ -486,7 +486,7 @@ namespace BareKit.Lua.Interpreter.Execution.VM
 			DynValue s = v.Tuple.Length >= 2 ? v.Tuple[1] : DynValue.Nil;
 			DynValue var = v.Tuple.Length >= 3 ? v.Tuple[2] : DynValue.Nil;
 
-			// BareKit.Lua additions - given f, s, var
+			// MoonSharp additions - given f, s, var
 			// 1) if f is not a function and has a __iterator metamethod, call __iterator to get the triplet
 			// 2) if f is a table with no __call metamethod, use a default table iterator
 

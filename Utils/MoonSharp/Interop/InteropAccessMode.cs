@@ -1,10 +1,10 @@
 ﻿
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
-	/// Enumerations of the possible strategies to marshal CLR objects to BareKit.Lua userdata and functions
+	/// Enumerations of the possible strategies to marshal CLR objects to MoonSharp userdata and functions
 	/// when using automatic descriptors.
-	/// Note that these are "hints" and BareKit.Lua is free to ignore the access mode specified (if different from
+	/// Note that these are "hints" and MoonSharp is free to ignore the access mode specified (if different from
 	/// HideMembers) and downgrade the access mode to "Reflection". 
 	/// This particularly happens when running on AOT platforms like iOS.
 	/// See also : <see cref="CallbackFunction"/> and <see cref="UserData"/> .
@@ -40,7 +40,7 @@ namespace BareKit.Lua.Interpreter
 		HideMembers,
 		/// <summary>
 		/// No reflection is allowed, nor code generation. This is used as a safeguard when registering types which should not
-		/// use a standard reflection based descriptor - for example for types implementing <see cref="BareKit.Lua.Interpreter.Interop.IUserDataType" />
+		/// use a standard reflection based descriptor - for example for types implementing <see cref="BareKit.Lua.Interop.IUserDataType" />
 		/// </summary>
 		NoReflectionAllowed,
 		/// <summary>

@@ -1,8 +1,8 @@
 ﻿
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
-	/// Constants of well known "symbols" in the BareKit.Lua grammar
+	/// Constants of well known "symbols" in the MoonSharp grammar
 	/// </summary>
 	public static class WellKnownSymbols
 	{

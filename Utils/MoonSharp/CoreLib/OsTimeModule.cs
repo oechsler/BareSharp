@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing time related Lua functions from the 'os' module.
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "os")]
+	[MoonSharpModule(Namespace = "os")]
 	public class OsTimeModule
 	{
 		static DateTime Time0 = DateTime.UtcNow;
@@ -32,13 +32,13 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return Epoch + ts;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue clock(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return GetUnixTime(DateTime.UtcNow, Time0);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue difftime(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue t2 = args.AsType(0, "difftime", DataType.Number, false);
@@ -50,7 +50,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewNumber(t2.Number - t1.Number);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue time(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DateTime date = DateTime.UtcNow;
@@ -98,7 +98,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return null;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue date(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DateTime reference = DateTime.UtcNow;

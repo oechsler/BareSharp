@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	public enum OpCodeMetadataType
 	{

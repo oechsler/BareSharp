@@ -6,19 +6,19 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
-	/// Class implementing basic Lua functions (print, type, tostring, etc) as a BareKit.Lua module.
+	/// Class implementing basic Lua functions (print, type, tostring, etc) as a MoonSharp module.
 	/// </summary>
-	[BareKit.LuaModule]
+	[MoonSharpModule]
 	public class BasicModule
 	{
 		//type (v)
 		//----------------------------------------------------------------------------------------------------------------
 		//Returns the type of its only argument, coded as a string. The possible results of this function are "nil" 
 		//(a string, not the value nil), "number", "string", "boolean", "table", "function", "thread", and "userdata". 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue type(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			if (args.Count < 1) throw ScriptRuntimeException.BadArgumentValueExpected(0, "type");
@@ -33,7 +33,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		//----------------------------------------------------------------------------------------------------------------
 		//Issues an error when the value of its argument v is false (i.e., nil or false); 
 		//otherwise, returns all its arguments. message is an error message; when absent, it defaults to "assertion failed!" 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue assert(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v = args[0];
@@ -53,7 +53,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// collectgarbage  ([opt [, arg]])
 		// ----------------------------------------------------------------------------------------------------------------
 		// This function is mostly a stub towards the CLR GC. If mode is nil, "collect" or "restart", a GC is forced.
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue collectgarbage(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue opt = args[0];
@@ -80,7 +80,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// With level 1 (the default), the error position is where the error function was called. 
 		// Level 2 points the error to where the function that called error was called; and so on. 
 		// Passing a level 0 avoids the addition of error position information to the message. 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue error(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue message = args.AsType(0, "error", DataType.String, false);
@@ -95,7 +95,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// 
 		// If the metatable of v has a "__tostring" field, then tostring calls the corresponding value with v as argument, 
 		// and uses the result of the call as its result. 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue tostring(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			if (args.Count < 1) throw ScriptRuntimeException.BadArgumentValueExpected(0, "tostring");
@@ -130,7 +130,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// If index is a number, returns all arguments after argument number index; a negative number indexes from 
 		// the end (-1 is the last argument). Otherwise, index must be the string "#", and select returns the total
 		// number of extra arguments it received. 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue select(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			if (args[0].Type == DataType.String && args[0].String == "#")
@@ -186,7 +186,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// The base may be any integer between 2 and 36, inclusive. In bases above 10, the letter 'A' (in either 
 		// upper or lower case) represents 10, 'B' represents 11, and so forth, with 'Z' representing 35. If the 
 		// string e is not a valid numeral in the given base, the function returns nil. 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue tonumber(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			if (args.Count < 1) throw ScriptRuntimeException.BadArgumentValueExpected(0, "tonumber");
@@ -249,7 +249,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue print(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			StringBuilder sb = new StringBuilder();

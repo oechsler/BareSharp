@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Execution
+namespace BareKit.Lua.Execution
 {
 	internal interface IClosureBuilder
 	{

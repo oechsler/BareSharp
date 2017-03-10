@@ -1,8 +1,8 @@
-﻿using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Tree.Expressions;
-using BareKit.Lua.Interpreter.Tree.Statements;
+﻿using BareKit.Lua.Execution;
+using BareKit.Lua.Tree.Expressions;
+using BareKit.Lua.Tree.Statements;
 
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	abstract class Statement : NodeBase
 	{

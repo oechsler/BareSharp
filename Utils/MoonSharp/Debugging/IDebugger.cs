@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// Interface for debuggers to implement, in order to provide debugging facilities to Scripts.

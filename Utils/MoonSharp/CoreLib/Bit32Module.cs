@@ -3,12 +3,12 @@
 
 using System;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing bit32 Lua functions 
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "bit32")]
+	[MoonSharpModule(Namespace = "bit32")]
 	public class Bit32Module
 	{
 		static readonly uint[] MASKS = new uint[] { 
@@ -60,7 +60,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue extract(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "extract", DataType.Number);
@@ -79,7 +79,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue replace(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "replace", DataType.Number);
@@ -117,7 +117,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue arshift(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "arshift", DataType.Number);
@@ -136,7 +136,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue rshift(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "rshift", DataType.Number);
@@ -155,7 +155,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue lshift(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "lshift", DataType.Number);
@@ -173,25 +173,25 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewNumber(v);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue band(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewNumber(Bitwise("band", args, (x, y) => x & y));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue btest(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewBoolean(0 != Bitwise("btest", args, (x, y) => x & y));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue bor(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewNumber(Bitwise("bor", args, (x, y) => x | y));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue bnot(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "bnot", DataType.Number);
@@ -199,13 +199,13 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewNumber(~v);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue bxor(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewNumber(Bitwise("bxor", args, (x, y) => x ^ y));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue lrotate(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "lrotate", DataType.Number);
@@ -223,7 +223,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewNumber(v);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue rrotate(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_v = args.AsType(0, "rrotate", DataType.Number);

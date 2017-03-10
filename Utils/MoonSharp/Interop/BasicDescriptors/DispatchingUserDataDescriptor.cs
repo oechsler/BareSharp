@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop.Converters;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop.Converters;
 
-namespace BareKit.Lua.Interpreter.Interop.BasicDescriptors
+namespace BareKit.Lua.Interop.BasicDescriptors
 {
 	/// <summary>
 	/// An abstract user data descriptor which accepts members described by <see cref="IMemberDescriptor"/> objects and
@@ -472,7 +472,7 @@ namespace BareKit.Lua.Interpreter.Interop.BasicDescriptors
 		/// it should return "null" (not a nil). 
 		/// See <see cref="IUserDataDescriptor.MetaIndex" /> for further details.
 		/// 
-		/// If a method exists marked with <see cref="BareKit.LuaUserDataMetamethodAttribute" /> for the specific
+		/// If a method exists marked with <see cref="MoonSharpUserDataMetamethodAttribute" /> for the specific
 		/// metamethod requested, that method is returned.
 		/// 
 		/// If the above fails, the following dispatching occur:

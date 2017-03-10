@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.IO
+namespace BareKit.Lua.IO
 {
 	/// <summary>
 	/// "Optimized" BinaryWriter which shares strings and use a dumb compression for integers

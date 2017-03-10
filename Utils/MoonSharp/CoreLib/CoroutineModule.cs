@@ -3,15 +3,15 @@
 
 using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing coroutine Lua functions 
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "coroutine")]
+	[MoonSharpModule(Namespace = "coroutine")]
 	public class CoroutineModule
 	{
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue create(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			if (args[0].Type != DataType.Function && args[0].Type != DataType.ClrFunction)
@@ -20,7 +20,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return executionContext.GetScript().CreateCoroutine(args[0]);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue wrap(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			if (args[0].Type != DataType.Function && args[0].Type != DataType.ClrFunction)
@@ -38,7 +38,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return handle.Coroutine.Resume(args.GetArray());
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue resume(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue handle = args.AsType(0, "resume", DataType.Thread);
@@ -81,7 +81,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue yield(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewYieldReq(args.GetArray());
@@ -89,14 +89,14 @@ namespace BareKit.Lua.Interpreter.CoreLib
 
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue running(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			Coroutine C = executionContext.GetCallingCoroutine();
 			return DynValue.NewTuple(DynValue.NewCoroutine(C), DynValue.NewBoolean(C.State == CoroutineState.Main));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue status(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue handle = args.AsType(0, "status", DataType.Thread);

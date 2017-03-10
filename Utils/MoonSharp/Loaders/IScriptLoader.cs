@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Loaders
+namespace BareKit.Lua.Loaders
 {
 	/// <summary>
 	/// Class dictating how requests to read scripts from files are handled.

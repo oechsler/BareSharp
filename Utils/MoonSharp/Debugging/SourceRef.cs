@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// Class representing a reference to source code interval

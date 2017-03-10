@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.DataStructs
+namespace BareKit.Lua.DataStructs
 {
 	/// <summary>
 	/// A preallocated, non-resizable, stack

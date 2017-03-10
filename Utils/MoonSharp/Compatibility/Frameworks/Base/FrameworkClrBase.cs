@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Compatibility.Frameworks
+namespace BareKit.Lua.Compatibility.Frameworks
 {
 	abstract class FrameworkClrBase : FrameworkReflectionBase
 	{

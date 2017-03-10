@@ -1,7 +1,7 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Execution.VM;
+using BareKit.Lua.Execution.VM;
 
-namespace BareKit.Lua.Interpreter.Execution
+namespace BareKit.Lua.Execution
 {
 	[Flags]
 	internal enum InstructionFieldUsage

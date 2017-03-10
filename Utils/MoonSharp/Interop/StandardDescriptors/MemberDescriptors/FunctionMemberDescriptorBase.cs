@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
-using BareKit.Lua.Interpreter.Interop.Converters;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.Converters;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Class providing easier marshalling of CLR functions

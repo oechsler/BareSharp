@@ -1,9 +1,9 @@
 ﻿
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
-	/// Enumeration of possible data types in BareKit.Lua
+	/// Enumeration of possible data types in MoonSharp
 	/// </summary>
 	public enum DataType
 	{

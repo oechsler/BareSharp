@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.Interop.Converters
+namespace BareKit.Lua.Interop.Converters
 {
 	/// <summary>
 	/// Static functions to handle conversions of numeric types

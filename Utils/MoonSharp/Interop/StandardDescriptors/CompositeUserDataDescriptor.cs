@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Compatibility;
+using BareKit.Lua.Compatibility;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// A user data descriptor which aggregates multiple descriptors and tries dispatching members

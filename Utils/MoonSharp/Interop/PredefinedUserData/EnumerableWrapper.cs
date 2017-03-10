@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using BareKit.Lua.Interpreter.Interop.Converters;
+using BareKit.Lua.Interop.Converters;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Wrappers for enumerables as return types

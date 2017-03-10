@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.DataStructs;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
-using BareKit.Lua.Interpreter.Interop.StandardDescriptors;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.DataStructs;
+using BareKit.Lua.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.StandardDescriptors;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Class providing easier marshalling of CLR events. Handling is limited to a narrow range of handler signatures, which,

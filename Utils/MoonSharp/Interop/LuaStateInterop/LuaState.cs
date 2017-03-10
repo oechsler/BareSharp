@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.Interop.LuaStateInterop
+namespace BareKit.Lua.Interop.LuaStateInterop
 {
 	/// <summary>
 	/// 

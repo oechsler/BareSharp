@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	class Token
 	{

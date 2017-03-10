@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	// This part is practically written procedural style - it looks more like C than C#.
 	// This is intentional so to avoid this-calls and virtual-calls as much as possible.

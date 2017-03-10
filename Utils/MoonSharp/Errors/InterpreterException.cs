@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Debugging;
+using BareKit.Lua.Debugging;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
-	/// Base type of all exceptions thrown in BareKit.Lua
+	/// Base type of all exceptions thrown in MoonSharp
 	/// </summary>
 #if !(PCL || ((!UNITY_EDITOR) && (ENABLE_DOTNET)) || NETFX_CORE)
 	[Serializable]
@@ -61,7 +61,7 @@ namespace BareKit.Lua.Interpreter
 		/// <summary>
 		/// Gets the interpreter call stack.
 		/// </summary>
-		public IList<BareKit.Lua.Interpreter.Debugging.WatchItem> CallStack { get; internal set; }
+		public IList<BareKit.Lua.Debugging.WatchItem> CallStack { get; internal set; }
 
 		/// <summary>
 		/// Gets the decorated message (error message plus error location in script) if possible.

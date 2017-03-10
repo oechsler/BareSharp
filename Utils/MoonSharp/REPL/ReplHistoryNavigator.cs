@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.REPL
+namespace BareKit.Lua.REPL
 {
 	/// <summary>
 	/// An implementation of <see cref="ReplInterpreter"/> which supports a very basic history of recent input lines.

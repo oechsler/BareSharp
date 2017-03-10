@@ -1,6 +1,6 @@
-﻿using BareKit.Lua.Interpreter.Tree.Expressions;
+﻿using BareKit.Lua.Tree.Expressions;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Represents a dynamic expression in the script

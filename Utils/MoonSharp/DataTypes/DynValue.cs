@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
-	/// A class representing a value in a Lua/BareKit.Lua script.
+	/// A class representing a value in a Lua/MoonSharp script.
 	/// </summary>
 	public sealed class DynValue
 	{
@@ -244,7 +244,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// Creates a new request for a tail call. This is the preferred way to execute Lua/BareKit.Lua code from a callback,
+		/// Creates a new request for a tail call. This is the preferred way to execute Lua/MoonSharp code from a callback,
 		/// although it's not always possible to use it. When a function (callback or script closure) returns a
 		/// TailCallRequest, the bytecode processor immediately executes the function contained in the request.
 		/// By executing script in this way, a callback function ensures it's not on the stack anymore and thus a number
@@ -267,7 +267,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// Creates a new request for a tail call. This is the preferred way to execute Lua/BareKit.Lua code from a callback,
+		/// Creates a new request for a tail call. This is the preferred way to execute Lua/MoonSharp code from a callback,
 		/// although it's not always possible to use it. When a function (callback or script closure) returns a
 		/// TailCallRequest, the bytecode processor immediately executes the function contained in the request.
 		/// By executing script in this way, a callback function ensures it's not on the stack anymore and thus a number
@@ -849,28 +849,28 @@ namespace BareKit.Lua.Interpreter
 		/// <returns></returns>
 		public static DynValue FromObject(Script script, object obj)
 		{
-			return BareKit.Lua.Interpreter.Interop.Converters.ClrToScriptConversions.ObjectToDynValue(script, obj);
+			return BareKit.Lua.Interop.Converters.ClrToScriptConversions.ObjectToDynValue(script, obj);
 		}
 
 		/// <summary>
-		/// Converts this BareKit.Lua DynValue to a CLR object.
+		/// Converts this MoonSharp DynValue to a CLR object.
 		/// </summary>
 		public object ToObject()
 		{
-			return BareKit.Lua.Interpreter.Interop.Converters.ScriptToClrConversions.DynValueToObject(this);
+			return BareKit.Lua.Interop.Converters.ScriptToClrConversions.DynValueToObject(this);
 		}
 
 		/// <summary>
-		/// Converts this BareKit.Lua DynValue to a CLR object of the specified type.
+		/// Converts this MoonSharp DynValue to a CLR object of the specified type.
 		/// </summary>
 		public object ToObject(Type desiredType)
 		{
 			//Contract.Requires(desiredType != null);
-			return BareKit.Lua.Interpreter.Interop.Converters.ScriptToClrConversions.DynValueToObjectOfType(this, desiredType, null, false);
+			return BareKit.Lua.Interop.Converters.ScriptToClrConversions.DynValueToObjectOfType(this, desiredType, null, false);
 		}
 
 		/// <summary>
-		/// Converts this BareKit.Lua DynValue to a CLR object of the specified type.
+		/// Converts this MoonSharp DynValue to a CLR object of the specified type.
 		/// </summary>
 		public T ToObject<T>()
 		{
@@ -879,11 +879,11 @@ namespace BareKit.Lua.Interpreter
 
 #if HASDYNAMIC
 		/// <summary>
-		/// Converts this BareKit.Lua DynValue to a CLR object, marked as dynamic
+		/// Converts this MoonSharp DynValue to a CLR object, marked as dynamic
 		/// </summary>
 		public dynamic ToDynamic()
 		{
-			return BareKit.Lua.Interpreter.Interop.Converters.ScriptToClrConversions.DynValueToObject(this);
+			return BareKit.Lua.Interop.Converters.ScriptToClrConversions.DynValueToObject(this);
 		}
 #endif
 

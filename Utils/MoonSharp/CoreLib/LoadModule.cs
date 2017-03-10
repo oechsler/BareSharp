@@ -2,15 +2,15 @@
 #pragma warning disable 1591
 
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing loading Lua functions like 'require', 'load', etc.
 	/// </summary>
-	[BareKit.LuaModule]
+	[MoonSharpModule]
 	public class LoadModule
 	{
-		public static void BareKit.LuaInit(Table globalTable, Table ioTable)
+		public static void MoonSharpInit(Table globalTable, Table ioTable)
 		{
 			DynValue package = globalTable.Get("package");
 
@@ -49,7 +49,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// or to "=(load)" otherwise.
 		// 
 		// The string mode is ignored, and assumed to be "t"; 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue load(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return load_impl(executionContext, args, null);
@@ -59,7 +59,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// ----------------------------------------------------------------
 		// Same as load, except that "env" defaults to the current environment of the function
 		// calling load, instead of the actual global environment.
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue loadsafe(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return load_impl(executionContext, args, GetSafeDefaultEnv(executionContext));
@@ -114,7 +114,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// ----------------------------------------------------------------
 		// Similar to load, but gets the chunk from file filename or from the standard input, 
 		// if no file name is given. INCOMPAT: stdin not supported, mode ignored
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue loadfile(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return loadfile_impl(executionContext, args, null);
@@ -124,7 +124,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		// ----------------------------------------------------------------
 		// Same as loadfile, except that "env" defaults to the current environment of the function
 		// calling load, instead of the actual global environment.
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue loadfilesafe(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return loadfile_impl(executionContext, args, GetSafeDefaultEnv(executionContext));
@@ -166,7 +166,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		//Opens the named file and executes its contents as a Lua chunk. When called without arguments, 
 		//dofile executes the contents of the standard input (stdin). Returns all values returned by the chunk. 
 		//In case of errors, dofile propagates the error to its caller (that is, dofile does not run in protected mode). 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue dofile(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			try
@@ -205,7 +205,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		//
 		//If there is any error loading or running the module, or if it cannot find any loader for the module, then require 
 		//signals an error. 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue __require_clr_impl(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			Script S = executionContext.GetScript();
@@ -217,7 +217,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public const string require = @"
 function(modulename)
 	if (package == nil) then package = { }; end

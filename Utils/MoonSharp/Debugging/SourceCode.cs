@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// Class representing the source code of a given script

@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 
 	/// <summary>
 	/// Marks a property as a configruation property
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
-	public sealed class BareKit.LuaPropertyAttribute : Attribute
+	public sealed class MoonSharpPropertyAttribute : Attribute
 	{
 		/// <summary>
 		/// The metamethod name (like '__div', '__ipairs', etc.)
@@ -16,18 +16,18 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="BareKit.LuaPropertyAttribute"/> class.
+		/// Initializes a new instance of the <see cref="MoonSharpPropertyAttribute"/> class.
 		/// </summary>
-		public BareKit.LuaPropertyAttribute()
+		public MoonSharpPropertyAttribute()
 		{
 
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="BareKit.LuaPropertyAttribute"/> class.
+		/// Initializes a new instance of the <see cref="MoonSharpPropertyAttribute"/> class.
 		/// </summary>
 		/// <param name="name">The name for this property</param>
-		public BareKit.LuaPropertyAttribute(string name)
+		public MoonSharpPropertyAttribute(string name)
 		{
 			Name = name;
 		}

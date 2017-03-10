@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.DataStructs
+namespace BareKit.Lua.DataStructs
 {
 #if USE_DYNAMIC_STACKS
 	internal class FastStack<T> : FastStackDynamic<T>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Loaders
+namespace BareKit.Lua.Loaders
 {
 	/// <summary>
 	/// A script loader used for platforms we cannot initialize in any better way..

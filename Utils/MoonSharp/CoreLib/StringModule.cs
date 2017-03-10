@@ -4,19 +4,19 @@
 using System;
 using System.IO;
 using System.Text;
-using BareKit.Lua.Interpreter.CoreLib.StringLib;
+using BareKit.Lua.CoreLib.StringLib;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing string Lua functions 
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "string")]
+	[MoonSharpModule(Namespace = "string")]
 	public class StringModule
 	{
-		public const string BASE64_DUMP_HEADER = "BareKit.Lua_dump_b64::";
+		public const string BASE64_DUMP_HEADER = "MoonSharp_dump_b64::";
 
-		public static void BareKit.LuaInit(Table globalTable, Table stringTable)
+		public static void MoonSharpInit(Table globalTable, Table stringTable)
 		{
 			Table stringMetatable = new Table(globalTable.OwnerScript);
 			stringMetatable.Set("__index", DynValue.NewTable(stringTable));
@@ -24,7 +24,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue dump(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue fn = args.AsType(0, "dump", DataType.Function, false);
@@ -48,7 +48,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue @char(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			StringBuilder sb = new StringBuilder(args.Count);
@@ -79,7 +79,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue @byte(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue vs = args.AsType(0, "byte", DataType.String, false);
@@ -90,7 +90,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 				i => Unicode2Ascii(i));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue unicode(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue vs = args.AsType(0, "unicode", DataType.String, false);
@@ -141,7 +141,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return s.Length - i;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue len(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue vs = args.AsType(0, "len", DataType.String, false);
@@ -150,26 +150,26 @@ namespace BareKit.Lua.Interpreter.CoreLib
 
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue match(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return executionContext.EmulateClassicCall(args, "match", KopiLua_StringLib.str_match);
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue gmatch(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return executionContext.EmulateClassicCall(args, "gmatch", KopiLua_StringLib.str_gmatch);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue gsub(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return executionContext.EmulateClassicCall(args, "gsub", KopiLua_StringLib.str_gsub);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue find(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return executionContext.EmulateClassicCall(args, "find",
@@ -177,21 +177,21 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-        [BareKit.LuaModuleMethod]
+        [MoonSharpModuleMethod]
         public static DynValue lower(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             DynValue arg_s = args.AsType(0, "lower", DataType.String, false);
             return DynValue.NewString(arg_s.String.ToLower());
         }
 
-        [BareKit.LuaModuleMethod]
+        [MoonSharpModuleMethod]
         public static DynValue upper(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             DynValue arg_s = args.AsType(0, "upper", DataType.String, false);
             return DynValue.NewString(arg_s.String.ToUpper());
         }
 
-        [BareKit.LuaModuleMethod]
+        [MoonSharpModuleMethod]
         public static DynValue rep(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             DynValue arg_s = args.AsType(0, "rep", DataType.String, false);
@@ -219,7 +219,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
             return DynValue.NewString(result.ToString());
         }
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue format(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return executionContext.EmulateClassicCall(args, "format", KopiLua_StringLib.str_format);
@@ -227,7 +227,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 
 
 
-        [BareKit.LuaModuleMethod]
+        [MoonSharpModuleMethod]
         public static DynValue reverse(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             DynValue arg_s = args.AsType(0, "reverse", DataType.String, false);
@@ -243,7 +243,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
             return DynValue.NewString(new String(elements));
         }
 
-        [BareKit.LuaModuleMethod]
+        [MoonSharpModuleMethod]
         public static DynValue sub(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             DynValue arg_s = args.AsType(0, "sub", DataType.String, false);
@@ -256,7 +256,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
             return DynValue.NewString(s);
         }
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue startsWith(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue arg_s1 = args.AsType(0, "startsWith", DataType.String, true);
@@ -268,7 +268,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewBoolean(arg_s1.String.StartsWith(arg_s2.String));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue endsWith(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue arg_s1 = args.AsType(0, "endsWith", DataType.String, true);
@@ -280,7 +280,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewBoolean(arg_s1.String.EndsWith(arg_s2.String));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue contains(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue arg_s1 = args.AsType(0, "contains", DataType.String, true);

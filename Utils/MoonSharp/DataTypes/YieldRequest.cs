@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Class wrapping a request to yield a coroutine

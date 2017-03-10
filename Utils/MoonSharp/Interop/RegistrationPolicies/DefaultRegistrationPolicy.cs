@@ -1,10 +1,10 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Interop.StandardDescriptors.HardwiredDescriptors;
+using BareKit.Lua.Interop.StandardDescriptors.HardwiredDescriptors;
 
-namespace BareKit.Lua.Interpreter.Interop.RegistrationPolicies
+namespace BareKit.Lua.Interop.RegistrationPolicies
 {
 	/// <summary>
-	/// The default registration policy used by BareKit.Lua unless explicitely replaced.
+	/// The default registration policy used by MoonSharp unless explicitely replaced.
 	/// Deregistrations are allowed, but registration of a new descriptor are not allowed
 	/// if a descriptor is already registered for that type.
 	/// 

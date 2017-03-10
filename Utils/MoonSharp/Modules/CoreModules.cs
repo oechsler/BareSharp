@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Enumeration (combinable as flags) of all the standard library modules
@@ -74,11 +74,11 @@ namespace BareKit.Lua.Interpreter
 		/// </summary>
 		Debug = 0x4000,
 		/// <summary>
-		/// The "dynamic" package (introduced by BareKit.Lua).
+		/// The "dynamic" package (introduced by MoonSharp).
 		/// </summary>
 		Dynamic = 0x8000,
 		/// <summary>
-		/// The "json" package (introduced by BareKit.Lua).
+		/// The "json" package (introduced by MoonSharp).
 		/// </summary>
 		Json = 0x10000,
 

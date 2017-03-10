@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// Class providing the IPlatformAccessor interface for standard full-feaured implementations.
@@ -78,7 +78,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// Class providing the IPlatformAccessor interface for standard full-feaured implementations.

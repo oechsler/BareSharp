@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// A class implementing all the bits needed to have a minimal support of a platform.

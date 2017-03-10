@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.IO;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.IO;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	sealed partial class Processor
 	{
@@ -102,7 +102,7 @@ namespace BareKit.Lua.Interpreter.Execution.VM
 				ulong headerMark = br.ReadUInt64();
 
 				if (headerMark != DUMP_CHUNK_MAGIC)
-					throw new ArgumentException("Not a BareKit.Lua chunk");
+					throw new ArgumentException("Not a MoonSharp chunk");
 
 				int version = br.ReadInt32();
 

@@ -1,9 +1,9 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
-using BareKit.Lua.Interpreter.Interop.Converters;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.Converters;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Member descriptor for the default constructor of value types.

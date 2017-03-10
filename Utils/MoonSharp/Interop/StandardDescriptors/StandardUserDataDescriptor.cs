@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop.BasicDescriptors;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Standard descriptor for userdata types.
@@ -46,8 +46,8 @@ namespace BareKit.Lua.Interpreter.Interop
 		private void FillMemberList()
 		{
 			HashSet<string> membersToIgnore = new HashSet<string>(
-				Framework.Do.GetCustomAttributes(this.Type, typeof(BareKit.LuaHideMemberAttribute), true)
-					.OfType<BareKit.LuaHideMemberAttribute>()
+				Framework.Do.GetCustomAttributes(this.Type, typeof(MoonSharpHideMemberAttribute), true)
+					.OfType<MoonSharpHideMemberAttribute>()
 					.Select(a => a.MemberName)
 				);
 
@@ -136,7 +136,7 @@ namespace BareKit.Lua.Interpreter.Interop
 
 				if (!Framework.Do.IsGenericTypeDefinition(nestedType))
 				{
-					if (Framework.Do.IsNestedPublic(nestedType) || Framework.Do.GetCustomAttributes(nestedType, typeof(BareKit.LuaUserDataAttribute), true).Length > 0)
+					if (Framework.Do.IsNestedPublic(nestedType) || Framework.Do.GetCustomAttributes(nestedType, typeof(MoonSharpUserDataAttribute), true).Length > 0)
 					{
 						var descr = UserData.RegisterType(nestedType, this.AccessMode);
 

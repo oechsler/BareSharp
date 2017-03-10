@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Execution;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Execution;
 
-namespace BareKit.Lua.Interpreter.Tree.Statements
+namespace BareKit.Lua.Tree.Statements
 {
 	class LabelStatement : Statement
 	{

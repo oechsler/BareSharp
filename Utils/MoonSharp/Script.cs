@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using BareKit.Lua.Interpreter.CoreLib;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Diagnostics;
-using BareKit.Lua.Interpreter.Execution.VM;
-using BareKit.Lua.Interpreter.IO;
-using BareKit.Lua.Interpreter.Platforms;
-using BareKit.Lua.Interpreter.Tree.Expressions;
-using BareKit.Lua.Interpreter.Tree.Fast_Interface;
+using BareKit.Lua.CoreLib;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Diagnostics;
+using BareKit.Lua.Execution.VM;
+using BareKit.Lua.IO;
+using BareKit.Lua.Platforms;
+using BareKit.Lua.Tree.Expressions;
+using BareKit.Lua.Tree.Fast_Interface;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
-	/// This class implements a BareKit.Lua scripting session. Multiple Script objects can coexist in the same program but cannot share
+	/// This class implements a MoonSharp scripting session. Multiple Script objects can coexist in the same program but cannot share
 	/// data among themselves unless some mechanism is put in place.
 	/// </summary>
 	public class Script : IScriptPrivateResource
 	{
 		/// <summary>
-		/// The version of the BareKit.Lua engine
+		/// The version of the MoonSharp engine
 		/// </summary>
 		public const string VERSION = "2.0.0.0";
 
@@ -109,7 +109,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// Loads a string containing a Lua/BareKit.Lua function.
+		/// Loads a string containing a Lua/MoonSharp function.
 		/// </summary>
 		/// <param name="code">The code.</param>
 		/// <param name="globalTable">The global table to bind to this chunk.</param>
@@ -153,7 +153,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Loads a string containing a Lua/BareKit.Lua script.
+		/// Loads a string containing a Lua/MoonSharp script.
 		/// </summary>
 		/// <param name="code">The code.</param>
 		/// <param name="globalTable">The global table to bind to this chunk.</param>
@@ -190,7 +190,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// Loads a Lua/BareKit.Lua script from a System.IO.Stream. NOTE: This will *NOT* close the stream!
+		/// Loads a Lua/MoonSharp script from a System.IO.Stream. NOTE: This will *NOT* close the stream!
 		/// </summary>
 		/// <param name="stream">The stream containing code.</param>
 		/// <param name="globalTable">The global table to bind to this chunk.</param>
@@ -268,7 +268,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Loads a string containing a Lua/BareKit.Lua script.
+		/// Loads a string containing a Lua/MoonSharp script.
 		/// </summary>
 		/// <param name="filename">The code.</param>
 		/// <param name="globalContext">The global table to bind to this chunk.</param>
@@ -317,7 +317,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Loads and executes a string containing a Lua/BareKit.Lua script.
+		/// Loads and executes a string containing a Lua/MoonSharp script.
 		/// </summary>
 		/// <param name="code">The code.</param>
 		/// <param name="globalContext">The global context.</param>
@@ -333,7 +333,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Loads and executes a stream containing a Lua/BareKit.Lua script.
+		/// Loads and executes a stream containing a Lua/MoonSharp script.
 		/// </summary>
 		/// <param name="stream">The stream.</param>
 		/// <param name="globalContext">The global context.</param>
@@ -349,7 +349,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Loads and executes a file containing a Lua/BareKit.Lua script.
+		/// Loads and executes a file containing a Lua/MoonSharp script.
 		/// </summary>
 		/// <param name="filename">The filename.</param>
 		/// <param name="globalContext">The global context.</param>
@@ -378,7 +378,7 @@ namespace BareKit.Lua.Interpreter
 		/// <summary>
 		/// Runs the specified code with all possible defaults for quick experimenting.
 		/// </summary>
-		/// <param name="code">The Lua/BareKit.Lua code.</param>
+		/// <param name="code">The Lua/MoonSharp code.</param>
 		/// A DynValue containing the result of the processing of the executed script.
 		public static DynValue RunString(string code)
 		{
@@ -432,7 +432,7 @@ namespace BareKit.Lua.Interpreter
 		/// <summary>
 		/// Calls the specified function.
 		/// </summary>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <returns>
 		/// The return value(s) of the function call.
 		/// </returns>
@@ -445,7 +445,7 @@ namespace BareKit.Lua.Interpreter
 		/// <summary>
 		/// Calls the specified function.
 		/// </summary>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <param name="args">The arguments to pass to the function.</param>
 		/// <returns>
 		/// The return value(s) of the function call.
@@ -486,7 +486,7 @@ namespace BareKit.Lua.Interpreter
 		/// <summary>
 		/// Calls the specified function.
 		/// </summary>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <param name="args">The arguments to pass to the function.</param>
 		/// <returns>
 		/// The return value(s) of the function call.
@@ -505,7 +505,7 @@ namespace BareKit.Lua.Interpreter
 		/// <summary>
 		/// Calls the specified function.
 		/// </summary>
-		/// <param name="function">The Lua/BareKit.Lua function to be called</param>
+		/// <param name="function">The Lua/MoonSharp function to be called</param>
 		/// <returns></returns>
 		/// <exception cref="System.ArgumentException">Thrown if function is not of DataType.Function</exception>
 		public DynValue Call(object function)
@@ -516,7 +516,7 @@ namespace BareKit.Lua.Interpreter
 		/// <summary>
 		/// Calls the specified function.
 		/// </summary>
-		/// <param name="function">The Lua/BareKit.Lua function to be called </param>
+		/// <param name="function">The Lua/MoonSharp function to be called </param>
 		/// <param name="args">The arguments to pass to the function.</param>
 		/// <returns></returns>
 		/// <exception cref="System.ArgumentException">Thrown if function is not of DataType.Function</exception>
@@ -670,7 +670,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Warms up the parser/lexer structures so that BareKit.Lua operations start faster.
+		/// Warms up the parser/lexer structures so that MoonSharp operations start faster.
 		/// </summary>
 		public static void WarmUp()
 		{
@@ -714,7 +714,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// BareKit.Lua (like Lua itself) provides a registry, a predefined table that can be used by any CLR code to 
+		/// MoonSharp (like Lua itself) provides a registry, a predefined table that can be used by any CLR code to 
 		/// store whatever Lua values it needs to store. 
 		/// Any CLR code can store data into this table, but it should take care to choose keys 
 		/// that are different from those used by other libraries, to avoid collisions. 
@@ -735,7 +735,7 @@ namespace BareKit.Lua.Interpreter
 			subproduct = (subproduct != null) ? (subproduct + " ") : "";
 
 			StringBuilder sb = new StringBuilder();
-			sb.AppendLine(string.Format("BareKit.Lua {0}{1} [{2}]", subproduct, Script.VERSION, Script.GlobalOptions.Platform.GetPlatformName()));
+			sb.AppendLine(string.Format("MoonSharp {0}{1} [{2}]", subproduct, Script.VERSION, Script.GlobalOptions.Platform.GetPlatformName()));
 			sb.AppendLine("Copyright (C) 2014-2016 Marco Mastropaolo");
 			sb.AppendLine("http://www.moonsharp.org");
 			return sb.ToString();

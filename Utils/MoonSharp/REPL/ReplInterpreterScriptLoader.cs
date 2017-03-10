@@ -1,8 +1,8 @@
 ﻿#if !(PCL || ENABLE_DOTNET || NETFX_CORE)
 using System;
-using BareKit.Lua.Interpreter.Loaders;
+using BareKit.Lua.Loaders;
 
-namespace BareKit.Lua.Interpreter.REPL
+namespace BareKit.Lua.REPL
 {
 	/// <summary>
 	/// A script loader loading scripts directly from the file system (does not go through platform object)

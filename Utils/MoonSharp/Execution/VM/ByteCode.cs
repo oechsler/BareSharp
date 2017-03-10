@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using BareKit.Lua.Interpreter.Debugging;
+using BareKit.Lua.Debugging;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	internal class ByteCode : RefIdObject
 	{

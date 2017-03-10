@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using BareKit.Lua.Interpreter.Compatibility;
+using BareKit.Lua.Compatibility;
 
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	internal static class LexerUtils
 	{

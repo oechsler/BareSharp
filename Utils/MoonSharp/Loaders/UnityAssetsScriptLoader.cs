@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BareKit.Lua.Interpreter.Compatibility;
+using BareKit.Lua.Compatibility;
 
-namespace BareKit.Lua.Interpreter.Loaders
+namespace BareKit.Lua.Loaders
 {
 	/// <summary>
 	/// A script loader which can load scripts from assets in Unity3D.
 	/// Scripts should be saved as .txt files in a subdirectory of Assets/Resources.
 	/// 
-	/// When BareKit.Lua is activated on Unity3D and the default script loader is used,
-	/// scripts should be saved as .txt files in Assets/Resources/BareKit.Lua/Scripts.
+	/// When MoonSharp is activated on Unity3D and the default script loader is used,
+	/// scripts should be saved as .txt files in Assets/Resources/MoonSharp/Scripts.
 	/// </summary>
 	public class UnityAssetsScriptLoader : ScriptLoaderBase
 	{
@@ -20,14 +20,14 @@ namespace BareKit.Lua.Interpreter.Loaders
 		/// <summary>
 		/// The default path where scripts are meant to be stored (if not changed)
 		/// </summary>
-		public const string DEFAULT_PATH = "BareKit.Lua/Scripts";
+		public const string DEFAULT_PATH = "MoonSharp/Scripts";
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UnityAssetsScriptLoader"/> class.
 		/// </summary>
 		/// <param name="assetsPath">The path, relative to Assets/Resources. For example
 		/// if your scripts are stored under Assets/Resources/Scripts, you should
-		/// pass the value "Scripts". If null, "BareKit.Lua/Scripts" is used. </param>
+		/// pass the value "Scripts". If null, "MoonSharp/Scripts" is used. </param>
 		public UnityAssetsScriptLoader(string assetsPath = null)
 		{
 			assetsPath = assetsPath ?? DEFAULT_PATH;

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BareKit.Lua.Interpreter.Execution.VM;
+using BareKit.Lua.Execution.VM;
 
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// Class providing services specific to debugger implementations.
 	/// </summary>
-	/// <seealso cref="BareKit.Lua.Interpreter.IScriptPrivateResource" />
+	/// <seealso cref="BareKit.Lua.IScriptPrivateResource" />
 	public sealed class DebugService : IScriptPrivateResource
 	{
 		Processor m_Processor;

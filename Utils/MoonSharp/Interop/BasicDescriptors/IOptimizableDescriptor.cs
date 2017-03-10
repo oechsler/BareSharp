@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Interop.BasicDescriptors
+namespace BareKit.Lua.Interop.BasicDescriptors
 {
 	/// <summary>
 	/// Interface for descriptors of any kind which support optimizations of their implementation according to InteropAccessMode

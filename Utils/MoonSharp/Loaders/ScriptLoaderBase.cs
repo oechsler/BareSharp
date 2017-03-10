@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace BareKit.Lua.Interpreter.Loaders
+namespace BareKit.Lua.Loaders
 {
 	/// <summary>
 	/// A base implementation of IScriptLoader, offering resolution of module names.

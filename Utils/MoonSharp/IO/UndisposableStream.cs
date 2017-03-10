@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace BareKit.Lua.Interpreter.IO
+namespace BareKit.Lua.IO
 {
 	/// <summary>
 	/// An adapter over Stream which bypasses the Dispose and Close methods.

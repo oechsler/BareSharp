@@ -1,8 +1,8 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Interop;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
+using BareKit.Lua.Interop;
+using BareKit.Lua.Interop.BasicDescriptors;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Exception for all runtime errors. In addition to constructors, it offers a lot of static methods
@@ -409,7 +409,7 @@ namespace BareKit.Lua.Interpreter
 		/// </returns>
 		public static ScriptRuntimeException UserDataArgumentTypeMismatch(DataType t, Type clrType)
 		{
-			return new ScriptRuntimeException("cannot find a conversion from a BareKit.Lua {0} to a clr {1}", t.ToString().ToLowerInvariant(), clrType.FullName);
+			return new ScriptRuntimeException("cannot find a conversion from a MoonSharp {0} to a clr {1}", t.ToString().ToLowerInvariant(), clrType.FullName);
 		}
 
 		/// <summary>

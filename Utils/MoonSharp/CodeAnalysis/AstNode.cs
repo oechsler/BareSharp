@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.CodeAnalysis
+namespace BareKit.Lua.CodeAnalysis
 {
 	class AstNode
 	{

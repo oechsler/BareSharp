@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Class used to support "tail" continuations - a way for C# / Lua interaction which supports 

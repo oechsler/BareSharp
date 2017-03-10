@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace BareKit.Lua.Interpreter.Diagnostics.PerformanceCounters
+namespace BareKit.Lua.Diagnostics.PerformanceCounters
 {
 	/// <summary>
 	/// This class is not *really* IDisposable.. it's just use to have a RAII like pattern.

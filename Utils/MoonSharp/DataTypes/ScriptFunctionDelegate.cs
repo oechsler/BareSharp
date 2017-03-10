@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// A Delegate type which can wrap a script function

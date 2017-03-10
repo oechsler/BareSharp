@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Interop;
+using BareKit.Lua.Interop;
 using System.Reflection;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// This class wraps a CLR function 

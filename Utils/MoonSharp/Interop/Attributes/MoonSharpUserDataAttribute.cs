@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Marks a type of automatic registration as userdata (which happens only if UserData.RegisterAssembly is called).
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false, AllowMultiple = false)]
-	public sealed class BareKit.LuaUserDataAttribute : Attribute
+	public sealed class MoonSharpUserDataAttribute : Attribute
 	{
 		/// <summary>
 		/// The interop access mode
@@ -14,9 +14,9 @@ namespace BareKit.Lua.Interpreter
 		public InteropAccessMode AccessMode { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="BareKit.LuaUserDataAttribute"/> class.
+		/// Initializes a new instance of the <see cref="MoonSharpUserDataAttribute"/> class.
 		/// </summary>
-		public BareKit.LuaUserDataAttribute()
+		public MoonSharpUserDataAttribute()
 		{
 			AccessMode = InteropAccessMode.Default;
 		}

@@ -6,19 +6,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.CoreLib.IO;
-using BareKit.Lua.Interpreter.Platforms;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.CoreLib.IO;
+using BareKit.Lua.Platforms;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing io Lua functions. Proper support requires a compatible IPlatformAccessor
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "io")]
+	[MoonSharpModule(Namespace = "io")]
 	public class IoModule
 	{
-		public static void BareKit.LuaInit(Table globalTable, Table ioTable)
+		public static void MoonSharpInit(Table globalTable, Table ioTable)
 		{
 			UserData.RegisterType<FileUserDataBase>(InteropAccessMode.Default, "file");
 
@@ -106,14 +106,14 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue close(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			FileUserDataBase outp = args.AsUserData<FileUserDataBase>(0, "close", true) ?? GetDefaultFile(executionContext, StandardFileType.StdOut);
 			return outp.close(executionContext, args);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue flush(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			FileUserDataBase outp = args.AsUserData<FileUserDataBase>(0, "close", true) ?? GetDefaultFile(executionContext, StandardFileType.StdOut);
@@ -122,13 +122,13 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue input(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return HandleDefaultStreamSetter(executionContext, args, StandardFileType.StdIn);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue output(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return HandleDefaultStreamSetter(executionContext, args, StandardFileType.StdOut);
@@ -164,7 +164,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return new System.Text.UTF8Encoding(false); 
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue lines(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			string filename = args.AsType(0, "lines", DataType.String, false).String;
@@ -195,7 +195,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue open(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			string filename = args.AsType(0, "open", DataType.String, false).String;
@@ -260,7 +260,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 				return ex.Message;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue type(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			if (args[0].Type != DataType.UserData)
@@ -276,21 +276,21 @@ namespace BareKit.Lua.Interpreter.CoreLib
 				return DynValue.NewString("closed file");
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue read(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			FileUserDataBase file = GetDefaultFile(executionContext, StandardFileType.StdIn);
 			return file.read(executionContext, args);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue write(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			FileUserDataBase file = GetDefaultFile(executionContext, StandardFileType.StdOut);
 			return file.write(executionContext, args);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue tmpfile(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			string tmpfilename = Script.GlobalOptions.Platform.IO_OS_GetTempFilename();

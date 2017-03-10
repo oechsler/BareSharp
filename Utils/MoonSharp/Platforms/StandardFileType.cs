@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// Enumeration of standard file handles

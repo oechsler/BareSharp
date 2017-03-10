@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop.BasicDescriptors;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Standard descriptor for Enum values

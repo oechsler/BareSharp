@@ -1,9 +1,9 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Execution.VM;
-using BareKit.Lua.Interpreter.Interop.LuaStateInterop;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Execution.VM;
+using BareKit.Lua.Interop.LuaStateInterop;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Class giving access to details of the environment where the script is executing

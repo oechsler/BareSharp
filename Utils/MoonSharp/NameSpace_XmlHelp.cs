@@ -1,23 +1,23 @@
 ﻿
-namespace BareKit.Lua.Interpreter 
+namespace BareKit.Lua 
 {
 	/// <summary>
-	/// Namespace containing all the most commonly used classes for BareKit.Lua operation.
+	/// Namespace containing all the most commonly used classes for MoonSharp operation.
 	/// When in doubt, refer to <see cref="Script" /> and <see cref="DynValue" /> classes as starting points.
 	/// </summary>
 	internal static class NamespaceDoc { }
 }
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
-	/// Namespace containing the implementation of the Lua standard library, as BareKit.Lua modules.
+	/// Namespace containing the implementation of the Lua standard library, as MoonSharp modules.
 	/// There's seldom the need to access these classes directly.
 	/// </summary>
 	internal static class NamespaceDoc { }
 }
 
-namespace BareKit.Lua.Interpreter.CoreLib.IO
+namespace BareKit.Lua.CoreLib.IO
 {
 	/// <summary>
 	/// Namespace containing userdata classes for the 'io' module
@@ -25,7 +25,7 @@ namespace BareKit.Lua.Interpreter.CoreLib.IO
 	internal static class NamespaceDoc { }
 }
 
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// Namespace containing classes used to support debuggers
@@ -33,7 +33,7 @@ namespace BareKit.Lua.Interpreter.Debugging
 	internal static class NamespaceDoc { }
 }
 
-namespace BareKit.Lua.Interpreter.Diagnostics
+namespace BareKit.Lua.Diagnostics
 {
 	/// <summary>
 	/// Namespace containing classes used to support self diagnostics (e.g. performance counters)
@@ -41,7 +41,7 @@ namespace BareKit.Lua.Interpreter.Diagnostics
 	internal static class NamespaceDoc { }
 }
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Namespace containing classes used to customize and support advanced interoperations between
@@ -50,7 +50,7 @@ namespace BareKit.Lua.Interpreter.Interop
 	internal static class NamespaceDoc { }
 }
 
-namespace BareKit.Lua.Interpreter.Interop.LuaStateInterop
+namespace BareKit.Lua.Interop.LuaStateInterop
 {
 	/// <summary>
 	/// Namespace containing classes used to provide a minimal support for porting code based on the classic
@@ -60,7 +60,7 @@ namespace BareKit.Lua.Interpreter.Interop.LuaStateInterop
 }
 
 
-namespace BareKit.Lua.Interpreter.Loaders
+namespace BareKit.Lua.Loaders
 {
 	/// <summary>
 	/// Namespace containing classes used to customized how scripts are loaded from external files.
@@ -69,7 +69,7 @@ namespace BareKit.Lua.Interpreter.Loaders
 }
 
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// Namespace containing classes used to customize how the interfacing with the operative system happens
@@ -79,7 +79,7 @@ namespace BareKit.Lua.Interpreter.Platforms
 	internal static class NamespaceDoc { }
 }
 
-namespace BareKit.Lua.Interpreter.REPL
+namespace BareKit.Lua.REPL
 {
 	/// <summary>
 	/// Contains classes useful to implement REPL interpreters.

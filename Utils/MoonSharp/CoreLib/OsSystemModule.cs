@@ -3,16 +3,16 @@
 
 using System;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing system related Lua functions from the 'os' module.
 	/// Proper support requires a compatible IPlatformAccessor
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "os")]
+	[MoonSharpModule(Namespace = "os")]
 	public class OsSystemModule
 	{
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue execute(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v = args.AsType(0, "execute", DataType.String, true);
@@ -40,7 +40,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue exit(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v_exitCode = args.AsType(0, "exit", DataType.Number, true);
@@ -54,7 +54,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			throw new InvalidOperationException("Unreachable code.. reached.");
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue getenv(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue varName = args.AsType(0, "getenv", DataType.String, false);
@@ -67,7 +67,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 				return DynValue.NewString(val);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue remove(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			string fileName = args.AsType(0, "remove", DataType.String, false).String;
@@ -93,7 +93,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue rename(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			string fileNameOld = args.AsType(0, "rename", DataType.String, false).String;
@@ -117,13 +117,13 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue setlocale(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewString("n/a");
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue tmpname(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewString(Script.GlobalOptions.Platform.IO_OS_GetTempFilename());

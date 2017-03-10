@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Serialization
+namespace BareKit.Lua.Serialization
 {
 	/// <summary>
 	/// 

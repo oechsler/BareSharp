@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using BareKit.Lua.Interpreter.Compatibility;
+using BareKit.Lua.Compatibility;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
 	/// Helper extension methods used to simplify some parts of userdata descriptor implementations
@@ -14,7 +14,7 @@ namespace BareKit.Lua.Interpreter.Interop
 	{
 		/// <summary>
 		/// Determines whether a
-		/// <see cref="BareKit.LuaVisibleAttribute" /> or a <see cref="BareKit.LuaHiddenAttribute" />  is changing visibility of a member
+		/// <see cref="MoonSharpVisibleAttribute" /> or a <see cref="MoonSharpHiddenAttribute" />  is changing visibility of a member
 		/// to scripts.
 		/// </summary>
 		/// <param name="mi">The member to check.</param>
@@ -23,17 +23,17 @@ namespace BareKit.Lua.Interpreter.Interop
 		/// <c>false</c> if visibility is forced hidden or the specified MemberInfo is null,
 		/// <c>if no attribute was found</c>
 		/// </returns>
-		/// <exception cref="System.InvalidOperationException">If both BareKit.LuaHiddenAttribute and BareKit.LuaVisibleAttribute are specified and they convey different messages.</exception>
+		/// <exception cref="System.InvalidOperationException">If both MoonSharpHiddenAttribute and MoonSharpVisibleAttribute are specified and they convey different messages.</exception>
 		public static bool? GetVisibilityFromAttributes(this MemberInfo mi)
 		{
 			if (mi == null)
 				return false;
 
-			BareKit.LuaVisibleAttribute va = mi.GetCustomAttributes(true).OfType<BareKit.LuaVisibleAttribute>().SingleOrDefault();
-			BareKit.LuaHiddenAttribute ha = mi.GetCustomAttributes(true).OfType<BareKit.LuaHiddenAttribute>().SingleOrDefault();
+			MoonSharpVisibleAttribute va = mi.GetCustomAttributes(true).OfType<MoonSharpVisibleAttribute>().SingleOrDefault();
+			MoonSharpHiddenAttribute ha = mi.GetCustomAttributes(true).OfType<MoonSharpHiddenAttribute>().SingleOrDefault();
 
 			if (va != null && ha != null && va.Visible)
-				throw new InvalidOperationException(string.Format("A member ('{0}') can't have discording BareKit.LuaHiddenAttribute and BareKit.LuaVisibleAttribute.", mi.Name));
+				throw new InvalidOperationException(string.Format("A member ('{0}') can't have discording MoonSharpHiddenAttribute and MoonSharpVisibleAttribute.", mi.Name));
 			else if (ha != null)
 				return false;
 			else if (va != null)
@@ -145,14 +145,14 @@ namespace BareKit.Lua.Interpreter.Interop
 
 		/// <summary>
 		/// Gets the list of metamethod names from attributes - in practice the list of metamethods declared through
-		/// <see cref="BareKit.LuaUserDataMetamethodAttribute" /> .
+		/// <see cref="MoonSharpUserDataMetamethodAttribute" /> .
 		/// </summary>
 		/// <param name="mi">The mi.</param>
 		/// <returns></returns>
 		public static List<string> GetMetaNamesFromAttributes(this MethodInfo mi)
 		{
-			return mi.GetCustomAttributes(typeof(BareKit.LuaUserDataMetamethodAttribute), true)
-				.OfType<BareKit.LuaUserDataMetamethodAttribute>()
+			return mi.GetCustomAttributes(typeof(MoonSharpUserDataMetamethodAttribute), true)
+				.OfType<MoonSharpUserDataMetamethodAttribute>()
 				.Select(a => a.Name)
 				.ToList();
 		}

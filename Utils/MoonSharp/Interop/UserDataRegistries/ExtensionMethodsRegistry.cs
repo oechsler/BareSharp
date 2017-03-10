@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.DataStructs;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.DataStructs;
+using BareKit.Lua.Interop.BasicDescriptors;
 
-namespace BareKit.Lua.Interpreter.Interop.UserDataRegistries
+namespace BareKit.Lua.Interop.UserDataRegistries
 {
 	/// <summary>
 	/// Registry of all extension methods. Use UserData statics to access these.

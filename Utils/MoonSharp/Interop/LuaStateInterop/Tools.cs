@@ -55,7 +55,7 @@ using System.Text.RegularExpressions;
 
 #endregion
 
-namespace BareKit.Lua.Interpreter.Interop.LuaStateInterop
+namespace BareKit.Lua.Interop.LuaStateInterop
 {
 	internal static class Tools
 	{

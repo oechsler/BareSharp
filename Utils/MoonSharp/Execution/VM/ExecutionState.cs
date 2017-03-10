@@ -1,6 +1,6 @@
-﻿using BareKit.Lua.Interpreter.DataStructs;
+﻿using BareKit.Lua.DataStructs;
 
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	internal sealed class ExecutionState
 	{

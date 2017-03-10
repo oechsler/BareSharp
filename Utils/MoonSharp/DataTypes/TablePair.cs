@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// A class representing a key/value pair for Table use

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Execution.VM;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Execution.VM;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// A class representing a script coroutine
@@ -110,7 +110,7 @@ namespace BareKit.Lua.Interpreter
 		}
 
 		/// <summary>
-		/// The purpose of this method is to convert a BareKit.Lua/Lua coroutine to a Unity3D coroutine.
+		/// The purpose of this method is to convert a MoonSharp/Lua coroutine to a Unity3D coroutine.
 		/// This loops over the coroutine, discarding returned values, and returning null for each invocation.
 		/// This means however that the coroutine will be invoked each frame.
 		/// Only non-CLR coroutines can be resumed with this method. Use an overload of the Resume method accepting a ScriptExecutionContext instead.

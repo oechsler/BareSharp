@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace BareKit.Lua.Interpreter.Execution
+namespace BareKit.Lua.Execution
 {
 	/// <summary>
 	/// The scope of a closure (container of upvalues)

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BareKit.Lua.Interpreter.Execution.Scopes;
-using BareKit.Lua.Interpreter.Tree.Statements;
+using BareKit.Lua.Execution.Scopes;
+using BareKit.Lua.Tree.Statements;
 
-namespace BareKit.Lua.Interpreter.Execution
+namespace BareKit.Lua.Execution
 {
 	internal class BuildTimeScope
 	{

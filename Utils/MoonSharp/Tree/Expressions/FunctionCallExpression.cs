@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.Execution;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.Execution;
 
-namespace BareKit.Lua.Interpreter.Tree.Expressions
+namespace BareKit.Lua.Tree.Expressions
 {
 	class FunctionCallExpression : Expression
 	{

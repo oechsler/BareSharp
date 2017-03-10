@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BareKit.Lua.Interpreter.Tree;
+using BareKit.Lua.Tree;
 
-namespace BareKit.Lua.Interpreter.Serialization.Json
+namespace BareKit.Lua.Serialization.Json
 {
 	/// <summary>
 	/// Class performing conversions between Tables and Json.

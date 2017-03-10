@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using BareKit.Lua.Interpreter.Compatibility.Frameworks;
+using BareKit.Lua.Compatibility.Frameworks;
 
-namespace BareKit.Lua.Interpreter.Compatibility
+namespace BareKit.Lua.Compatibility
 {
 	public static class Framework
 	{

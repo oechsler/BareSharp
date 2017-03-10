@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Diagnostics
+namespace BareKit.Lua.Diagnostics
 {
 	/// <summary>
 	/// Enumeration of unit of measures of the performance counters

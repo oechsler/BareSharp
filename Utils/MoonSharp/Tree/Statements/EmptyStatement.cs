@@ -1,6 +1,6 @@
-﻿using BareKit.Lua.Interpreter.Execution;
+﻿using BareKit.Lua.Execution;
 
-namespace BareKit.Lua.Interpreter.Tree.Statements
+namespace BareKit.Lua.Tree.Statements
 {
 	class EmptyStatement : Statement
 	{

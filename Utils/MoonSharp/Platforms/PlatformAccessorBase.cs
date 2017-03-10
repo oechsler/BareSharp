@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace BareKit.Lua.Interpreter.Platforms
+namespace BareKit.Lua.Platforms
 {
 	/// <summary>
 	/// An abstract class which offers basic services on top of IPlatformAccessor to provide easier implementation of platforms.

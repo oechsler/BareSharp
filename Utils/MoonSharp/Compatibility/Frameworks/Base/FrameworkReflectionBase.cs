@@ -12,7 +12,7 @@ using System.Text;
 	using TTypeInfo = System.Type;
 #endif
 
-namespace BareKit.Lua.Interpreter.Compatibility.Frameworks
+namespace BareKit.Lua.Compatibility.Frameworks
 {
 	abstract class FrameworkReflectionBase : FrameworkBase
 	{

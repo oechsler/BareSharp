@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Marks a method as the handler of metamethods of a userdata type
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-	public sealed class BareKit.LuaUserDataMetamethodAttribute : Attribute
+	public sealed class MoonSharpUserDataMetamethodAttribute : Attribute
 	{
 		/// <summary>
 		/// The metamethod name (like '__div', '__ipairs', etc.)
@@ -14,10 +14,10 @@ namespace BareKit.Lua.Interpreter
 		public string Name { get; private set; }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="BareKit.LuaUserDataMetamethodAttribute"/> class.
+		/// Initializes a new instance of the <see cref="MoonSharpUserDataMetamethodAttribute"/> class.
 		/// </summary>
 		/// <param name="name">The metamethod name (like '__div', '__ipairs', etc.)</param>
-		public BareKit.LuaUserDataMetamethodAttribute(string name)
+		public MoonSharpUserDataMetamethodAttribute(string name)
 		{
 			Name = name;
 		}

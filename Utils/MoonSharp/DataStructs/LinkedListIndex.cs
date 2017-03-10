@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.DataStructs
+namespace BareKit.Lua.DataStructs
 {
 	/// <summary>
 	/// An index to accelerate operations on a LinkedList<typeparamref name="TValue"/> using a single key of type <typeparamref name="TKey"/>

@@ -2,19 +2,19 @@
 #pragma warning disable 1591
 
 using System;
-using BareKit.Lua.Interpreter.Interop;
+using BareKit.Lua.Interop;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing math Lua functions 
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "math")]
+	[MoonSharpModule(Namespace = "math")]
 	public class MathModule
 	{
-		[BareKit.LuaModuleConstant]
+		[MoonSharpModuleConstant]
 		public const double pi = Math.PI;
-		[BareKit.LuaModuleConstant]
+		[MoonSharpModuleConstant]
 		public const double huge = double.MaxValue;
 
 		private static Random GetRandom(Script s)
@@ -30,7 +30,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		public static void BareKit.LuaInit(Table globalTable, Table ioTable)
+		public static void MoonSharpInit(Table globalTable, Table ioTable)
 		{
 			SetRandom(globalTable.OwnerScript, new Random());
 		}
@@ -79,79 +79,79 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue abs(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "abs", d => Math.Abs(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue acos(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "acos", d => Math.Acos(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue asin(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "asin", d => Math.Asin(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue atan(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "atan", d => Math.Atan(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue atan2(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec2(args, "atan2", (d1, d2) => Math.Atan2(d1, d2));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue ceil(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "ceil", d => Math.Ceiling(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue cos(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "cos", d => Math.Cos(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue cosh(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "cosh", d => Math.Cosh(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue deg(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "deg", d => d * 180.0 / Math.PI);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue exp(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "exp", d => Math.Exp(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue floor(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "floor", d => Math.Floor(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue fmod(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec2(args, "fmod", (d1, d2) => Math.IEEERemainder(d1, d2));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue frexp(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			// http://stackoverflow.com/questions/389993/extracting-mantissa-and-exponent-from-double-in-c-sharp
@@ -210,31 +210,31 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewTuple(DynValue.NewNumber(m), DynValue.NewNumber(e));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue ldexp(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec2(args, "ldexp", (d1, d2) => d1 * Math.Pow(2, d2));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue log(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec2n(args, "log", Math.E, (d1, d2) => Math.Log(d1, d2));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue max(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return execaccum(args, "max", (d1, d2) => Math.Max(d1, d2));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue min(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return execaccum(args, "min", (d1, d2) => Math.Min(d1, d2));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue modf(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue arg = args.AsType(0, "modf", DataType.Number, false);
@@ -242,19 +242,19 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue pow(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec2(args, "pow", (d1, d2) => Math.Pow(d1, d2));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue rad(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "rad", d => d * Math.PI / 180.0);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue random(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue m = args.AsType(0, "random", DataType.Number, true);
@@ -280,7 +280,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewNumber(d);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue randomseed(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue arg = args.AsType(0, "randomseed", DataType.Number, false);
@@ -289,31 +289,31 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.Nil;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue sin(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "sin", d => Math.Sin(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue sinh(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "sinh", d => Math.Sinh(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue sqrt(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "sqrt", d => Math.Sqrt(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue tan(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "tan", d => Math.Tan(d));
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue tanh(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return exec1(args, "tanh", d => Math.Tanh(d));

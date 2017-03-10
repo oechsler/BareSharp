@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
-using BareKit.Lua.Interpreter.Interop;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
-using BareKit.Lua.Interpreter.Interop.RegistrationPolicies;
-using BareKit.Lua.Interpreter.Interop.StandardDescriptors;
-using BareKit.Lua.Interpreter.Interop.UserDataRegistries;
-using BareKit.Lua.Interpreter.Serialization.Json;
+using BareKit.Lua.Interop;
+using BareKit.Lua.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.RegistrationPolicies;
+using BareKit.Lua.Interop.StandardDescriptors;
+using BareKit.Lua.Interop.UserDataRegistries;
+using BareKit.Lua.Serialization.Json;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Class exposing C# objects as Lua userdata.
@@ -136,7 +136,7 @@ namespace BareKit.Lua.Interpreter
 
 
 		/// <summary>
-		/// Registers all types marked with a BareKit.LuaUserDataAttribute that ar contained in an assembly.
+		/// Registers all types marked with a MoonSharpUserDataAttribute that ar contained in an assembly.
 		/// </summary>
 		/// <param name="asm">The assembly.</param>
 		/// <param name="includeExtensionTypes">if set to <c>true</c> extension types are registered to the appropriate registry.</param>

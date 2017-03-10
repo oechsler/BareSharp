@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 
 	/// <summary>

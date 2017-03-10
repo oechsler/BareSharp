@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Debugging
+namespace BareKit.Lua.Debugging
 {
 	/// <summary>
 	/// Enumeration of the possible watch types

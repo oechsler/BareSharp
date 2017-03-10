@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Execution.VM
+namespace BareKit.Lua.Execution.VM
 {
 	sealed partial class Processor
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.Interop
+namespace BareKit.Lua.Interop
 {
 	/// <summary>
-	/// Interface used by BareKit.Lua to access objects of a given type from scripts.
+	/// Interface used by MoonSharp to access objects of a given type from scripts.
 	/// </summary>
 	public interface IUserDataDescriptor
 	{

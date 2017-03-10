@@ -1,5 +1,5 @@
 ﻿
-namespace BareKit.Lua.Interpreter.Interop.StandardDescriptors.HardwiredDescriptors
+namespace BareKit.Lua.Interop.StandardDescriptors.HardwiredDescriptors
 {
 	public sealed class DefaultValue
 	{

@@ -2,12 +2,12 @@
 #pragma warning disable 1591
 
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
-	/// Class implementing dynamic expression evaluations at runtime (a BareKit.Lua addition).
+	/// Class implementing dynamic expression evaluations at runtime (a MoonSharp addition).
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "dynamic")]
+	[MoonSharpModule(Namespace = "dynamic")]
 	public class DynamicModule
 	{
 		private class DynamicExprWrapper
@@ -15,12 +15,12 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			public DynamicExpression Expr;
 		}
 
-		public static void BareKit.LuaInit(Table globalTable, Table stringTable)
+		public static void MoonSharpInit(Table globalTable, Table stringTable)
 		{
 			UserData.RegisterType<DynamicExprWrapper>(InteropAccessMode.HideMembers);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue eval(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			try
@@ -50,7 +50,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue prepare(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			try

@@ -48,13 +48,13 @@
 // THE SOFTWARE.
 
 
-using BareKit.Lua.Interpreter.Interop.LuaStateInterop;
+using BareKit.Lua.Interop.LuaStateInterop;
 using lua_Integer = System.Int32;
 using LUA_INTFRM_T = System.Int64;
 using ptrdiff_t = System.Int32;
 using UNSIGNED_LUA_INTFRM_T = System.UInt64;
 
-namespace BareKit.Lua.Interpreter.CoreLib.StringLib
+namespace BareKit.Lua.CoreLib.StringLib
 {
 	internal class KopiLua_StringLib : LuaBase
 	{

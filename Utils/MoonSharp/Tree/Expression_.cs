@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Tree.Expressions;
+using BareKit.Lua.Execution;
+using BareKit.Lua.Tree.Expressions;
 
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	abstract class Expression : NodeBase
 	{

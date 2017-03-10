@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BareKit.Lua.Interpreter.REPL
+namespace BareKit.Lua.REPL
 {
 	/// <summary>
 	/// This class provides a simple REPL intepreter ready to be reused in a simple way.

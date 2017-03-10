@@ -1,8 +1,8 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Compatibility;
-using BareKit.Lua.Interpreter.Interop;
+using BareKit.Lua.Compatibility;
+using BareKit.Lua.Interop;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Descriptor which acts as a non-containing adapter from IUserDataType to IUserDataDescriptor

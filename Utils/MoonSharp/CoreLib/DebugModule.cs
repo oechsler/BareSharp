@@ -3,18 +3,18 @@
 
 using System;
 using System.Text;
-using BareKit.Lua.Interpreter.Debugging;
-using BareKit.Lua.Interpreter.REPL;
+using BareKit.Lua.Debugging;
+using BareKit.Lua.REPL;
 
-namespace BareKit.Lua.Interpreter.CoreLib
+namespace BareKit.Lua.CoreLib
 {
 	/// <summary>
 	/// Class implementing debug Lua functions. Support for the debug module is partial. 
 	/// </summary>
-	[BareKit.LuaModule(Namespace = "debug")]
+	[MoonSharpModule(Namespace = "debug")]
 	public class DebugModule
 	{
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue debug(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			Script script = executionContext.GetScript();
@@ -50,7 +50,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			}
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue getuservalue(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v = args[0];
@@ -61,7 +61,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return v.UserData.UserValue ?? DynValue.Nil;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue setuservalue(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v = args.AsType(0, "setuservalue", DataType.UserData, false);
@@ -70,13 +70,13 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return v.UserData.UserValue = t;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue getregistry(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			return DynValue.NewTable(executionContext.GetScript().Registry);
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue getmetatable(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v = args[0];
@@ -90,7 +90,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 				return DynValue.Nil;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue setmetatable(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue v = args[0];
@@ -108,7 +108,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return v;
 		}
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue getupvalue(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			var index = (int)args.AsType(1, "getupvalue", DataType.Number, false).Number - 1;
@@ -129,7 +129,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue upvalueid(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			var index = (int)args.AsType(1, "getupvalue", DataType.Number, false).Number - 1;
@@ -148,7 +148,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue setupvalue(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			var index = (int)args.AsType(1, "setupvalue", DataType.Number, false).Number - 1;
@@ -169,7 +169,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue upvaluejoin(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			DynValue f1 = args.AsType(0, "upvaluejoin", DataType.Function, false);
@@ -192,7 +192,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		}
 
 
-		[BareKit.LuaModuleMethod]
+		[MoonSharpModuleMethod]
 		public static DynValue traceback(ScriptExecutionContext executionContext, CallbackArguments args)
 		{
 			StringBuilder sb = new StringBuilder();
@@ -247,7 +247,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 			return DynValue.NewString(sb);
 		}
 
-		//[BareKit.LuaModuleMethod]
+		//[MoonSharpModuleMethod]
 		//public static DynValue getlocal(ScriptExecutionContext executionContext, CallbackArguments args)
 		//{
 		//	Coroutine c;
@@ -297,7 +297,7 @@ namespace BareKit.Lua.Interpreter.CoreLib
 		//}
 
 
-		//[BareKit.LuaMethod]
+		//[MoonSharpMethod]
 		//public static DynValue getinfo(ScriptExecutionContext executionContext, CallbackArguments args)
 		//{
 		//	Coroutine cor = executionContext.GetCallingCoroutine();

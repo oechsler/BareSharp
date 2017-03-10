@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Interop.BasicDescriptors;
+using BareKit.Lua.Interop.BasicDescriptors;
 
-namespace BareKit.Lua.Interpreter.Interop.StandardDescriptors.HardwiredDescriptors
+namespace BareKit.Lua.Interop.StandardDescriptors.HardwiredDescriptors
 {
 	public abstract class HardwiredMethodMemberDescriptor : FunctionMemberDescriptorBase
 	{

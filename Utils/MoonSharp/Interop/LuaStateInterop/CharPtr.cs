@@ -48,7 +48,7 @@
 using System;
 using System.Diagnostics;
 
-namespace BareKit.Lua.Interpreter.Interop.LuaStateInterop
+namespace BareKit.Lua.Interop.LuaStateInterop
 {
 	public class CharPtr
 	{

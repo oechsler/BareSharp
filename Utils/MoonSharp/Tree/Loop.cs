@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Execution;
-using BareKit.Lua.Interpreter.Execution.VM;
+using BareKit.Lua.Execution;
+using BareKit.Lua.Execution.VM;
 
-namespace BareKit.Lua.Interpreter.Tree
+namespace BareKit.Lua.Tree
 {
 	internal class Loop : ILoop
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
-using BareKit.Lua.Interpreter.Compatibility;
+using BareKit.Lua.Compatibility;
 
-namespace BareKit.Lua.Interpreter.Interop.Converters
+namespace BareKit.Lua.Interop.Converters
 {
 	internal static class ScriptToClrConversions
 	{

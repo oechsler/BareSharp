@@ -1,7 +1,7 @@
-﻿using BareKit.Lua.Interpreter.Interop;
-using BareKit.Lua.Interpreter.Platforms;
+﻿using BareKit.Lua.Interop;
+using BareKit.Lua.Platforms;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// Class containing script global options, that is options which cannot be customized per-script.

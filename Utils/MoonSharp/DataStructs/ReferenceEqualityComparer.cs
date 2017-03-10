@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BareKit.Lua.Interpreter.DataStructs
+namespace BareKit.Lua.DataStructs
 {
 	/// <summary>
 	/// Implementation of IEqualityComparer enforcing reference equality

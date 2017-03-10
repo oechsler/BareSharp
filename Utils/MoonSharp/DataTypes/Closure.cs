@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BareKit.Lua.Interpreter.Execution;
+using BareKit.Lua.Execution;
 
-namespace BareKit.Lua.Interpreter
+namespace BareKit.Lua
 {
 	/// <summary>
 	/// A class representing a script function
