@@ -137,7 +137,6 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the attached Glide tweening instance.
         /// </summary>
-        [MoonSharpVisible(true)]
         protected Tweener Tweening
 		{
 			get { return ((Stage)Parent).Tweening; }

@@ -9,11 +9,11 @@ namespace BareKit.Input
 	[Flags]
 	public enum Finger
 	{
-		One,
-		Two,
-		Three,
-		Four,
-		Five
+		One = 0,
+		Two = 1,
+		Three = 2,
+		Four = 3,
+		Five = 4
 	}
 
 	public class TouchInput : Input

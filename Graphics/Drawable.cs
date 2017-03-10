@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using MoonSharp.Interpreter.Interop;
+
 namespace BareKit.Graphics
 {
     public class Drawable
@@ -57,9 +59,10 @@ namespace BareKit.Graphics
 			return (Drawable)MemberwiseClone();
 		}
 
-		/// <summary>
-		/// Gets the attached ScalingManager.
-		/// </summary>
+        /// <summary>
+        /// Gets the attached ScalingManager.
+        /// </summary>
+        [MoonSharpVisible(true)]
         protected ScalingManager Scaling
         {
             get { return scaling; }

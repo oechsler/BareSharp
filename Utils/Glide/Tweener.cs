@@ -54,19 +54,19 @@ namespace BareKit.Tweening
 	        private static Dictionary<Type, ConstructorInfo> registeredLerpers;
 	        private Dictionary<object, List<Tween>> tweens;
 	        private List<Tween> toRemove, toAdd, allTweens;
-	
-	        /// <summary>
-	        /// <para>Tweens a set of properties on an object.</para>
-	        /// <para>To tween instance properties/fields, pass the object.</para>
-	        /// <para>To tween static properties/fields, pass the type of the object, using typeof(ObjectType) or object.GetType().</para>
-	        /// </summary>
-	        /// <param name="target">The object or type to tween.</param>
-	        /// <param name="values">The values to tween to, in an anonymous type ( new { prop1 = 100, prop2 = 0} ).</param>
-	        /// <param name="duration">Duration of the tween in seconds.</param>
-	        /// <param name="delay">Delay before the tween starts, in seconds.</param>
-	        /// <param name="overwrite">Whether pre-existing tweens should be overwritten if this tween involves the same properties.</param>
-	        /// <returns>The tween created, for setting properties on.</returns>
-	        public Tween Tween<T>(T target, object values, float duration, float delay = 0, bool overwrite = true) where T : class
+
+            /// <summary>
+            /// <para>Tweens a set of properties on an object.</para>
+            /// <para>To tween instance properties/fields, pass the object.</para>
+            /// <para>To tween static properties/fields, pass the type of the object, using typeof(ObjectType) or object.GetType().</para>
+            /// </summary>
+            /// <param name="target">The object or type to tween.</param>
+            /// <param name="values">The values to tween to, in an anonymous type ( new { prop1 = 100, prop2 = 0} ).</param>
+            /// <param name="duration">Duration of the tween in seconds.</param>
+            /// <param name="delay">Delay before the tween starts, in seconds.</param>
+            /// <param name="overwrite">Whether pre-existing tweens should be overwritten if this tween involves the same properties.</param>
+            /// <returns>The tween created, for setting properties on.</returns>
+            public Tween Tween<T>(T target, object values, float duration, float delay = 0, bool overwrite = true) where T : class
 	        {
 	        	if (target == null)
 	        		throw new ArgumentNullException("target");

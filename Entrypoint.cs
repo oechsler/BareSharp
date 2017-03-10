@@ -6,6 +6,7 @@ using MoonSharp.Interpreter;
 using BareKit.Audio;
 using BareKit.Graphics;
 using BareKit.Tweening;
+using BareKit.Lua;
 
 namespace BareKit
 {
@@ -55,8 +56,11 @@ namespace BareKit
             Scripting.Initialize(this, "main");
             Scripting.Global.Set("stage", UserData.Create(stage));
 
-            if (Scripting.Global != null && Scripting.Global.Get("init").IsNotNil())
-                Scripting.Global.Get("init").Function.Call();
+            Scripting.Global.Set("delta", DynValue.NewNumber(0));
+            Scripting.Global.Set("fps", DynValue.NewNumber(0));
+
+            if (Scripting.Global != null && Scripting.Global.Get("start").IsNotNil())
+                Scripting.Global.Get("start").Function.Call();
         }
 
         protected override void Update(GameTime gameTime)
@@ -66,15 +70,18 @@ namespace BareKit
 			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
+            Scripting.Global.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
             if (Scripting.Global != null && Scripting.Global.Get("update").IsNotNil())
-                Scripting.Global.Get("update").Function.Call((float)gameTime.ElapsedGameTime.TotalSeconds);
+                Scripting.Global.Get("update").Function.Call(gameTime.ElapsedGameTime.TotalSeconds);
 
             if (oneSecond >= 1)
 			{
 				fps = frames;
 				frames = 0;
 				oneSecond--;
-			}
+
+                Scripting.Global.Set("fps", DynValue.NewNumber(fps));
+            }
 			oneSecond += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             base.Update(gameTime);
