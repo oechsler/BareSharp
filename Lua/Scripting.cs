@@ -40,34 +40,34 @@ namespace BareKit.Lua
                 ");
                 script.Globals.Set("loader", DynValue.Nil);
 
-                string name = target.GetType().GetTypeInfo().Assembly.GetName().Name;
+                script.Globals.Set("_default", DynValue.NewString(target.GetType().GetTypeInfo().Assembly.GetName().Name));
                 script.Globals.Set("bare", DynValue.NewTable(script));
                 script.DoString($@"
                     bare.vector = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
                     bare.color = alloc('Microsoft.Xna.Framework.Color', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.Content.ContentManager', 'MonoGame.Framework')
-                    bare.rectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', '{name}')
+                    bare.rrotatedRectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', _default)
 
-                    bare.sound = alloc('BareKit.Audio.Sound', '{name}')
-                    alloc('BareKit.Audio.SoundManager', '{name}')
+                    bare.sound = alloc('BareKit.Audio.Sound', _default)
+                    alloc('BareKit.Audio.SoundManager', _default)
 
-                    bare.container = alloc('BareKit.Graphics.Container', '{name}')
-                    alloc('BareKit.Graphics.Drawable', '{name}')
-                    bare.label = alloc('BareKit.Graphics.Label', '{name}')
-                    bare.rect = alloc('BareKit.Graphics.Rect', '{name}')
-                    alloc('BareKit.Graphics.ScalingManager', '{name}')
-                    bare.scene = alloc('BareKit.Graphics.Scene', '{name}')
-                    bare.sprite = alloc('BareKit.Graphics.Sprite', '{name}')
+                    bare.container = alloc('BareKit.Graphics.Container', _default)
+                    alloc('BareKit.Graphics.Drawable', _default)
+                    bare.label = alloc('BareKit.Graphics.Label', _default)
+                    bare.rect = alloc('BareKit.Graphics.Rect', _default)
+                    alloc('BareKit.Graphics.ScalingManager', _default)
+                    bare.scene = alloc('BareKit.Graphics.Scene', _default)
+                    bare.sprite = alloc('BareKit.Graphics.Sprite', _default)
 
-                    bare.gamepad = alloc('BareKit.Input.GamepadInput', '{name}')
+                    bare.gamepadInput = alloc('BareKit.Input.GamepadInput', _default)
                     bare.buttons = alloc('Microsoft.Xna.Framework.Input.Buttons', 'MonoGame.Framework')
-                    alloc('BareKit.Input.Input', '{name}')
-                    bare.state = alloc('BareKit.Input.InputState', '{name}')
-                    alloc('BareKit.Input.InputManager', '{name}')
-                    bare.key = alloc('BareKit.Input.KeyInput', '{name}')
+                    alloc('BareKit.Input.Input', _default)
+                    bare.inputState = alloc('BareKit.Input.InputState', _default)
+                    alloc('BareKit.Input.InputManager', _default)
+                    bare.keyInput = alloc('BareKit.Input.KeyInput', _default)
                     bare.keys = alloc('Microsoft.Xna.Framework.Input.Keys', 'MonoGame.Framework')
-                    bare.touch = alloc('BareKit.Input.TouchInput', '{name}')
-                    bare.finger = enum(alloc('BareKit.Input.Finger', '{name}'))
+                    bare.touchInput = alloc('BareKit.Input.TouchInput', _default)
+                    bare.finger = enum(alloc('BareKit.Input.Finger', _default))
                 ");
             }
 
@@ -130,7 +130,9 @@ namespace BareKit.Lua
             object[] convertedArgs = new object[args.Length];
             for (int i = 0; i < args.Length; i++)
             {
-                if (args[i].GetType() == typeof(double))
+                if (args[i].GetType() == typeof(double) && ((double)args[i] - Math.Floor((double)args[i])) == 0)
+                    convertedArgs[i] = (int)(double)args[i];
+                else if (args[i].GetType() == typeof(double))
                     convertedArgs[i] = (float)(double)args[i];
                 else
                     convertedArgs[i] = args[i];
