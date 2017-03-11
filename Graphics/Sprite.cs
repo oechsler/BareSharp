@@ -49,10 +49,14 @@ namespace BareKit.Graphics
 				isRendered = true;
 				buffer.Draw(texture: texture,
 							position: Scaling.Size / 2 + Position,
+                            sourceRectangle: texture.Bounds,
 							origin: new Vector2(texture.Width, texture.Height) / 2 + Origin,
 							rotation: Rotation,
 							scale: screenScale * Scale,
-							color: Color * Alpha
+							color: Color * Alpha,
+
+                            effects: SpriteEffects.None,
+                            layerDepth: 0
 						   );
 			}
 			else

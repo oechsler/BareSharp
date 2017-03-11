@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using MoonSharp.Interpreter;
@@ -61,7 +63,9 @@ namespace BareKit
 
             if (Scripting.Global != null && Scripting.Global.Get("start").IsNotNil())
                 Scripting.Global.Get("start").Function.Call();
-        }
+
+            GC.Collect();
+        } 
 
         protected override void Update(GameTime gameTime)
         {
@@ -72,7 +76,7 @@ namespace BareKit
 
             Scripting.Global.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
             if (Scripting.Global != null && Scripting.Global.Get("update").IsNotNil())
-                Scripting.Global.Get("update").Function.Call(gameTime.ElapsedGameTime.TotalSeconds);
+                Scripting.Global.Get("update").Function.Call();
 
             if (oneSecond >= 1)
 			{
