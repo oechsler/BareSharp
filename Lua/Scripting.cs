@@ -18,7 +18,7 @@ namespace BareKit.Lua
         static object target;
         static string scriptDirectory;
 
-        public static void Initialize(object target, string path)
+        public static void Initialize(Entrypoint target, string path)
         {
             if (script == null)
             {
@@ -40,34 +40,36 @@ namespace BareKit.Lua
                 ");
                 script.Globals.Set("loader", DynValue.Nil);
 
-                script.Globals.Set("_default", DynValue.NewString(target.GetType().GetTypeInfo().Assembly.GetName().Name));
+                script.Globals.Set("_DEFAULT", DynValue.NewString(target.GetType().GetTypeInfo().Assembly.GetName().Name));
                 script.Globals.Set("bare", DynValue.NewTable(script));
                 script.DoString($@"
+                    alloc('Microsoft.Xna.Framework.Game', 'MonoGame.Framework')
+                    alloc('Microsoft.Xna.Framework.GameWindow', 'MonoGame.Framework')
                     bare.vector = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
                     bare.color = alloc('Microsoft.Xna.Framework.Color', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.Content.ContentManager', 'MonoGame.Framework')
-                    bare.rrotatedRectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', _default)
+                    bare.rotatedRectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', _DEFAULT)
 
-                    bare.sound = alloc('BareKit.Audio.Sound', _default)
-                    alloc('BareKit.Audio.SoundManager', _default)
+                    bare.sound = alloc('BareKit.Audio.Sound', _DEFAULT)
+                    alloc('BareKit.Audio.SoundManager', _DEFAULT)
 
-                    bare.container = alloc('BareKit.Graphics.Container', _default)
-                    alloc('BareKit.Graphics.Drawable', _default)
-                    bare.label = alloc('BareKit.Graphics.Label', _default)
-                    bare.rect = alloc('BareKit.Graphics.Rect', _default)
-                    alloc('BareKit.Graphics.ScalingManager', _default)
-                    bare.scene = alloc('BareKit.Graphics.Scene', _default)
-                    bare.sprite = alloc('BareKit.Graphics.Sprite', _default)
+                    bare.container = alloc('BareKit.Graphics.Container', _DEFAULT)
+                    alloc('BareKit.Graphics.Drawable', _DEFAULT)
+                    bare.label = alloc('BareKit.Graphics.Label', _DEFAULT)
+                    bare.rect = alloc('BareKit.Graphics.Rect', _DEFAULT)
+                    alloc('BareKit.Graphics.ScalingManager', _DEFAULT)
+                    bare.scene = alloc('BareKit.Graphics.Scene', _DEFAULT)
+                    bare.sprite = alloc('BareKit.Graphics.Sprite', _DEFAULT)
 
-                    bare.gamepadInput = alloc('BareKit.Input.GamepadInput', _default)
+                    bare.gamepadInput = alloc('BareKit.Input.GamepadInput', _DEFAULT)
                     bare.buttons = alloc('Microsoft.Xna.Framework.Input.Buttons', 'MonoGame.Framework')
-                    alloc('BareKit.Input.Input', _default)
-                    bare.inputState = alloc('BareKit.Input.InputState', _default)
-                    alloc('BareKit.Input.InputManager', _default)
-                    bare.keyInput = alloc('BareKit.Input.KeyInput', _default)
+                    alloc('BareKit.Input.Input', _DEFAULT)
+                    bare.inputState = alloc('BareKit.Input.InputState', _DEFAULT)
+                    alloc('BareKit.Input.InputManager', _DEFAULT)
+                    bare.keyInput = alloc('BareKit.Input.KeyInput', _DEFAULT)
                     bare.keys = alloc('Microsoft.Xna.Framework.Input.Keys', 'MonoGame.Framework')
-                    bare.touchInput = alloc('BareKit.Input.TouchInput', _default)
-                    bare.finger = enum(alloc('BareKit.Input.Finger', _default))
+                    bare.touchInput = alloc('BareKit.Input.TouchInput', _DEFAULT)
+                    bare.finger = enum(alloc('BareKit.Input.Finger', _DEFAULT))
                 ");
             }
 
@@ -111,17 +113,12 @@ namespace BareKit.Lua
             return name;
         }
 
-        public static void Dealloc(string typeName, string assemblyName = null)
+        public static void Dealloc(string name)
         {
-            if (assemblyName == null)
-                assemblyName = typeName.Replace($".{typeName.Split('.')[typeName.Split('.').Length - 1]}", "");
-
-            string name = $"{typeName}, {assemblyName}";
-
             if (UserData.IsTypeRegistered(Type.GetType(name)))
             {
                 UserData.UnregisterType(Type.GetType(name));
-                Print($"Deallocated \"{typeName.Split('.')[typeName.Split('.').Length - 1]}\" class.");
+                Print($"Deallocated \"{name.Split('.')[name.Split('.').Length - 1].Split(',')[0]}\" class.");
             }
         }
 

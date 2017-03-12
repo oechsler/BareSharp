@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using MoonSharp.Interpreter;
+using MoonSharp.Interpreter.Interop;
 
 using BareKit.Audio;
 using BareKit.Graphics;
@@ -12,6 +13,7 @@ using BareKit.Lua;
 
 namespace BareKit
 {
+    [MoonSharpUserData]
     public class Entrypoint : Game
     {
         GraphicsDeviceManager graphics;
@@ -56,6 +58,7 @@ namespace BareKit
 			stage = new Stage(scaling, Content, tweening, sound);
             
             Scripting.Initialize(this, "main");
+            Scripting.Global.Set("entrypoint", UserData.Create(this));
             Scripting.Global.Set("stage", UserData.Create(stage));
 
             Scripting.Global.Set("delta", DynValue.NewNumber(0));
@@ -115,6 +118,7 @@ namespace BareKit
         /// <summary>
         /// Gets or sets the attached ScalingManager.
         /// </summary>
+        [MoonSharpVisible(true)]
 		protected ScalingManager Scaling
 		{
 			get { return scaling; }
@@ -140,6 +144,7 @@ namespace BareKit
         /// <summary>
         /// Gets the current Frames/s count.
         /// </summary>
+        [MoonSharpVisible(false)]
 		public static int FramesPerSecond
 		{
 			get { return fps; }

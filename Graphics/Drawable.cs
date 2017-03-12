@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using MoonSharp.Interpreter.Interop;
@@ -20,6 +22,11 @@ namespace BareKit.Graphics
 
         Container parent;
 
+        /// <summary>
+        /// Occurs once the Drawable has been ininitalized.
+        /// </summary>
+        public event EventHandler<EventArgs> Initialized;
+
         public Drawable()
         {
             position = new Vector2(0);
@@ -39,6 +46,8 @@ namespace BareKit.Graphics
 		public virtual void Initialize(ScalingManager scaling)
 		{
 			this.scaling = scaling;
+
+            Initialized?.Invoke(this, EventArgs.Empty);
 		}		
 
 		/// <summary>
