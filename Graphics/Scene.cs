@@ -17,9 +17,21 @@ namespace BareKit.Graphics
 
 		bool contentLoaded;
 
+        /// <summary>
+        /// Occures once a navigation to this scene is done.
+        /// </summary>
         public event EventHandler<EventArgs> Entered;
+        /// <summary>
+        /// Occures once a navigation to a other scene is done.
+        /// </summary>
         public event EventHandler<EventArgs> Left;
+        /// <summary>
+        /// Occurs once the scene recieves an update call.
+        /// </summary>
         public event EventHandler<EventArgs> Updated;
+        /// <summary>
+        /// Occurs once the scene recieves a resize call.
+        /// </summary>
         public event EventHandler<EventArgs> Resized;
 
         public sealed override void Initialize(ScalingManager scaling)

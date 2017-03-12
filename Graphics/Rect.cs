@@ -69,9 +69,9 @@ namespace BareKit.Graphics
 		}
 
 		/// <summary>
-		/// Gets or sets the tickness displayed onscreen.
+		/// Gets or sets the thickness displayed onscreen.
 		/// </summary>
-		public float Tickness
+		public float Thickness
 		{
 			get { return thickness; }
 			set { thickness = value; }
