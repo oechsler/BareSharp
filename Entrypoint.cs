@@ -47,18 +47,22 @@ namespace BareKit
         {
             base.Initialize();
 
+            Scripting.Initialize(this, "main");
+            Scripting.Global.Set("entrypoint", UserData.Create(this));
+
+            if (Scripting.Global != null && Scripting.Global.Get("init").IsNotNil())
+                Scripting.Global.Get("init").Function.Call();
+
 #if MONOMAC
 			scaling.Center();
 #endif
 
-			sound = new SoundManager();
+            sound = new SoundManager();
 
             buffer = new SpriteBatch(GraphicsDevice);
 			tweening = new Tweener();
 			stage = new Stage(scaling, Content, tweening, sound);
-            
-            Scripting.Initialize(this, "main");
-            Scripting.Global.Set("entrypoint", UserData.Create(this));
+
             Scripting.Global.Set("stage", UserData.Create(stage));
 
             Scripting.Global.Set("delta", DynValue.NewNumber(0));
@@ -110,7 +114,8 @@ namespace BareKit
         /// <summary>
         /// Gets the attached GraphicsDeviceManager.
         /// </summary>
-		protected GraphicsDeviceManager Graphics
+        [MoonSharpVisible(true)]
+        protected GraphicsDeviceManager Graphics
 		{
 			get { return graphics; }
 		}

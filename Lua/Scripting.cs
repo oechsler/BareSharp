@@ -1,7 +1,4 @@
 ﻿using System;
-#if WINDOWS_UAP
-using System.Diagnostics;
-#endif
 using System.Reflection;
 using System.IO;
 
@@ -44,8 +41,10 @@ namespace BareKit.Lua
                 script.Globals.Set("bare", DynValue.NewTable(script));
                 script.DoString($@"
                     alloc('Microsoft.Xna.Framework.Game', 'MonoGame.Framework')
+                    alloc('Microsoft.Xna.Framework.GraphicsDeviceManager', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.GameWindow', 'MonoGame.Framework')
-                    bare.vector = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
+                    bare.vector2 = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
+                    bare.vector3 = alloc('Microsoft.Xna.Framework.Vector3', 'MonoGame.Framework')
                     bare.color = alloc('Microsoft.Xna.Framework.Color', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.Content.ContentManager', 'MonoGame.Framework')
                     bare.rotatedRectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', _DEFAULT)
@@ -145,12 +144,7 @@ namespace BareKit.Lua
 
         public static void Print(string message)
         {
-            message = $"[{DateTime.Now.ToString("HH:mm:ss")}]: {(message != null ? message : "nil")}";
-#if WINDOWS_UAP
-            Debug.WriteLine(message);
-#else
-            Console.WriteLine(message);
-#endif
+            Logger.Info(typeof(Scripting), $"{(message != null ? message : "nil")}");
         }
 
         public static string RootDirectory
