@@ -67,7 +67,10 @@ namespace BareKit.Audio
         /// </summary>
 		public Sound Play()
 		{
-			sound.Play();
+            if(sound.State == SoundState.Stopped)
+                sound.Play();
+            else
+                sound.Resume();
 
 			return this;
 		}
@@ -125,7 +128,15 @@ namespace BareKit.Audio
 		}
 
         /// <summary>
-        /// Gets the value indicating whether the Sound is looped.
+        /// Gets the value inidiacting whether the Sound is playing.
+        /// </summary>
+        public bool IsPlaying
+        {
+            get { return sound.State == SoundState.Playing; }
+        }
+
+        /// <summary>
+        /// Gets or sets the value indicating whether the Sound is looped.
         /// </summary>
 		public bool IsLooped
 		{

@@ -51,7 +51,7 @@ namespace BareKit.Graphics
 		/// </summary>
         public RotatedRectangle Bounds
         {
-            get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin); }
+            get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X / 2, (int)Size.Y / 2), Rotation, Origin); }
         }
 
         /// <summary>
