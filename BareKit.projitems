@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\TouchInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lua\Scripting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\RotatedRectangle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Ease.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\GlideInfo.cs" />
