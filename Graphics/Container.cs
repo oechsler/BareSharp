@@ -10,9 +10,14 @@ namespace BareKit.Graphics
         List<Drawable> drawables;
         SpriteBatch containerBuffer;
 
+        BlendState blendMode;
+        Shader shader;
+
 		public Container()
         {
             drawables = new List<Drawable>();
+
+            blendMode = BlendState.AlphaBlend;
         }
 
         public override void Draw(SpriteBatch buffer)
@@ -32,10 +37,28 @@ namespace BareKit.Graphics
 
 			// Apply the transform to the SpriteBatch buffer and
 			// render the contained Drawables to it
-			containerBuffer.Begin(transformMatrix: transfrom);
+			containerBuffer.Begin(transformMatrix: transfrom, blendState: blendMode, effect: shader?.Effect);
             foreach (Drawable drawable in drawables)
                 drawable.Draw(containerBuffer);
             containerBuffer.End();
+        }
+
+        /// <summary>
+        /// Gets or sets the used blending mode.
+        /// </summary>
+        public BlendState BlendMode
+        {
+            get { return blendMode; }
+            set { blendMode = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the used shader.
+        /// </summary>
+        public Shader Shader
+        {
+            get { return shader; }
+            set { shader = value; }
         }
 
         /// <summary>

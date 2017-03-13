@@ -95,6 +95,9 @@ namespace BareKit.Graphics
 		/// </summary>
 		protected virtual void UnloadContent()
         {
+            Content.Unload();
+            contentLoaded = false;
+
             // Unload your Drawables here (mark for gc)
             // ex.: sprite = null;
         }

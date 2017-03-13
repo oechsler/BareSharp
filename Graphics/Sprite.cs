@@ -54,7 +54,7 @@ namespace BareKit.Graphics
 							rotation: Rotation,
 							scale: screenScale * Scale,
 							color: Color * Alpha,
-
+                        
                             effects: SpriteEffects.None,
                             layerDepth: 0
 						   );
