@@ -80,7 +80,8 @@ namespace BareKit.Lua
                 ");
             }
 
-            Require(path);
+            if (Require(path) != DynValue.Nil)
+                Logger.Info(typeof(Scripting), "Enabled Lua scripting.");
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace BareKit.Lua
                     {
                         script = null;
                         Logger.Warn(typeof(Scripting), $"{ex.DecoratedMessage.Split(':')[1]} {ex.Message.Substring(0, 1).ToUpper()}{ex.Message.Substring(1)}.");
-                        Logger.Warn(typeof(Scripting), "Disabled lua scripting.");
+                        Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
                     }
                 }
                 Logger.Warn(typeof(Scripting), $"Module '{resourceName}' does not exist.");
@@ -194,7 +195,7 @@ namespace BareKit.Lua
                 {
                     script = null;
                     Logger.Warn(typeof(Scripting), $"{ex.DecoratedMessage.Split(':')[1]} {ex.Message.Substring(0, 1).ToUpper()}{ex.Message.Substring(1)}.");
-                    Logger.Warn(typeof(Scripting), "Disabled lua scripting.");
+                    Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
                 }
             }
             return DynValue.NewNil();

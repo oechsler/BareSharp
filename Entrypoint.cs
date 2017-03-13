@@ -34,6 +34,9 @@ namespace BareKit
         /// </summary>
         public Entrypoint()
         {
+            Logger.Info(GetType(), "This project is powered by the BARE Framework.");
+            Logger.Info(GetType(), $"Copyright © 2016-{DateTime.Now.Year} - Boxnetwork Softwarehouse.");
+
             graphics = new GraphicsDeviceManager(this);
 			scaling = new ScalingManager(graphics, Window, new Vector3(720, 16, 9), 1.25f);
 
@@ -46,6 +49,9 @@ namespace BareKit
         protected override void Initialize()
         {
             base.Initialize();
+
+            Logger.Info(GetType(), $"Content will be loaded from '{Content.RootDirectory}'.");
+            Logger.Info(GetType(), $"Scripts will be loaded from '{Scripting.RootDirectory}'.");
 
             Scripting.Initialize(this, "main");
             Scripting.Global?.Set("entrypoint", UserData.Create(this));
@@ -64,6 +70,11 @@ namespace BareKit
             Scripting.Global?.Set("stage", UserData.Create(stage));
             Scripting.Global?.Set("delta", DynValue.NewNumber(0));
             Scripting.Global?.Set("fps", DynValue.NewNumber(0));
+
+            Logger.Info(GetType(), $"Initial window size is '{scaling.Size}'.");
+            Logger.Info(GetType(), $"Initial content scale is '{scaling.Scale.X}'.");
+            Logger.Info(GetType(), $"Ready. Handoff to userdefined code.");
+
             Scripting.Call(Scripting.Global?.Get("start"));
 
             GC.Collect();

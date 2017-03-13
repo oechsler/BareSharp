@@ -1,5 +1,5 @@
 ﻿using System;
-#if WINDOWS_UAP
+#if DEBUG
 using System.Diagnostics;
 #endif
 
@@ -9,20 +9,20 @@ namespace BareKit
     {
         public static void Info(Type sender, string message)
         {
-            message = $"[{DateTime.Now.ToString("HH:mm:ss")}][{sender.Name}]> {message}";
-#if WINDOWS_UAP
+            message = $"[{DateTime.Now.ToString("HH:mm:ss")}][{sender.Name}]: {message}";
+#if DEBUG
             Debug.WriteLine(message);
-#else
+#elif !WINDOWS_UAP
             Console.WriteLine(message);
 #endif
         }
 
         public static void Warn(Type sender, string message)
         {
-            message = $"[{DateTime.Now.ToString("HH:mm:ss")}][{sender.Name.ToUpper()}]> {message}";
-#if WINDOWS_UAP
+            message = $"[{DateTime.Now.ToString("HH:mm:ss")}][{sender.Name.ToUpper()}]: {message}";
+#if DEBUG
             Debug.WriteLine(message);
-#else
+#elif !WINDOWS_UAP
             Console.WriteLine(message);
 #endif
         }
