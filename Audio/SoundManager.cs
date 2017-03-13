@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using Microsoft.Xna.Framework.Audio;
+
 namespace BareKit.Audio
 {
     public class SoundManager
@@ -55,5 +57,11 @@ namespace BareKit.Audio
 
 			return this;
 		}
+
+        public float MasterVolume
+        {
+            get { return SoundEffect.MasterVolume; }
+            set { SoundEffect.MasterVolume = value; }
+        }
     }
 }
