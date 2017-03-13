@@ -34,9 +34,6 @@ namespace BareKit
         /// </summary>
         public Entrypoint()
         {
-            Logger.Info(GetType(), "This project is powered by the BARE Framework.");
-            Logger.Info(GetType(), $"Copyright © 2016-{DateTime.Now.Year} - Boxnetwork Softwarehouse.");
-
             graphics = new GraphicsDeviceManager(this);
 			scaling = new ScalingManager(graphics, Window, new Vector3(720, 16, 9), 1.25f);
 
