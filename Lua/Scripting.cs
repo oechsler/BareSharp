@@ -15,6 +15,11 @@ namespace BareKit.Lua
         static object target;
         static string scriptDirectory;
 
+        /// <summary>
+        /// Initializes the Lua scripting interpreter.
+        /// </summary>
+        /// <param name="target">Object of the assembly the interpreter is executing on.</param>
+        /// <param name="path">The relative path to the main script.</param>
         public static void Initialize(Entrypoint target, string path)
         {
             if (script == null)
@@ -46,6 +51,8 @@ namespace BareKit.Lua
                     bare.vector2 = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
                     bare.vector3 = alloc('Microsoft.Xna.Framework.Vector3', 'MonoGame.Framework')
                     bare.color = alloc('Microsoft.Xna.Framework.Color', 'MonoGame.Framework')
+                    bare.blendMode = alloc('Microsoft.Xna.Framework.Graphics.BlendState', 'MonoGame.Framework')
+                    alloc('Microsoft.Xna.Framework.Graphics.Effect', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.Content.ContentManager', 'MonoGame.Framework')
                     bare.rotatedRectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', _DEFAULT)
 
@@ -57,6 +64,7 @@ namespace BareKit.Lua
                     bare.label = alloc('BareKit.Graphics.Label', _DEFAULT)
                     bare.rect = alloc('BareKit.Graphics.Rect', _DEFAULT)
                     alloc('BareKit.Graphics.ScalingManager', _DEFAULT)
+                    bare.shader = alloc('BareKit.Graphics.Shader', _DEFAULT)
                     bare.scene = alloc('BareKit.Graphics.Scene', _DEFAULT)
                     bare.sprite = alloc('BareKit.Graphics.Sprite', _DEFAULT)
 
@@ -72,13 +80,13 @@ namespace BareKit.Lua
                 ");
             }
 
-            if (Require(path) == DynValue.Nil)
-            {
-                script = null;
-                Print("Disabled lua scripting.");
-            }
+            Require(path);
         }
 
+        /// <summary>
+        /// Loads a script file into memory.
+        /// </summary>
+        /// <param name="path">The relative path to the script.</param>
         public static DynValue Require(string path)
         {
             if (script != null)
@@ -87,15 +95,29 @@ namespace BareKit.Lua
                 Stream resourceStream = target.GetType().GetTypeInfo().Assembly.GetManifestResourceStream($"{scriptDirectory}.{path.Replace("/", ".")}.lua");
                 if (resourceStream != null)
                 {
-                    Print($"Required \"{resourceName}\" module.");
-                    return script.DoStream(resourceStream);
+                    try
+                    {
+                        Logger.Info(typeof(Scripting), $"Required '{resourceName}' module.");
+                        return script.DoStream(resourceStream);
+                    }
+                    catch (SyntaxErrorException ex)
+                    {
+                        script = null;
+                        Logger.Warn(typeof(Scripting), $"{ex.DecoratedMessage.Split(':')[1]} {ex.Message.Substring(0, 1).ToUpper()}{ex.Message.Substring(1)}.");
+                        Logger.Warn(typeof(Scripting), "Disabled lua scripting.");
+                    }
                 }
-                Print($"Module \"{resourceName}\" does not exist.");
+                Logger.Warn(typeof(Scripting), $"Module '{resourceName}' does not exist.");
                 return DynValue.Nil;
             }
             throw new Exception("Loader has not been initialized yet.");
         }
 
+        /// <summary>
+        /// Allocates a class type for to use with the interpeter.
+        /// </summary>
+        /// <param name="typeName">The class path of the type.</param>
+        /// <param name="assemblyName">The assembly the class is part of.</param>
         public static string Alloc(string typeName, string assemblyName = null)
         {
             if (assemblyName == null)
@@ -106,21 +128,30 @@ namespace BareKit.Lua
             if (!UserData.IsTypeRegistered(Type.GetType(name)))
             {
                 UserData.RegisterType(Type.GetType(name));
-                Print($"Allocated \"{typeName.Split('.')[typeName.Split('.').Length - 1]}\" class.");
+                Logger.Info(typeof(Scripting), $"Allocated '{typeName.Split('.')[typeName.Split('.').Length - 1]}' class.");
             }
 
             return name;
         }
 
+        /// <summary>
+        /// Deallocates a class type.
+        /// </summary>
+        /// <param name="name">The class types definition name.</param>
         public static void Dealloc(string name)
         {
             if (UserData.IsTypeRegistered(Type.GetType(name)))
             {
                 UserData.UnregisterType(Type.GetType(name));
-                Print($"Deallocated \"{name.Split('.')[name.Split('.').Length - 1].Split(',')[0]}\" class.");
+                Logger.Info(typeof(Scripting), $"Deallocated '{name.Split('.')[name.Split('.').Length - 1].Split(',')[0]}' class.");
             }
         }
 
+        /// <summary>
+        /// Instanciates a object by its class types definition name.
+        /// </summary>
+        /// <param name="name">The class types definition name.</param>
+        /// <param name="args">Constructor arguments of the specified class</param>
         public static DynValue Init(string name, params object[] args)
         {
             object[] convertedArgs = new object[args.Length];
@@ -137,30 +168,70 @@ namespace BareKit.Lua
             return UserData.Create(Activator.CreateInstance(Type.GetType(name), convertedArgs));
         }
 
+        /// <summary>
+        /// Staticly creates a object by its class types definition name.
+        /// </summary>
+        /// <param name="name">The class types definition name.</param>
         public static DynValue Enum(string name)
         {
             return UserData.CreateStatic(Type.GetType(name));
         }
 
-        public static void Print(string message)
+        /// <summary>
+        /// Safly executes a function withing Lua.
+        /// </summary>
+        /// <param name="function">The functions definition point.</param>
+        /// <param name="args">The specified functions arguments.</param>
+        public static DynValue Call(DynValue function, params DynValue[] args)
         {
-            Logger.Info(typeof(Scripting), $"{(message != null ? message : "nil")}");
+            if (Global != null && function.IsNotNil())
+            {
+                try
+                {
+                    return function.Function.Call(args);
+                }
+                catch (ScriptRuntimeException ex)
+                {
+                    script = null;
+                    Logger.Warn(typeof(Scripting), $"{ex.DecoratedMessage.Split(':')[1]} {ex.Message.Substring(0, 1).ToUpper()}{ex.Message.Substring(1)}.");
+                    Logger.Warn(typeof(Scripting), "Disabled lua scripting.");
+                }
+            }
+            return DynValue.NewNil();
         }
 
+        /// <summary>
+        /// Prints out a specified message to the console.
+        /// </summary>
+        /// <param name="message">The message to print.</param>
+        public static void Print(string message)
+        {
+            Logger.Info(typeof(Scripting), $"{(message != null ? message : "(nil)")}");
+        }
+
+        /// <summary>
+        /// Gets or sets the default search directory for scripts.
+        /// </summary>
         public static string RootDirectory
         {
             get { return rootDirectory; }
             set { rootDirectory = value; }
         }
 
+        /// <summary>
+        /// Gets a reference to the interpreter.
+        /// </summary>
         public static Script Script
         {
             get { return script; }
         }
 
+        /// <summary>
+        /// Gets a reference to the standard librarys table.
+        /// </summary>
         public static Table Global
         {
-            get { return script.Globals.Get("bare").Table; }
+            get {return script?.Globals.Get("bare").Table; }
         }
     }
 }

@@ -48,10 +48,8 @@ namespace BareKit
             base.Initialize();
 
             Scripting.Initialize(this, "main");
-            Scripting.Global.Set("entrypoint", UserData.Create(this));
-
-            if (Scripting.Global != null && Scripting.Global.Get("init").IsNotNil())
-                Scripting.Global.Get("init").Function.Call();
+            Scripting.Global?.Set("entrypoint", UserData.Create(this));
+            Scripting.Call(Scripting.Global?.Get("init"));
 
 #if MONOMAC
 			scaling.Center();
@@ -63,13 +61,10 @@ namespace BareKit
 			tweening = new Tweener();
 			stage = new Stage(scaling, Content, tweening, sound);
 
-            Scripting.Global.Set("stage", UserData.Create(stage));
-
-            Scripting.Global.Set("delta", DynValue.NewNumber(0));
-            Scripting.Global.Set("fps", DynValue.NewNumber(0));
-
-            if (Scripting.Global != null && Scripting.Global.Get("start").IsNotNil())
-                Scripting.Global.Get("start").Function.Call();
+            Scripting.Global?.Set("stage", UserData.Create(stage));
+            Scripting.Global?.Set("delta", DynValue.NewNumber(0));
+            Scripting.Global?.Set("fps", DynValue.NewNumber(0));
+            Scripting.Call(Scripting.Global?.Get("start"));
 
             GC.Collect();
         } 
@@ -81,9 +76,8 @@ namespace BareKit
 			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            Scripting.Global.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
-            if (Scripting.Global != null && Scripting.Global.Get("update").IsNotNil())
-                Scripting.Global.Get("update").Function.Call();
+            Scripting.Global?.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
+            Scripting.Call(Scripting.Global?.Get("update"));
 
             if (oneSecond >= 1)
 			{
@@ -91,7 +85,7 @@ namespace BareKit
 				frames = 0;
 				oneSecond--;
 
-                Scripting.Global.Set("fps", DynValue.NewNumber(fps));
+                Scripting.Global?.Set("fps", DynValue.NewNumber(fps));
             }
 			oneSecond += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
