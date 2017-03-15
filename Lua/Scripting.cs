@@ -78,7 +78,7 @@ namespace BareKit.Lua
                     bare.keyInput = alloc('BareKit.Input.KeyInput', _DEFAULT)
                     bare.keys = alloc('Microsoft.Xna.Framework.Input.Keys', 'MonoGame.Framework')
                     bare.touchInput = alloc('BareKit.Input.TouchInput', _DEFAULT)
-                    bare.finger = enum(alloc('BareKit.Input.Finger', _DEFAULT))
+                    bare.finger = alloc('BareKit.Input.Finger', _DEFAULT)
                 ");
             }
 

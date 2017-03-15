@@ -120,7 +120,7 @@ namespace BareKit.Graphics
 		/// </summary>
         public Vector2 Size
 		{
-			get { return font.MeasureString(text) * screenScale; }
+			get { return font.MeasureString(text) * screenScale * Scale; }
 		}
 
 		/// <summary>

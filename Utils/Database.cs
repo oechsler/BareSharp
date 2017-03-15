@@ -33,7 +33,7 @@ namespace BareKit
                 writer.WriteLine($"{node.Key}={node.Value}");
             writer.Dispose();
 
-            Logger.Info(GetType(), $"'{nodes.Count}' node(s) saved to '{name}'.");
+            Logger.Info(GetType(), $"Saved '{nodes.Count}' node(s) to '{name}'.");
         }
 
         public void Load()
@@ -57,7 +57,7 @@ namespace BareKit
                 reader.Dispose();
             }
 
-            Logger.Info(GetType(), $"'{count}' node(s) loaded from '{name}'.");
+            Logger.Info(GetType(), $"Loaded '{count}' node(s) from '{name}'.");
         }
 
         public void Clear()

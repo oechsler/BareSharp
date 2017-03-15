@@ -72,7 +72,7 @@ namespace BareKit
 
             Logger.Info(GetType(), $"Initial window size is '{scaling.Size}'.");
             Logger.Info(GetType(), $"Initial content scale is '{scaling.Scale.X}'.");
-            Logger.Info(GetType(), $"Ready. Handoff to userdefined code.");
+            Logger.Info(GetType(), "Ready. Handoff to userdefined code.");
 
             Scripting.Call(Scripting.Global?.Get("start"));
 

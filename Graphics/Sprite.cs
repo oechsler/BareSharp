@@ -106,7 +106,7 @@ namespace BareKit.Graphics
 		/// </summary>
         public Vector2 Size
         {
-            get { return new Vector2(texture.Width, texture.Height) * screenScale; }
+            get { return new Vector2(texture.Width, texture.Height) * screenScale * Scale; }
         }
 
         /// <summary>
