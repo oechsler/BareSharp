@@ -91,6 +91,17 @@ namespace BareKit.Graphics
         }
 
         /// <summary>
+        /// Canges the attached texture asset.
+        /// </summary>
+        /// <param name="assetName">The within the content pipeline assigned name.</param>
+		public Sprite Change(string assetName)
+        {
+            texture = content.Load<Texture2D>(assetName);
+
+            return this;
+        }
+
+        /// <summary>
 		/// Gets the size vector.
 		/// </summary>
         public Vector2 Size

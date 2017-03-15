@@ -95,9 +95,20 @@ namespace BareKit.Graphics
             screenScale = new Vector2(.5f) / assetScale * Scaling.Scale;
         }
 
-		/// <summary>
-		/// Gets or sets the text displayed onscreen.
-		/// </summary>
+        /// <summary>
+        /// Canges the attached font asset.
+        /// </summary>
+        /// <param name="assetName">The within the content pipeline assigned name.</param>
+		public Label Change(string assetName)
+        {
+            font = content.Load<SpriteFont>(assetName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Gets or sets the text displayed onscreen.
+        /// </summary>
         public string Text
         {
             get { return text; }
