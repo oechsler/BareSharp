@@ -17,6 +17,7 @@ namespace BareKit.Graphics
 		ContentManager content;
 		Tweener tweening;
 		SoundManager sound;
+        Database global;
 
         /// <summary>
         /// Initializes a new instance of the Stage class.
@@ -25,12 +26,13 @@ namespace BareKit.Graphics
         /// <param name="content">The content pipline attached to the Scenes.</param>
         /// <param name="tweening">The Glide tweening instacne attached to the Scenes.</param>
         /// <param name="sound">The SoundManager attached to the Scenes.</param>
-		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound)
+		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound, Database global)
         {
 			Initialize(scaling);
 			this.content = content;
 			this.tweening = tweening;
 			this.sound = sound;
+            this.global = global;
 
             // Default background color (hex #282828)
             Color = new Color(40, 40, 40);
@@ -138,5 +140,13 @@ namespace BareKit.Graphics
 		{
 			get { return sound; }
 		}
+
+        /// <summary>
+        /// Gets the attached global Database.
+        /// </summary>
+		public Database Global
+        {
+            get { return global; }
+        }
     }
 }

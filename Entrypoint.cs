@@ -23,6 +23,7 @@ namespace BareKit
 
         SpriteBatch buffer;
 		Tweener tweening;
+        Database global;
         Stage stage;
 
 		float oneSecond;
@@ -62,7 +63,8 @@ namespace BareKit
 
             buffer = new SpriteBatch(GraphicsDevice);
 			tweening = new Tweener();
-			stage = new Stage(scaling, Content, tweening, sound);
+            global = new Database("global");
+            stage = new Stage(scaling, Content, tweening, sound, global);
 
             Scripting.Global?.Set("stage", UserData.Create(stage));
             Scripting.Global?.Set("delta", DynValue.NewNumber(0));
@@ -111,6 +113,13 @@ namespace BareKit
             base.Draw(gameTime);
 
 			frames++;
+        }
+
+        protected override void OnDeactivated(object sender, EventArgs args)
+        {
+            base.OnDeactivated(sender, args);
+
+            global.Save();
         }
 
         /// <summary>

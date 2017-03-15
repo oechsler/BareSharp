@@ -167,6 +167,15 @@ namespace BareKit.Graphics
 		}
 
         /// <summary>
+        /// Gets the attached global Database.
+        /// </summary>
+        [MoonSharpVisible(true)]
+        protected Database Global
+        {
+            get { return ((Stage)Parent).Global; }
+        }
+
+        /// <summary>
         /// Gets the Scenes InputManager.
         /// </summary>
         [MoonSharpVisible(true)]

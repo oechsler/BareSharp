@@ -56,6 +56,8 @@ namespace BareKit.Lua
                     alloc('Microsoft.Xna.Framework.Content.ContentManager', 'MonoGame.Framework')
                     bare.rotatedRectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', _DEFAULT)
 
+                    bare.database = alloc('BareKit.Database', _DEFAULT)
+
                     bare.sound = alloc('BareKit.Audio.Sound', _DEFAULT)
                     alloc('BareKit.Audio.SoundManager', _DEFAULT)
 
@@ -82,6 +84,8 @@ namespace BareKit.Lua
 
             if (Require(path) != DynValue.Nil)
                 Logger.Info(typeof(Scripting), "Enabled Lua scripting.");
+            else
+                Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
         }
 
         /// <summary>
@@ -198,7 +202,7 @@ namespace BareKit.Lua
                     Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
                 }
             }
-            return DynValue.NewNil();
+            return DynValue.Nil;
         }
 
         /// <summary>
