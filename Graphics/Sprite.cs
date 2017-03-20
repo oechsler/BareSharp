@@ -37,9 +37,9 @@ namespace BareKit.Graphics
 			onResize(Scaling, EventArgs.Empty);
 		}
 
-        public override void Draw(SpriteBatch buffer)
+        public override void Draw(SpriteBatch buffer, Matrix transform)
         {
-            base.Draw(buffer);
+            base.Draw(buffer, transform);
 
             // Determine whether the Label should be rendered 
             RotatedRectangle screenBounds = Scaling.Bounds;

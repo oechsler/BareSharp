@@ -48,10 +48,10 @@ namespace BareKit.Graphics
 				((Scene)Children[Children.Count - 1]).Update(delta);
         }
 
-        public override void Draw(SpriteBatch buffer)
+        public override void Draw(SpriteBatch buffer, Matrix transform)
         {
             if (Children.Count > 0)
-                Children[Children.Count - 1].Draw(buffer);
+                Children[Children.Count - 1].Draw(buffer, transform);
         }
 
         /// <summary>

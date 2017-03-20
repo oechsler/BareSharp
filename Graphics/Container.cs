@@ -20,9 +20,9 @@ namespace BareKit.Graphics
             blendMode = BlendState.AlphaBlend;
         }
 
-        public override void Draw(SpriteBatch buffer)
+        public override void Draw(SpriteBatch buffer, Matrix transform)
         {
-            base.Draw(buffer);
+            base.Draw(buffer, transform);
 
 			// Allocate a offscreen SpriteBatch buffer for the Container
 			// if none exists to this point
@@ -30,16 +30,16 @@ namespace BareKit.Graphics
                 containerBuffer = new SpriteBatch(buffer.GraphicsDevice);
 
 			// Calculate the transform of the Container
-			Matrix transfrom = Matrix.CreateTranslation(-Scaling.Size.X / 2 + Origin.X, -Scaling.Size.Y / 2 + Origin.Y, 1) *
-						       Matrix.CreateRotationZ(Rotation) *
-						       Matrix.CreateTranslation(Scaling.Size.X / 2 + Position.X, Scaling.Size.Y / 2 + Position.Y, 0) *
-						       Matrix.CreateScale(Scale.X, Scale.Y, 1);
+			transform *= Matrix.CreateTranslation(-Scaling.Size.X / 2 + Origin.X, -Scaling.Size.Y / 2 + Origin.Y, 0) *
+						                Matrix.CreateRotationZ(Rotation) *
+						                Matrix.CreateTranslation(Scaling.Size.X / 2 + Position.X, Scaling.Size.Y / 2 + Position.Y, 0) *
+						                Matrix.CreateScale(Scale.X, Scale.Y, 1);
 
 			// Apply the transform to the SpriteBatch buffer and
 			// render the contained Drawables to it
-			containerBuffer.Begin(transformMatrix: transfrom, blendState: blendMode, effect: shader?.Effect);
+			containerBuffer.Begin(transformMatrix: transform, blendState: blendMode, effect: shader?.Effect);
             foreach (Drawable drawable in drawables)
-                drawable.Draw(containerBuffer);
+                drawable.Draw(containerBuffer, transform);
             containerBuffer.End();
         }
 

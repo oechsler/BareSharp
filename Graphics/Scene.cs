@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -115,9 +116,9 @@ namespace BareKit.Graphics
             // ex.: sprite.Position.X += 10 * delta;
         }
 
-		public override sealed void Draw(SpriteBatch buffer)
+		public override sealed void Draw(SpriteBatch buffer, Matrix transform)
 		{
-			base.Draw(buffer);
+			base.Draw(buffer, transform);
 		}
 
 		/// <summary>

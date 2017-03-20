@@ -107,7 +107,7 @@ namespace BareKit
 			GraphicsDevice.Clear(stage.Color);
 
             buffer.Begin();
-            stage.Draw(buffer);
+            stage.Draw(buffer, Matrix.Identity);
             buffer.End();
 
             base.Draw(gameTime);

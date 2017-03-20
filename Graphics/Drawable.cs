@@ -47,9 +47,9 @@ namespace BareKit.Graphics
 		/// Sends drawcalls to a specific SpriteBatch buffer.
 		/// </summary>
 		/// <param name="buffer">SpriteBatch buffer to which the calls are being send.</param>
-        public virtual void Draw(SpriteBatch buffer)
+        public virtual void Draw(SpriteBatch buffer, Matrix transform)
         {
-			// Add your own drawcalls here
+            // Add your own drawcalls here
 			// ex.: buffer.Draw(Texture);
         }
 
