@@ -24,7 +24,7 @@ namespace BareKit.Graphics
 		public override void Draw(SpriteBatch buffer, Matrix transform)
 		{
 			base.Draw(buffer, transform);
-            
+
 			// Determine whether the Rect should be rendered 
 			RotatedRectangle screenBounds = Scaling.Bounds;
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
@@ -38,9 +38,10 @@ namespace BareKit.Graphics
 					primitiveBuffer = new SpriteBatch(buffer.GraphicsDevice);
 
 				// Calculate the transform of the Rect
-				transform *= Matrix.CreateTranslation(-Size.X / 2 + Origin.X, -Size.Y / 2 + Origin.Y, 1) *
+				transform =  Matrix.CreateTranslation(-Size.X / 2 + Origin.X, -Size.Y / 2 + Origin.Y, 1) *
 						     Matrix.CreateRotationZ(Rotation) *
-							 Matrix.CreateTranslation(Scaling.Size.X / 2 + Position.X, Scaling.Size.Y / 2 + Position.Y, 0);
+							 Matrix.CreateTranslation(Scaling.Size.X / 2 + Position.X, Scaling.Size.Y / 2 + Position.Y, 0) * 
+                             transform;
 
 				// Apply the transform to the SpriteBatch buffer and
 				// render the primitive rectangle shape to it

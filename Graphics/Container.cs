@@ -30,10 +30,11 @@ namespace BareKit.Graphics
                 containerBuffer = new SpriteBatch(buffer.GraphicsDevice);
 
 			// Calculate the transform of the Container
-			transform *= Matrix.CreateTranslation(-Scaling.Size.X / 2 + Origin.X, -Scaling.Size.Y / 2 + Origin.Y, 0) *
-						                Matrix.CreateRotationZ(Rotation) *
-						                Matrix.CreateTranslation(Scaling.Size.X / 2 + Position.X, Scaling.Size.Y / 2 + Position.Y, 0) *
-						                Matrix.CreateScale(Scale.X, Scale.Y, 1);
+			transform = Matrix.CreateTranslation(-Scaling.Size.X / 2 + Origin.X, -Scaling.Size.Y / 2 + Origin.Y, 0) *
+						 Matrix.CreateRotationZ(Rotation) *
+						 Matrix.CreateTranslation(Scaling.Size.X / 2 + Position.X - Origin.X, Scaling.Size.Y / 2 + Position.Y - Origin.Y, 0) *
+						 Matrix.CreateScale(Scale.X, Scale.Y, 1) * 
+                         transform;
 
 			// Apply the transform to the SpriteBatch buffer and
 			// render the contained Drawables to it
