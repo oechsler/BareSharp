@@ -53,7 +53,7 @@ namespace BareKit
 
             Scripting.Initialize(this, "main");
             Scripting.Global?.Set("entrypoint", UserData.Create(this));
-            Scripting.Call(Scripting.Global?.Get("init"));
+            Scripting.Call(Scripting.Global?.Get("config"), UserData.Create(this));
 
 #if MONOMAC
 			scaling.Center();
@@ -70,8 +70,10 @@ namespace BareKit
             Scripting.Global?.Set("delta", DynValue.NewNumber(0));
             Scripting.Global?.Set("fps", DynValue.NewNumber(0));
 
-            Logger.Info(GetType(), $"Initial window size is '{scaling.Size}'.");
-            Logger.Info(GetType(), $"Initial content scale is '{scaling.Scale.X}'.");
+            Logger.Info(GetType(), $"Vertical synchronisation activated '{graphics.SynchronizeWithVerticalRetrace}'.");
+            Logger.Info(GetType(), $"Framstep is set to '{TargetElapsedTime.TotalMilliseconds} ms'.");
+            Logger.Info(GetType(), $"Initial window size is '{scaling.Size.ToString().Replace("{X:", "").Replace(" Y:", "x").Replace("}", "")}'.");
+            Logger.Info(GetType(), $"Initial content scale is 'x{scaling.Scale.X}'.");
             Logger.Info(GetType(), "Ready. Handoff to userdefined code.");
 
             Scripting.Call(Scripting.Global?.Get("start"));

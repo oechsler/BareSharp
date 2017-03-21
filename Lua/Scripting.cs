@@ -45,6 +45,7 @@ namespace BareKit.Lua
                 script.Globals.Set("_DEFAULT", DynValue.NewString(target.GetType().GetTypeInfo().Assembly.GetName().Name));
                 script.Globals.Set("bare", DynValue.NewTable(script));
                 script.DoString($@"
+                    bare.timeSpan = alloc('System.TimeSpan', 'System.Runtime')
                     alloc('Microsoft.Xna.Framework.Game', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.GraphicsDeviceManager', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.GameWindow', 'MonoGame.Framework')
