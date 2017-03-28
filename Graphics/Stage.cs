@@ -84,7 +84,6 @@ namespace BareKit.Graphics
             else
                 Logger.Info(GetType(), $"Navigated from '{current.GetType().Name}' to '{sceneInstance.GetType().Name}'.");
 
-
             return this;
 		}
 

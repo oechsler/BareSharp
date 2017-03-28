@@ -105,7 +105,7 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Unfits the specified number from the current scale.
 		/// </summary>
-		public float UnFit(float number)
+		public float Unfit(float number)
 		{
 			return number / contentScale;
 		}
@@ -113,7 +113,7 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Unfits the specified vector from the current scale.
 		/// </summary>
-		public Vector2 UnFit(Vector2 vector)
+		public Vector2 Unfit(Vector2 vector)
 		{
 			return vector / contentScale;
 		}
