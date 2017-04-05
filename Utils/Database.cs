@@ -19,9 +19,9 @@ namespace BareKit
 
     public class Database
     {
-        string name;
-        IsolatedStorageFile storage;
-        List<DatabaseNode> nodes;
+        readonly string name;
+        readonly IsolatedStorageFile storage;
+        readonly List<DatabaseNode> nodes;
 
         public Database(string name)
         {
@@ -34,8 +34,8 @@ namespace BareKit
 
         public void Save()
         {
-            StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(name, FileMode.Create, storage));
-            foreach (DatabaseNode node in nodes)
+            var writer = new StreamWriter(new IsolatedStorageFileStream(name, FileMode.Create, storage));
+            foreach (var node in nodes)
                 writer.WriteLine($"{node.Key}={node.Value}");
             writer.Dispose();
 
@@ -46,15 +46,15 @@ namespace BareKit
         {
             nodes.Clear();
 
-            int count = 0;
+            var count = 0;
             if (storage.FileExists(name))
             {
-                StreamReader reader = new StreamReader(new IsolatedStorageFileStream(name, FileMode.Open, storage));
+                var reader = new StreamReader(new IsolatedStorageFileStream(name, FileMode.Open, storage));
                 while (!reader.EndOfStream)
                 {
-                    string line = reader.ReadLine();
-                    string key = line.Split('=')[0];
-                    string value = line.Split('=')[1];
+                    var line = reader.ReadLine();
+                    var key = line?.Split('=')[0];
+                    var value = line?.Split('=')[1];
 
                     nodes.Add(new DatabaseNode { Key = key, Value = value });
 
@@ -71,9 +71,9 @@ namespace BareKit
             storage.DeleteFile(name);
         }
 
-        DatabaseNode getNode(string key)
+        DatabaseNode GetNode(string key)
         {
-            foreach (DatabaseNode node in nodes)
+            foreach (var node in nodes)
             {
                 if (node.Key == key)
                     return node;
@@ -81,9 +81,9 @@ namespace BareKit
             return default(DatabaseNode);
         }
 
-        void setNode(string key, DatabaseNode node)
+        void SetNode(string key, DatabaseNode node)
         {
-            DatabaseNode tempNode = getNode(key);
+            var tempNode = GetNode(key);
             if (tempNode.Value != null)
                 nodes[nodes.IndexOf(tempNode)] = node;
             else
@@ -92,17 +92,17 @@ namespace BareKit
 
         public object Get(string key)
         {
-            return getNode(key).Value;
+            return GetNode(key).Value;
         }
 
         public void Set(string key, object value)
         {
-            setNode(key, new DatabaseNode { Key = key, Value = value });
+            SetNode(key, new DatabaseNode { Key = key, Value = value });
         }
 
         public bool Exists(string key)
         {
-            return getNode(key).Value != null;
+            return GetNode(key).Value != null;
         }
     }
 }
