@@ -26,7 +26,11 @@ namespace BareKit
         public Database(string name)
         {
             this.name = $"{name}.bdb";
+#if !WINDOWS_UAP
             storage = IsolatedStorageFile.GetUserStoreForAssembly();
+#else
+            storage = IsolatedStorageFile.GetUserStoreForApplication();
+#endif
             nodes = new List<DatabaseNode>();
 
             Load();
