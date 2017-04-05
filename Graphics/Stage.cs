@@ -12,13 +12,8 @@ using BareKit.Tweening;
 namespace BareKit.Graphics
 {
     [MoonSharpUserData]
-    public class Stage : Container
+    public sealed class Stage : Container
     {
-		ContentManager content;
-		Tweener tweening;
-		SoundManager sound;
-        Database global;
-
         /// <summary>
         /// Initializes a new instance of the Stage class.
         /// </summary>
@@ -26,13 +21,14 @@ namespace BareKit.Graphics
         /// <param name="content">The content pipline attached to the Scenes.</param>
         /// <param name="tweening">The Glide tweening instacne attached to the Scenes.</param>
         /// <param name="sound">The SoundManager attached to the Scenes.</param>
-		public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound, Database global)
+        /// <param name="global">The global Database attached to the Scenes.</param>
+        public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound, Database global)
         {
 			Initialize(scaling);
-			this.content = content;
-			this.tweening = tweening;
-			this.sound = sound;
-            this.global = global;
+			this.Content = content;
+			this.Tweening = tweening;
+			this.Sound = sound;
+            this.Global = global;
 
             // Default background color (hex #282828)
             Color = new Color(40, 40, 40);
@@ -79,12 +75,12 @@ namespace BareKit.Graphics
 			AddChild(sceneInstance);
 			sceneInstance.Enter(current);
 
-            if (current == null)
-                Logger.Info(GetType(), $"Initial navigation to '{sceneInstance.GetType().Name}'.");
-            else
-                Logger.Info(GetType(), $"Navigated from '{current.GetType().Name}' to '{sceneInstance.GetType().Name}'.");
+		    Logger.Info(GetType(),
+		        current == null
+		            ? $"Initial navigation to '{sceneInstance.GetType().Name}'."
+		            : $"Navigated from '{current.GetType().Name}' to '{sceneInstance.GetType().Name}'.");
 
-            return this;
+		    return this;
 		}
 
         /// <summary>
@@ -92,18 +88,16 @@ namespace BareKit.Graphics
         /// </summary>
         public Stage NavigateBack()
         {
-            if (CanNavigateBack)
-            {
-                Scene current = (Scene)Children[Children.Count - 1];
-                Scene target = (Scene)Children[Children.Count - 2];
+            if (!CanNavigateBack) return this;
+            var current = (Scene)Children[Children.Count - 1];
+            var target = (Scene)Children[Children.Count - 2];
 
-                current.Leave(true);
-                target.Enter(current);
+            current.Leave(true);
+            target.Enter(current);
 
-                RemoveChild(current);
+            RemoveChild(current);
 
-                Logger.Info(GetType(), $"Navigated back from '{current.GetType().Name}' to '{target.GetType().Name}'.");
-            }
+            Logger.Info(GetType(), $"Navigated back from '{current.GetType().Name}' to '{target.GetType().Name}'.");
 
             return this;
         }
@@ -111,41 +105,26 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the value indicating whether a backwards navigation is posssible.
         /// </summary>
-        public bool CanNavigateBack
-        {
-            get { return Children.Count > 1 ? true : false; }
-        }
+        public bool CanNavigateBack => Children.Count > 1;
 
         /// <summary>
         /// Gets the attached content pipline.
         /// </summary>
-		public ContentManager Content
-		{
-			get { return content; }
-		}
+		public ContentManager Content { get; }
 
         /// <summary>
         /// Gets the attached Glide tweening instance.
         /// </summary>
-		public Tweener Tweening
-		{
-			get { return tweening; }
-		}
+		public Tweener Tweening { get; }
 
         /// <summary>
         /// Gets the attached SoundManager.
         /// </summary>
-		public SoundManager Sound
-		{
-			get { return sound; }
-		}
+		public SoundManager Sound { get; }
 
         /// <summary>
         /// Gets the attached global Database.
         /// </summary>
-		public Database Global
-        {
-            get { return global; }
-        }
+		public Database Global { get; }
     }
 }

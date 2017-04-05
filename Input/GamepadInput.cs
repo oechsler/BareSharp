@@ -9,7 +9,7 @@ namespace BareKit.Input
 	{
 		GamePadState previousState;
 		GamePadState currentState;
-		Buttons button;
+	    readonly Buttons button;
 
         /// <summary>
         /// Initializes a new instance of the GamepadInput class.
@@ -50,6 +50,12 @@ namespace BareKit.Input
 						if (currentState.IsButtonDown(button))
 							Trigger();
 						break;
+				    case InputState.Moved:
+				        break;
+				    case InputState.Unknown:
+				        break;
+				    default:
+				        throw new ArgumentOutOfRangeException();
 				}
 			}
 
@@ -60,60 +66,26 @@ namespace BareKit.Input
         /// <summary>
         /// Returns the value indicating whether the gampad is connected.
         /// </summary>
-		public bool IsConnected
-		{
-			get { return currentState.IsConnected; }
-		}
+		public bool IsConnected => currentState.IsConnected;
 
-        /// <summary>
+	    /// <summary>
         /// Returns the gampads left stick position vector.
         /// </summary>
-		public Vector2 LeftStick
-		{
-			get {
-				if (currentState.IsConnected)
-					return currentState.ThumbSticks.Left;
-				return new Vector2(0);
-			}
-		}
+		public Vector2 LeftStick => currentState.IsConnected ? currentState.ThumbSticks.Left : new Vector2(0);
 
-        /// <summary>
+	    /// <summary>
         /// Returns the gampads right stick position vector.
         /// </summary>
-		public Vector2 RightStick
-		{
-			get
-			{
-				if (currentState.IsConnected)
-					return currentState.ThumbSticks.Right;
-				return new Vector2(0);
-			}
-		}
+		public Vector2 RightStick => currentState.IsConnected ? currentState.ThumbSticks.Right : new Vector2(0);
 
-        /// <summary>
+	    /// <summary>
         /// Returns the gampads left trigger position value.
         /// </summary>
-		public float LeftTrigger
-		{
-			get
-			{
-				if (currentState.IsConnected)
-					return currentState.Triggers.Left;
-				return 0;
-			}
-		}
+		public float LeftTrigger => currentState.IsConnected ? currentState.Triggers.Left : 0;
 
-        /// <summary>
+	    /// <summary>
         /// Returns the gampads right trigger position value.
         /// </summary>
-		public float RightTrigger
-		{
-			get
-			{
-				if (currentState.IsConnected)
-					return currentState.Triggers.Right;
-				return 0;
-			}
-		}
+		public float RightTrigger => currentState.IsConnected ? currentState.Triggers.Right : 0;
 	}
 }

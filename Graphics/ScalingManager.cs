@@ -9,13 +9,12 @@ namespace BareKit.Graphics
 {
     public class ScalingManager
     {
-		GameWindow window;
+        readonly GameWindow window;
 #if MONOMAC
 		GraphicsDeviceManager graphics;
 #endif
 
         Vector2 initialSize;
-        Vector2 currentSize;
         float contentScale;
         DisplayOrientation orientation;
 
@@ -54,8 +53,8 @@ namespace BareKit.Graphics
 
         void OnResized(object sender, EventArgs e)
         {
-            currentSize = new Vector2(window.ClientBounds.Width, window.ClientBounds.Height);
-            contentScale = Math.Min(currentSize.X / initialSize.X, currentSize.Y / initialSize.Y);
+            Size = new Vector2(window.ClientBounds.Width, window.ClientBounds.Height);
+            contentScale = Math.Min(Size.X / initialSize.X, Size.Y / initialSize.Y);
 
             orientation = window.CurrentOrientation;
 
@@ -121,33 +120,21 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets the controlled windows size vector.
 		/// </summary>
-        public Vector2 Size
-        {
-            get { return currentSize; }
-        }
+        public Vector2 Size { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Gets the controlled windows bounds rectangle.
 		/// </summary>
-		public RotatedRectangle Bounds
-		{
-			get { return new RotatedRectangle(new Microsoft.Xna.Framework.Rectangle(0, 0, (int)currentSize.X, (int)currentSize.Y), 0); }
-		}
+		public RotatedRectangle Bounds => new RotatedRectangle(new Microsoft.Xna.Framework.Rectangle(0, 0, (int)Size.X, (int)Size.Y), 0);
 
-		/// <summary>
+        /// <summary>
 		/// Gets the current scale.
 		/// </summary>
-        public Vector2 Scale
-        {
-            get { return new Vector2(contentScale); }
-        }
+        public Vector2 Scale => new Vector2(contentScale);
 
-		/// <summary>
+        /// <summary>
 		/// Gets the current display orientation.
 		/// </summary>
-        public DisplayOrientation Orientation
-        {
-            get { return orientation; }
-        }
+        public DisplayOrientation Orientation => orientation;
     }
 }

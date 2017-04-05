@@ -9,29 +9,25 @@ namespace BareKit.Graphics
 {
     public class Drawable
     {
-        ScalingManager scaling;
-
         Vector2 position;
-        float rotation;
         Vector2 scale;
         Vector2 origin;
 
         Color color;
         float alpha;
-		bool isVisible;
 
         Container parent;
 
         public Drawable()
         {
             position = new Vector2(0);
-            rotation = 0;
+            Rotation = 0;
             scale = new Vector2(1);
             origin = new Vector2(0);
 
             color = Color.White;
             alpha = 1;
-			isVisible = true;
+			IsVisible = true;
         }
 
 		/// <summary>
@@ -40,13 +36,14 @@ namespace BareKit.Graphics
 		/// <param name="scaling">ScalingManager the instance scale is being controled by.</param>
 		public virtual void Initialize(ScalingManager scaling)
 		{
-			this.scaling = scaling;
-		}		
+			this.Scaling = scaling;
+		}
 
-		/// <summary>
-		/// Sends drawcalls to a specific SpriteBatch buffer.
-		/// </summary>
-		/// <param name="buffer">SpriteBatch buffer to which the calls are being send.</param>
+        /// <summary>
+        /// Sends drawcalls to a specific SpriteBatch buffer.
+        /// </summary>
+        /// <param name="buffer">SpriteBatch buffer to which the calls are being send.</param>
+        /// <param name="transform">The parent transform by which the drawable gets transformed.</param>
         public virtual void Draw(SpriteBatch buffer, Matrix transform)
         {
             // Add your own drawcalls here
@@ -65,12 +62,9 @@ namespace BareKit.Graphics
         /// Gets the attached ScalingManager.
         /// </summary>
         [MoonSharpVisible(true)]
-        protected ScalingManager Scaling
-        {
-            get { return scaling; }
-        }
+        protected ScalingManager Scaling { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Gets or sets the position vector.
 		/// </summary>
         public Vector2 Position
@@ -100,13 +94,9 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Gets or sets the rotation in radiants.
 		/// </summary>
-        public float Rotation 
-        {
-            get { return rotation; }
-			set { rotation = value; }
-        }
+        public float Rotation { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Gets or sets the scale vector.
 		/// </summary>
         public Vector2 Scale
@@ -201,20 +191,16 @@ namespace BareKit.Graphics
 		/// </summary>
         public float Alpha
         {
-			get { return isVisible ? alpha : 0; }
+			get { return IsVisible ? alpha : 0; }
             set { alpha = value; }
         }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether the Drawable is visible.
 		/// </summary>
-		public bool IsVisible
-		{
-			get { return isVisible; }
-			set { isVisible = value; }
-		}
+		public bool IsVisible { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Gets or sets the parent component.
 		/// </summary>
         public Container Parent

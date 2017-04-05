@@ -7,7 +7,7 @@ namespace BareKit.Audio
 {
 	public class Sound
 	{
-		ContentManager content;
+	    readonly ContentManager content;
 
 		SoundEffectInstance sound;
 		SoundState state;
@@ -43,23 +43,23 @@ namespace BareKit.Audio
         /// </summary>
 		public void Update()
 		{
-			if (sound.State != state)
-			{
-				switch (sound.State)
-				{
-					case SoundState.Playing:
-						Played?.Invoke(this, EventArgs.Empty);
-						break;
-					case SoundState.Paused:
-						Paused?.Invoke(this, EventArgs.Empty);
-						break;
-					case SoundState.Stopped:
-						Stopped?.Invoke(this, EventArgs.Empty);
-						break;
-				}
+		    if (sound.State == state) return;
+		    switch (sound.State)
+		    {
+		        case SoundState.Playing:
+		            Played?.Invoke(this, EventArgs.Empty);
+		            break;
+		        case SoundState.Paused:
+		            Paused?.Invoke(this, EventArgs.Empty);
+		            break;
+		        case SoundState.Stopped:
+		            Stopped?.Invoke(this, EventArgs.Empty);
+		            break;
+		        default:
+		            throw new ArgumentOutOfRangeException();
+		    }
 
-				state = sound.State;
-			}
+		    state = sound.State;
 		}
 
         /// <summary>
@@ -130,12 +130,9 @@ namespace BareKit.Audio
         /// <summary>
         /// Gets the value inidiacting whether the Sound is playing.
         /// </summary>
-        public bool IsPlaying
-        {
-            get { return sound.State == SoundState.Playing; }
-        }
+        public bool IsPlaying => sound.State == SoundState.Playing;
 
-        /// <summary>
+	    /// <summary>
         /// Gets or sets the value indicating whether the Sound is looped.
         /// </summary>
 		public bool IsLooped

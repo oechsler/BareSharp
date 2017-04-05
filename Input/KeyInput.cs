@@ -9,7 +9,7 @@ namespace BareKit.Input
 	{
 		KeyboardState previousState;
 		KeyboardState currentState;
-		Keys key;
+	    readonly Keys key;
 
         /// <summary>
         /// Initializes a new instance of the KeyInput class.
@@ -40,6 +40,12 @@ namespace BareKit.Input
 					if (currentState.IsKeyDown(key))
 						Trigger();
 					break;
+			    case InputState.Moved:
+			        break;
+			    case InputState.Unknown:
+			        break;
+			    default:
+			        throw new ArgumentOutOfRangeException();
 			}
 
 			previousState = currentState;

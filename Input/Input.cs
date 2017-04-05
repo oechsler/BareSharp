@@ -15,10 +15,7 @@ namespace BareKit.Input
 
 	public class Input
 	{
-		InputState triggerState;
-		ScalingManager scaling;
-
-        /// <summary>
+	    /// <summary>
         /// Occurs once the given InputState condition is valid.
         /// </summary>
 		public event EventHandler<EventArgs> Triggered;
@@ -29,7 +26,7 @@ namespace BareKit.Input
         /// <param name="triggerState">The state the input device needs to be in for the event to trigger.</param>
 		public Input(InputState triggerState)
 		{
-			this.triggerState = triggerState;
+			this.TriggerState = triggerState;
 		}
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace BareKit.Input
 		/// <param name="scaling">ScalingManager the instance scale is being controled by.</param>
 		public void Initialize(ScalingManager scaling)
 		{
-			this.scaling = scaling;
+			this.Scaling = scaling;
 		}
 
         /// <summary>
@@ -61,17 +58,11 @@ namespace BareKit.Input
         /// <summary>
         /// Gets the needed InputState.
         /// </summary>
-		protected InputState TriggerState
-		{
-			get { return triggerState; }
-		}
+		protected InputState TriggerState { get; }
 
-        /// <summary>
+	    /// <summary>
         /// Gets the attached ScalingManager.
         /// </summary>
-		protected ScalingManager Scaling
-		{
-			get { return scaling; }
-		}
+		protected ScalingManager Scaling { get; set; }
 	}
 }

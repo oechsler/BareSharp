@@ -5,7 +5,7 @@ namespace BareKit.Graphics
 {
     public class Shader
     {
-        Effect effect;
+        readonly Effect effect;
 
         /// <summary>
         /// Initializes a ne instance of the Shader class.
@@ -20,17 +20,11 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets the Shaders parameters table.
         /// </summary>
-        public EffectParameterCollection Parameters
-        {
-            get { return effect.Parameters; }
-        }
+        public EffectParameterCollection Parameters => effect.Parameters;
 
         /// <summary>
         /// Gets the Shaders effect.
         /// </summary>
-        public Effect Effect
-        {
-            get { return effect; }
-        }
+        public Effect Effect => effect;
     }
 }

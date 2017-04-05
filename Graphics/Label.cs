@@ -8,15 +8,12 @@ namespace BareKit.Graphics
 {
     public class Label : Drawable
     {
-        ContentManager content;
+        readonly ContentManager content;
 
-        string assetName;
+        readonly string assetName;
         Vector2 assetScale;
         Vector2 screenScale;
         SpriteFont font;
-		bool isRendered;
-
-        string text;
 
         /// <summary>
         /// Initializes a new instance of the Label class.
@@ -29,17 +26,17 @@ namespace BareKit.Graphics
 			this.content = content;
             this.assetName = assetName;
 			font = content.Load<SpriteFont>(assetName + "_1x");
-			isRendered = true;
+			IsRendered = true;
 
-            this.text = text;
+            this.Text = text;
         }
 
 		public override void Initialize(ScalingManager scaling)
 		{
 			base.Initialize(scaling);
 
-			Scaling.Resized += onResize;
-			onResize(Scaling, EventArgs.Empty);
+			Scaling.Resized += OnResize;
+			OnResize(Scaling, EventArgs.Empty);
 		}
 
         public override void Draw(SpriteBatch buffer, Matrix transform)
@@ -47,15 +44,15 @@ namespace BareKit.Graphics
             base.Draw(buffer, transform);
 
 			// Determine whether the Label should be rendered 
-			RotatedRectangle screenBounds = Scaling.Bounds;
+			var screenBounds = Scaling.Bounds;
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)
 			{
-				isRendered = true;
+				IsRendered = true;
 				buffer.DrawString(spriteFont: font,
-								  text: text,
+								  text: Text,
 								  position: Scaling.Size / 2 + Position,
-								  origin: font.MeasureString(text) / 2 + Origin,
+								  origin: font.MeasureString(Text) / 2 + Origin,
 								  rotation: Rotation,
 								  scale: screenScale * Scale,
 								  color: Color * Alpha,
@@ -65,17 +62,17 @@ namespace BareKit.Graphics
 								 );
 			}
 			else
-				isRendered = false;
+				IsRendered = false;
         }
 
-        void onResize(object sender, EventArgs e)
+        void OnResize(object sender, EventArgs e)
         {
 			// Scaling factor the font asset is optimaly displayed with
-            Vector2 targetAssetScale = new Vector2((float)Math.Max(1, Math.Round(Scaling.Scale.X*2)));
+            var targetAssetScale = new Vector2((float)Math.Max(1, Math.Round(Scaling.Scale.X*2)));
             if (assetScale != targetAssetScale)
             {
                 assetScale = targetAssetScale;
-                for (int i = (int) assetScale.X; i > 0; i--)
+                for (var i = (int) assetScale.X; i > 0; i--)
                 {
                     try
                     {
@@ -109,34 +106,21 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets or sets the text displayed onscreen.
         /// </summary>
-        public string Text
-        {
-            get { return text; }
-            set { text = value; }
-        }
+        public string Text { get; set; }
 
-		/// <summary>
+        /// <summary>
 		/// Gets the size vector.
 		/// </summary>
-        public Vector2 Size
-		{
-			get { return font.MeasureString(text) * screenScale * Scale; }
-		}
+        public Vector2 Size => font.MeasureString(Text) * screenScale * Scale;
 
-		/// <summary>
+        /// <summary>
 		/// Gets the bounds rectangle.
 		/// </summary>
-		public RotatedRectangle Bounds
-        {
-			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin); }
-		}
+		public RotatedRectangle Bounds => new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin);
 
-		/// <summary>
+        /// <summary>
 		/// Gets the value indicating whether the Label is rendered.
 		/// </summary> 
-		public bool IsRendered
-		{
-			get { return isRendered; }
-		}
+		public bool IsRendered { get; set; }
     }
 }

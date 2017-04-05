@@ -6,9 +6,9 @@ namespace BareKit.Input
 {
 	public class InputManager
 	{
-		List<Input> inputs;
+	    readonly List<Input> inputs;
 
-		ScalingManager scaling;
+	    readonly ScalingManager scaling;
 
         /// <summary>
         /// Initializes a new instance of the InputManager class.
@@ -26,7 +26,7 @@ namespace BareKit.Input
         /// </summary>
 		public void Update()
 		{
-			foreach (Input input in inputs)
+			foreach (var input in inputs)
 				input.Update();
 		}
 

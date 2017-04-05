@@ -9,9 +9,6 @@ namespace BareKit.Lua
     [MoonSharpUserData]
     public static class Scripting
     {
-        static string rootDirectory;
-
-        static Script script;
         static object target;
         static string scriptDirectory;
 
@@ -22,17 +19,17 @@ namespace BareKit.Lua
         /// <param name="path">The relative path to the main script.</param>
         public static void Initialize(Entrypoint target, string path)
         {
-            if (script == null)
+            if (Script == null)
             {
-                script = new Script();
+                Script = new Script();
                 Scripting.target = target;
-                scriptDirectory = $"{target.GetType().Namespace}.{rootDirectory}";
+                scriptDirectory = $"{target.GetType().Namespace}.{RootDirectory}";
 
                 UserData.RegisterAssembly(target.GetType().GetTypeInfo().Assembly);
                 UserData.RegisterType<EventArgs>();
 
-                script.Globals.Set("loader", UserData.CreateStatic(typeof(Scripting)));
-                script.DoString(@"
+                Script.Globals.Set("loader", UserData.CreateStatic(typeof(Scripting)));
+                Script.DoString(@"
                     require = loader.require
                     alloc = loader.alloc
                     dealloc = loader.dealloc
@@ -40,12 +37,15 @@ namespace BareKit.Lua
                     enum = loader.enum
                     print = loader.print
                 ");
-                script.Globals.Set("loader", DynValue.Nil);
+                Script.Globals.Set("loader", DynValue.Nil);
 
-                script.Globals.Set("_DEFAULT", DynValue.NewString(target.GetType().GetTypeInfo().Assembly.GetName().Name));
-                script.Globals.Set("bare", DynValue.NewTable(script));
-                script.DoString($@"
+                Script.Globals.Set("_DEFAULT", DynValue.NewString(target.GetType().GetTypeInfo().Assembly.GetName().Name));
+                Script.Globals.Set("bare", DynValue.NewTable(Script));
+                Script.DoString($@"
                     bare.timeSpan = alloc('System.TimeSpan', 'System.Runtime')
+                    if bare.timeSpan == nil then
+                        bare.timeSpan = alloc('System.TimeSpan', 'mscorlib')
+                    end
                     alloc('Microsoft.Xna.Framework.Game', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.GraphicsDeviceManager', 'MonoGame.Framework')
                     alloc('Microsoft.Xna.Framework.GameWindow', 'MonoGame.Framework')
@@ -83,7 +83,7 @@ namespace BareKit.Lua
                 ");
             }
 
-            if (Require(path) != DynValue.Nil)
+            if (!Equals(Require(path), DynValue.Nil))
                 Logger.Info(typeof(Scripting), "Enabled Lua scripting.");
             else
                 Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
@@ -95,28 +95,26 @@ namespace BareKit.Lua
         /// <param name="path">The relative path to the script.</param>
         public static DynValue Require(string path)
         {
-            if (script != null)
+            if (Script == null) throw new Exception("Loader has not been initialized yet.");
+
+            var resourceName = path.Split('/')[path.Split('/').Length - 1];
+            var resourceStream = target.GetType().GetTypeInfo().Assembly.GetManifestResourceStream($"{scriptDirectory}.{path.Replace("/", ".")}.lua");
+            if (resourceStream != null)
             {
-                string resourceName = path.Split('/')[path.Split('/').Length - 1];
-                Stream resourceStream = target.GetType().GetTypeInfo().Assembly.GetManifestResourceStream($"{scriptDirectory}.{path.Replace("/", ".")}.lua");
-                if (resourceStream != null)
+                try
                 {
-                    try
-                    {
-                        Logger.Info(typeof(Scripting), $"Required '{resourceName}' module.");
-                        return script.DoStream(resourceStream);
-                    }
-                    catch (SyntaxErrorException ex)
-                    {
-                        script = null;
-                        Logger.Warn(typeof(Scripting), $"{ex.DecoratedMessage.Split(':')[1]} {ex.Message.Substring(0, 1).ToUpper()}{ex.Message.Substring(1)}.");
-                        Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
-                    }
+                    Logger.Info(typeof(Scripting), $"Required '{resourceName}' module.");
+                    return Script.DoStream(resourceStream);
                 }
-                Logger.Warn(typeof(Scripting), $"Module '{resourceName}' does not exist.");
-                return DynValue.Nil;
+                catch (SyntaxErrorException ex)
+                {
+                    Script = null;
+                    Logger.Warn(typeof(Scripting), $"{ex.DecoratedMessage.Split(':')[1]} {ex.Message.Substring(0, 1).ToUpper()}{ex.Message.Substring(1)}.");
+                    Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
+                }
             }
-            throw new Exception("Loader has not been initialized yet.");
+            Logger.Warn(typeof(Scripting), $"Module '{resourceName}' does not exist.");
+            return DynValue.Nil;
         }
 
         /// <summary>
@@ -131,11 +129,11 @@ namespace BareKit.Lua
 
             string name = $"{typeName}, {assemblyName}";
 
-            if (!UserData.IsTypeRegistered(Type.GetType(name)))
-            {
-                UserData.RegisterType(Type.GetType(name));
-                Logger.Info(typeof(Scripting), $"Allocated '{typeName.Split('.')[typeName.Split('.').Length - 1]}' class.");
-            }
+            if (Type.GetType(name) == null) return null;
+
+            if (UserData.IsTypeRegistered(Type.GetType(name))) return name;
+            UserData.RegisterType(Type.GetType(name));
+            Logger.Info(typeof(Scripting), $"Allocated '{typeName.Split('.')[typeName.Split('.').Length - 1]}' class.");
 
             return name;
         }
@@ -146,11 +144,11 @@ namespace BareKit.Lua
         /// <param name="name">The class types definition name.</param>
         public static void Dealloc(string name)
         {
-            if (UserData.IsTypeRegistered(Type.GetType(name)))
-            {
-                UserData.UnregisterType(Type.GetType(name));
-                Logger.Info(typeof(Scripting), $"Deallocated '{name.Split('.')[name.Split('.').Length - 1].Split(',')[0]}' class.");
-            }
+            if (Type.GetType(name) == null) return;
+
+            if (!UserData.IsTypeRegistered(Type.GetType(name))) return;
+            UserData.UnregisterType(Type.GetType(name));
+            Logger.Info(typeof(Scripting), $"Deallocated '{name.Split('.')[name.Split('.').Length - 1].Split(',')[0]}' class.");
         }
 
         /// <summary>
@@ -160,12 +158,12 @@ namespace BareKit.Lua
         /// <param name="args">Constructor arguments of the specified class</param>
         public static DynValue Init(string name, params object[] args)
         {
-            object[] convertedArgs = new object[args.Length];
-            for (int i = 0; i < args.Length; i++)
+            var convertedArgs = new object[args.Length];
+            for (var i = 0; i < args.Length; i++)
             {
-                if (args[i].GetType() == typeof(double) && ((double)args[i] - Math.Floor((double)args[i])) == 0)
+                if (args[i] is double && Math.Abs((double)args[i] - Math.Floor((double)args[i])) < 0.1)
                     convertedArgs[i] = (int)(double)args[i];
-                else if (args[i].GetType() == typeof(double))
+                else if (args[i] is double)
                     convertedArgs[i] = (float)(double)args[i];
                 else
                     convertedArgs[i] = args[i];
@@ -198,7 +196,7 @@ namespace BareKit.Lua
                 }
                 catch (ScriptRuntimeException ex)
                 {
-                    script = null;
+                    Script = null;
                     Logger.Warn(typeof(Scripting), $"{ex.DecoratedMessage.Split(':')[1]} {ex.Message.Substring(0, 1).ToUpper()}{ex.Message.Substring(1)}.");
                     Logger.Warn(typeof(Scripting), "Disabled Lua scripting.");
                 }
@@ -212,32 +210,22 @@ namespace BareKit.Lua
         /// <param name="message">The message to print.</param>
         public static void Print(string message)
         {
-            Logger.Info(typeof(Scripting), $"{(message != null ? message : "(nil)")}");
+            Logger.Info(typeof(Scripting), $"{message ?? "(nil)"}");
         }
 
         /// <summary>
         /// Gets or sets the default search directory for scripts.
         /// </summary>
-        public static string RootDirectory
-        {
-            get { return rootDirectory; }
-            set { rootDirectory = value; }
-        }
+        public static string RootDirectory { get; set; }
 
         /// <summary>
         /// Gets a reference to the interpreter.
         /// </summary>
-        public static Script Script
-        {
-            get { return script; }
-        }
+        public static Script Script { get; set; }
 
         /// <summary>
         /// Gets a reference to the standard librarys table.
         /// </summary>
-        public static Table Global
-        {
-            get {return script?.Globals.Get("bare").Table; }
-        }
+        public static Table Global => Script?.Globals.Get("bare").Table;
     }
 }

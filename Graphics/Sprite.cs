@@ -8,13 +8,12 @@ namespace BareKit.Graphics
 {
     class Sprite : Drawable
     {
-        ContentManager content;
+        readonly ContentManager content;
 
-        string assetName;
+        readonly string assetName;
         Vector2 assetScale;
         Vector2 screenScale;
         Texture2D texture;
-		bool isRendered;
 
         /// <summary>
         /// Initializes a new instance of the Sprite class.
@@ -26,15 +25,15 @@ namespace BareKit.Graphics
             this.content = content;
             this.assetName = assetName;
             texture = content.Load<Texture2D>(assetName + "_1x");
-			isRendered = true;
+			IsRendered = true;
         }
 
 		public override void Initialize(ScalingManager scaling)
 		{
 			base.Initialize(scaling);
 
-			Scaling.Resized += onResize;
-			onResize(Scaling, EventArgs.Empty);
+			Scaling.Resized += OnResize;
+			OnResize(Scaling, EventArgs.Empty);
 		}
 
         public override void Draw(SpriteBatch buffer, Matrix transform)
@@ -42,11 +41,11 @@ namespace BareKit.Graphics
             base.Draw(buffer, transform);
 
             // Determine whether the Label should be rendered 
-            RotatedRectangle screenBounds = Scaling.Bounds;
+            var screenBounds = Scaling.Bounds;
 			screenBounds.ChangePosition((int)(-Scaling.Size.X / 2), (int)(-Scaling.Size.Y / 2));
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)
 			{
-				isRendered = true;
+				IsRendered = true;
 				buffer.Draw(texture: texture,
 							position: Scaling.Size / 2 + Position,
                             sourceRectangle: texture.Bounds,
@@ -60,17 +59,17 @@ namespace BareKit.Graphics
 						   );
 			}
 			else
-				isRendered = false;
+				IsRendered = false;
         }
 
-        void onResize(object sender, EventArgs e)
+        void OnResize(object sender, EventArgs e)
         {
             // Scaling factor the sprite asset is optimaly displayed with
-            Vector2 targetAssetScale = new Vector2((float)Math.Max(1, Math.Round(Scaling.Scale.X)));
+            var targetAssetScale = new Vector2((float)Math.Max(1, Math.Round(Scaling.Scale.X)));
             if (assetScale != targetAssetScale)
             {
                 assetScale = targetAssetScale;
-                for (int i = (int) assetScale.X; i > 0; i--)
+                for (var i = (int) assetScale.X; i > 0; i--)
                 {
                     try
                     {
@@ -104,25 +103,16 @@ namespace BareKit.Graphics
         /// <summary>
 		/// Gets the size vector.
 		/// </summary>
-        public Vector2 Size
-        {
-            get { return new Vector2(texture.Width, texture.Height) * screenScale * Scale; }
-        }
+        public Vector2 Size => new Vector2(texture.Width, texture.Height) * screenScale * Scale;
 
         /// <summary>
 		/// Gets the bounds rectangle.
 		/// </summary>
-        public RotatedRectangle Bounds
-		{
-			get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin); }
-		}
+        public RotatedRectangle Bounds => new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X, (int)Size.Y), Rotation, Origin);
 
         /// <summary>
 		/// Gets the value indicating whether the Label is rendered.
 		/// </summary>
-		public bool IsRendered
-		{
-			get { return isRendered; }
-		}
+		public bool IsRendered { get; set; }
     }
 }

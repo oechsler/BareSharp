@@ -41,7 +41,7 @@ namespace BareKit.Graphics
 
 			input = new InputManager(scaling);
 
-			scaling.Resized += (object sender, EventArgs e) =>
+			scaling.Resized += (sender, e) =>
 			{
 				Resize();
 			};
@@ -116,7 +116,7 @@ namespace BareKit.Graphics
             // ex.: sprite.Position.X += 10 * delta;
         }
 
-		public override sealed void Draw(SpriteBatch buffer, Matrix transform)
+		public sealed override void Draw(SpriteBatch buffer, Matrix transform)
 		{
 			base.Draw(buffer, transform);
 		}
@@ -136,53 +136,35 @@ namespace BareKit.Graphics
         /// Gets the Stage the Scene is a child of.
         /// </summary>
         [MoonSharpVisible(true)]
-        protected Stage Stage
-		{
-			get { return (Stage)Parent; }
-		}
+        protected Stage Stage => (Stage)Parent;
 
         /// <summary>
         /// Gets the attached content pipeline.
         /// </summary>
         [MoonSharpVisible(true)]
-        protected ContentManager Content
-		{
-			get { return ((Stage)Parent).Content; }
-		}
+        protected ContentManager Content => ((Stage)Parent).Content;
 
         /// <summary>
         /// Gets the attached Glide tweening instance.
         /// </summary>
-        protected Tweener Tweening
-		{
-			get { return ((Stage)Parent).Tweening; }
-		}
+        protected Tweener Tweening => ((Stage)Parent).Tweening;
 
         /// <summary>
         /// Gets the attached SoundManager.
         /// </summary>
         [MoonSharpVisible(true)]
-        protected SoundManager Sound 
-		{
-			get { return ((Stage)Parent).Sound; }
-		}
+        protected SoundManager Sound => ((Stage)Parent).Sound;
 
         /// <summary>
         /// Gets the attached global Database.
         /// </summary>
         [MoonSharpVisible(true)]
-        protected Database Global
-        {
-            get { return ((Stage)Parent).Global; }
-        }
+        protected Database Global => ((Stage)Parent).Global;
 
         /// <summary>
         /// Gets the Scenes InputManager.
         /// </summary>
         [MoonSharpVisible(true)]
-        protected InputManager Input
-		{
-			get { return input; }
-		}
+        protected InputManager Input => input;
     }
 }

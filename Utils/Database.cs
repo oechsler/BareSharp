@@ -7,7 +7,13 @@ namespace BareKit
 {
     public struct DatabaseNode
     {
+        /// <summary>
+        /// Gets or sets the nodes key.
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// Gets or sets the nodes value.
+        /// </summary>
         public object Value { get; set; }
     }
 
@@ -20,7 +26,7 @@ namespace BareKit
         public Database(string name)
         {
             this.name = $"{name}.bdb";
-            storage = IsolatedStorageFile.GetUserStoreForApplication();
+            storage = IsolatedStorageFile.GetUserStoreForAssembly();
             nodes = new List<DatabaseNode>();
 
             Load();

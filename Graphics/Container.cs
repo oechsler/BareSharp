@@ -7,17 +7,14 @@ namespace BareKit.Graphics
 {
     public class Container : Drawable
     {
-        List<Drawable> drawables;
+        readonly List<Drawable> drawables;
         SpriteBatch containerBuffer;
 
-        BlendState blendMode;
-        Shader shader;
-
-		public Container()
+        public Container()
         {
             drawables = new List<Drawable>();
 
-            blendMode = BlendState.AlphaBlend;
+            BlendMode = BlendState.AlphaBlend;
         }
 
         public override void Draw(SpriteBatch buffer, Matrix transform)
@@ -38,8 +35,8 @@ namespace BareKit.Graphics
 
 			// Apply the transform to the SpriteBatch buffer and
 			// render the contained Drawables to it
-			containerBuffer.Begin(transformMatrix: transform, blendState: blendMode, effect: shader?.Effect);
-            foreach (Drawable drawable in drawables)
+			containerBuffer.Begin(transformMatrix: transform, blendState: BlendMode, effect: Shader?.Effect);
+            foreach (var drawable in drawables)
                 drawable.Draw(containerBuffer, transform);
             containerBuffer.End();
         }
@@ -47,36 +44,22 @@ namespace BareKit.Graphics
         /// <summary>
         /// Gets or sets the used blending mode.
         /// </summary>
-        public BlendState BlendMode
-        {
-            get { return blendMode; }
-            set { blendMode = value; }
-        }
+        public BlendState BlendMode { get; set; }
 
         /// <summary>
         /// Gets or sets the used shader.
         /// </summary>
-        public Shader Shader
-        {
-            get { return shader; }
-            set { shader = value; }
-        }
+        public Shader Shader { get; set; }
 
         /// <summary>
 		/// Gets the size vector.
 		/// </summary>
-        public Vector2 Size
-        {
-            get { return Scaling.Size * Scale; }
-        }
+        public Vector2 Size => Scaling.Size * Scale;
 
         /// <summary>
 		/// Gets the bounds rectangle.
 		/// </summary>
-        public RotatedRectangle Bounds
-        {
-            get { return new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X / 2, (int)Size.Y / 2), Rotation, Origin); }
-        }
+        public RotatedRectangle Bounds => new RotatedRectangle(new Rectangle((int)(Position.X - Size.X / 2), (int)(Position.Y - Size.Y / 2), (int)Size.X / 2, (int)Size.Y / 2), Rotation, Origin);
 
         /// <summary>
         /// Adds a child Drawable to the Container.
@@ -106,9 +89,6 @@ namespace BareKit.Graphics
 		/// <summary>
 		/// Returs a copy of the contianed child Drawables.
 		/// </summary>
-        public List<Drawable> Children
-        {
-            get { return new List<Drawable>(drawables); }
-        }
+        public List<Drawable> Children => new List<Drawable>(drawables);
     }
 }

@@ -21,12 +21,9 @@ namespace BareKit.Input
 		TouchCollection touches;
 		MouseState previousState;
 		MouseState currentState;
-		Finger finger;
+	    readonly Finger finger;
 
-		RotatedRectangle bounds;
-		Vector2 position;
-
-        /// <summary>
+	    /// <summary>
         /// Initializes a new instance of the TouchInput class.
         /// </summary>
         /// <param name="inputState">The state the input device needs to be in for the event to trigger.</param>
@@ -37,8 +34,8 @@ namespace BareKit.Input
 			previousState = currentState = Mouse.GetState();
 			this.finger = finger;
 
-			bounds = new RotatedRectangle(new Rectangle(int.MinValue / 2, int.MinValue / 2, int.MaxValue, int.MaxValue), 0);
-			position = new Vector2(0, 0);
+			Bounds = new RotatedRectangle(new Rectangle(int.MinValue / 2, int.MinValue / 2, int.MaxValue, int.MaxValue), 0);
+			Position = new Vector2(0, 0);
 		}
 
 		public override void Update()
@@ -47,9 +44,9 @@ namespace BareKit.Input
 
 			if(TouchPanel.GetCapabilities().IsConnected)
 			{
-				Vector2 panelSize = new Vector2(TouchPanel.DisplayWidth, TouchPanel.DisplayHeight);
+				var panelSize = new Vector2(TouchPanel.DisplayWidth, TouchPanel.DisplayHeight);
 
-				TouchLocationState state;
+				var state = TouchLocationState.Invalid;
 				switch (TriggerState)
 				{
 					case InputState.Pressed:
@@ -64,19 +61,21 @@ namespace BareKit.Input
 					case InputState.Down:
 						state = TouchLocationState.Moved;
 						break;
-					default:
+				    case InputState.Unknown:
+				        break;
+				    default:
 						state = TouchLocationState.Invalid;
 						break;
 				}
 
 				Finger currentFinger = 0;
-				foreach (TouchLocation touch in touches)
+				foreach (var touch in touches)
 				{
 					if (currentFinger == finger && touch.State == state)
 					{
-						position = -Scaling.Size / 2 + touch.Position / panelSize * Scaling.Size;
+						Position = -Scaling.Size / 2 + touch.Position / panelSize * Scaling.Size;
 
-						if (bounds.Intersects(new Rectangle((int)position.X, (int)position.Y, 1, 1)))
+						if (Bounds.Intersects(new Rectangle((int)Position.X, (int)Position.Y, 1, 1)))
 							Trigger();
 					}
 					currentFinger++;
@@ -86,7 +85,7 @@ namespace BareKit.Input
 			}
 			else
 			{
-				bool matches = false;
+				var matches = false;
 
 				switch (finger)
 				{
@@ -106,13 +105,21 @@ namespace BareKit.Input
 						else if (currentState.RightButton == ButtonState.Pressed && (TriggerState == InputState.Moved || TriggerState == InputState.Down))
 							matches = true;
 						break;
+				    case Finger.Three:
+				        break;
+				    case Finger.Four:
+				        break;
+				    case Finger.Five:
+				        break;
+				    default:
+				        throw new ArgumentOutOfRangeException();
 				}
 
 				if (matches || TriggerState == InputState.Moved)
 				{
-					position = currentState.Position.ToVector2() - Scaling.Size / 2;
+					Position = currentState.Position.ToVector2() - Scaling.Size / 2;
 
-					if (bounds.Intersects(new Rectangle((int)position.X, (int)position.Y, 1, 1)))
+					if (Bounds.Intersects(new Rectangle((int)Position.X, (int)Position.Y, 1, 1)))
 						Trigger();
 				}
 
@@ -124,18 +131,11 @@ namespace BareKit.Input
         /// <summary>
 		/// Gets or sets the triggering bounds rectangle.
 		/// </summary>
-		public RotatedRectangle Bounds
-		{
-			get { return bounds; }
-			set { bounds = value; }
-		}
+		public RotatedRectangle Bounds { get; set; }
 
-        /// <summary>
+	    /// <summary>
         /// Gets the (cursor-)postition vector.
         /// </summary>
-		public Vector2 Position
-		{
-			get { return position; }
-		}
+		public Vector2 Position { get; set; }
 	}
 }

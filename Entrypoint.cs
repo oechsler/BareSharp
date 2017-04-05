@@ -16,27 +16,21 @@ namespace BareKit
     [MoonSharpUserData]
     public class Entrypoint : Game
     {
-        GraphicsDeviceManager graphics;
-        ScalingManager scaling;
+        SoundManager sound;
 
-		SoundManager sound;
-
-        SpriteBatch buffer;
-		Tweener tweening;
+        Tweener tweening;
         Database global;
-        Stage stage;
 
-		float oneSecond;
+        float oneSecond;
 		static int frames;
-		static int fps;
 
         /// <summary>
         /// Initializes a new instance of the Entrypoint class.
         /// </summary>
         public Entrypoint()
         {
-            graphics = new GraphicsDeviceManager(this);
-			scaling = new ScalingManager(graphics, Window, new Vector3(720, 16, 9), 1.25f);
+            Graphics = new GraphicsDeviceManager(this);
+			Scaling = new ScalingManager(Graphics, Window, new Vector3(720, 16, 9), 1.25f);
 
             Content.RootDirectory = "Content";
             Scripting.RootDirectory = "Scripts";
@@ -61,19 +55,19 @@ namespace BareKit
 
             sound = new SoundManager();
 
-            buffer = new SpriteBatch(GraphicsDevice);
+            Buffer = new SpriteBatch(GraphicsDevice);
 			tweening = new Tweener();
             global = new Database("global");
-            stage = new Stage(scaling, Content, tweening, sound, global);
+            Stage = new Stage(Scaling, Content, tweening, sound, global);
 
-            Scripting.Global?.Set("stage", UserData.Create(stage));
+            Scripting.Global?.Set("stage", UserData.Create(Stage));
             Scripting.Global?.Set("delta", DynValue.NewNumber(0));
             Scripting.Global?.Set("fps", DynValue.NewNumber(0));
 
-            Logger.Info(GetType(), $"Vertical synchronisation activated '{graphics.SynchronizeWithVerticalRetrace}'.");
+            Logger.Info(GetType(), $"Vertical synchronisation activated '{Graphics.SynchronizeWithVerticalRetrace}'.");
             Logger.Info(GetType(), $"Framstep is set to '{TargetElapsedTime.TotalMilliseconds} ms'.");
-            Logger.Info(GetType(), $"Initial window size is '{scaling.Size.ToString().Replace("{X:", "").Replace(" Y:", "x").Replace("}", "")}'.");
-            Logger.Info(GetType(), $"Initial content scale is 'x{scaling.Scale.X}'.");
+            Logger.Info(GetType(), $"Initial window size is '{Scaling.Size.ToString().Replace("{X:", "").Replace(" Y:", "x").Replace("}", "")}'.");
+            Logger.Info(GetType(), $"Initial content scale is 'x{Scaling.Scale.X}'.");
             Logger.Info(GetType(), "Ready. Handoff to userdefined code.");
 
             Scripting.Call(Scripting.Global?.Get("start"));
@@ -86,18 +80,18 @@ namespace BareKit
 			sound.Update();
 
 			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            Stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             Scripting.Global?.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
             Scripting.Call(Scripting.Global?.Get("update"));
 
             if (oneSecond >= 1)
 			{
-				fps = frames;
+				FramesPerSecond = frames;
 				frames = 0;
 				oneSecond--;
 
-                Scripting.Global?.Set("fps", DynValue.NewNumber(fps));
+                Scripting.Global?.Set("fps", DynValue.NewNumber(FramesPerSecond));
             }
 			oneSecond += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -106,11 +100,11 @@ namespace BareKit
 
         protected override void Draw(GameTime gameTime)
         {
-			GraphicsDevice.Clear(stage.Color);
+			GraphicsDevice.Clear(Stage.Color);
 
-            buffer.Begin();
-            stage.Draw(buffer, Matrix.Identity);
-            buffer.End();
+            Buffer.Begin();
+            Stage.Draw(Buffer, Matrix.Identity);
+            Buffer.End();
 
             base.Draw(gameTime);
 
@@ -128,44 +122,28 @@ namespace BareKit
         /// Gets the attached GraphicsDeviceManager.
         /// </summary>
         [MoonSharpVisible(true)]
-        protected GraphicsDeviceManager Graphics
-		{
-			get { return graphics; }
-		}
+        protected GraphicsDeviceManager Graphics { get; }
 
         /// <summary>
         /// Gets or sets the attached ScalingManager.
         /// </summary>
         [MoonSharpVisible(true)]
-		protected ScalingManager Scaling
-		{
-			get { return scaling; }
-			set { scaling = value; } 
-		}
+		protected ScalingManager Scaling { get; set; }
 
         /// <summary>
         /// Gets the attached SpriteBatch buffer.
         /// </summary>
-		protected SpriteBatch Buffer
-		{
-			get { return buffer; }
-		}
+		protected SpriteBatch Buffer { get; set; }
 
         /// <summary>
         /// Gets the attached Stage.
         /// </summary>
-		protected Stage Stage
-		{
-			get { return stage; }
-		}
+		protected Stage Stage { get; set; }
 
         /// <summary>
         /// Gets the current Frames/s count.
         /// </summary>
         [MoonSharpVisible(false)]
-		public static int FramesPerSecond
-		{
-			get { return fps; }
-		}
+		public static int FramesPerSecond { get; set; }
     }
 }
