@@ -111,12 +111,22 @@ namespace BareKit
 			frames++;
         }
 
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            global.Save();
+
+            base.OnExiting(sender, args);
+        }
+
+#if !WINDOWS && !MONOMAC && !LINUX 
         protected override void OnDeactivated(object sender, EventArgs args)
         {
-            base.OnDeactivated(sender, args);
+            OnExiting(sender, args);
 
-            global.Save();
+            base.OnDeactivated(sender, args);
         }
+#endif
 
         /// <summary>
         /// Gets the attached GraphicsDeviceManager.

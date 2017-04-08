@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Linq;
+using System.Text;
 
 namespace BareKit
 {
@@ -39,8 +41,13 @@ namespace BareKit
         public void Save()
         {
             var writer = new StreamWriter(new IsolatedStorageFileStream(name, FileMode.Create, storage));
+            writer.WriteLine("# Changes made to this file may result in loss of data");
             foreach (var node in nodes)
-                writer.WriteLine($"{node.Key}={node.Value}");
+            {
+                var reversed = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{node.Key}={node.Value}")).Replace("=", ":").ToCharArray();
+                Array.Reverse(reversed);
+                writer.WriteLine(new string(reversed));
+            }
             writer.Dispose();
 
             Logger.Info(GetType(), $"Saved '{nodes.Count}' node(s) to '{name}'.");
@@ -57,10 +64,15 @@ namespace BareKit
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    var key = line?.Split('=')[0];
-                    var value = line?.Split('=')[1];
+                    if (line == null || line.StartsWith("#")) continue;
 
-                    nodes.Add(new DatabaseNode { Key = key, Value = value });
+                    var reversed = line.Replace(":", "=").ToCharArray();
+                    Array.Reverse(reversed);
+                    line = Encoding.UTF8.GetString(Convert.FromBase64String(new string(reversed)));
+
+                    var key = line.Split('=')[0];
+                    var value = line.Split('=')[1];
+                    nodes.Add(new DatabaseNode {Key = key, Value = value});
 
                     count++;
                 }

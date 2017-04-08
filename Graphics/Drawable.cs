@@ -36,7 +36,7 @@ namespace BareKit.Graphics
 		/// <param name="scaling">ScalingManager the instance scale is being controled by.</param>
 		public virtual void Initialize(ScalingManager scaling)
 		{
-			this.Scaling = scaling;
+			Scaling = scaling;
 		}
 
         /// <summary>
