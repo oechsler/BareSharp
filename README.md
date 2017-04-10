@@ -11,7 +11,7 @@ For further information on the MonoGame framework, please do checkout their [doc
 
 ### Entrypoint
 
-In order for Bare to run, you need to replace the default Game1 class with Bare's Entrypoint. The Entrypoint can also be customized to fit your needs by overriding it.	<br />*It is highly recommended that you create your own Entrypoint, when using C# to code.*
+In order for Bare to run, you need to replace the default Game1 class with Bare's Entrypoint. The Entrypoint can also be customized to fit your needs by overriding it. *It is highly recommended that you create your own Entrypoint, when using C# to code.*
 
 ~~~cs
 using BareKit;
