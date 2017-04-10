@@ -30,13 +30,13 @@ public class Main
 
 ### Scripting
 
-*Bare uitilizes [MoonSharp](http://www.moonsharp.org) to implement the Lua scripting language. It is intended that you use Lua for scripting your games. But because Bare's API is completly written in C# an translated to Lua during runtime, you may use C# aswell for more advanced scripting or due to personal preference.*
+*Bare uitilizes [MoonSharp](http://www.moonsharp.org) to implement the Lua scripting language. It is intended that you use Lua for scripting your games. But because Bare's API is written completly in C# and translated to Lua during runtime, you may use C# aswell for more advanced scripting or due to personal preference.*
 
 * *Known caveat: the integrated [Glide](https://bitbucket.org/jacobalbano/glide) tweening engine is not accessible through Lua!*
 
 Userdefined Lua scripts by deafult have to be placed in the `Scripts` subdirectory of your project and need to be marked as `Embedded resource` in Visual Studio. *For changing the default directory please have a look into Bare's Entrypoint class.*
 
-To enable Bares scripting create file in the `Scripting` directory, name it `main.Lua` and mark it as `Embedded resource`.  Just add the following code to it and you are ready to go.
+To enable Bare's scripting create file in the `Scripting` directory, name it `main.Lua` and mark it as `Embedded resource`.  Just add the following code to it and you are ready to go.
 
 ~~~lua
 function bare.start()
