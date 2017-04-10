@@ -1,15 +1,15 @@
-#Getting Started
+# Getting Started
 
 For further information on the MonoGame framework, please do checkout their [documentation](http://www.monogame.net/documentation/?page=main).
 <br />This guide assumes that you already know how to work with MonoGame's content pipeline.
 
-###General setup
+### General setup
 
 1. Import Bare's shared project into your Visual Studio solution.
 2. Link the shared project with your executing MonoGame project.
 3. Link a version of [MoonSharp](http://www.moonsharp.org) with your executing project.
 
-###Entrypoint
+### Entrypoint
 
 In order for Bare to run, you need to replace the default Game1 class with Bare's Entrypoint. The Entrypoint can also be customized to fit your needs by overriding it.	<br />*It is highly recommended that you create your own Entrypoint, when using C# to code.*
 
@@ -28,7 +28,7 @@ public class Main
 }
 ~~~
 
-###Scripting
+### Scripting
 
 *Bare uitilizes [MoonSharp](http://www.moonsharp.org) to implement the Lua scripting language. It is intended that you use Lua for scripting your games. But because Bare's API is completly written in C# an translated to Lua during runtime, you may use C# aswell for more advanced scripting or due to personal preference.*
 
@@ -46,9 +46,9 @@ end
 
 *When executing, this should print out* `Ready.` *in Visual Studio's output window.*
 
-###Callback functions
+### Callback functions
 
-######bare.start
+###### bare.start
 
 ~~~lua
 function bare.start()
@@ -60,7 +60,7 @@ end
 
 *This function gets called once, when Bare is started. This is usually where you load your scenes and setup things specific to your game. You may want to do these things somewhere else, but doing them here ensures that their only done once and therefore saving a lot of system resources.*
 
-######bare.update
+###### bare.update
 
 ~~~lua
 function bare.update()
@@ -71,7 +71,7 @@ end
 
 *This function is continoussly called befor rendering a frame. Probably this is where all your logic is done.* `bare.delta` *is the so called delta time. It is the amount of time in seconds since the last time this function was called (usually a small value). Due to the event driven nature of the Bare framework, the delta time can be accessed via a variable.*
 
-######bare.config
+###### bare.config
 
 ~~~lua
 function bare.config(e)
@@ -84,11 +84,11 @@ end
 
 *This function is called before the window is created and therefore allows you to make a change to the default size of 720x506 in the way indicated above. Other things like for example mouse visibility are configurable aswell.*
 
-###Standard library
+### Standard library
 
 Bare's Lua interpereter contains the complete set of standard functions. Beyond that there are a few important functions for registering and allocating objects from the underlaying C# context.
 
-######alloc
+###### alloc
 
 ~~~lua 
 -- definition
@@ -99,14 +99,14 @@ vector2 = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
 
 *This function allocates C# classes to the Lua scripting context. When allocating from your executing assembly, you can simply use `_DEFAULT` instead of specifing the assembly name.*
 
-######dealloc
+###### dealloc
 
 ~~~lua
 dealloc(typedef)
 ~~~
 *This function is the counterpart to alloc (use this function carefully).*
 
-######init
+###### init
 
 ~~~lua
 -- definition
@@ -119,7 +119,7 @@ print('Current scale: ' .. scale.toString())
 
 *This function instanciates C# objects inside the Lua scripting context. Methodes and fields of the respective objects can be accessed the same way as in C#, but always need to start lowercase. To initiate garbage collection of an instance simply set its userdata reference to a `nil` value.*
 
-######enum
+###### enum
 
 ~~~lua
 -- definituion
@@ -130,7 +130,7 @@ background = enum(color).cornflowerBlue
 
 *This function references C# enums inside the lua scripting context.*
 
-######Drawables
+###### Drawables
 
 ~~~lua
 bare.container        -- Container drawable.
@@ -140,7 +140,7 @@ bare.scene            -- Scene for rendering drawables.
 bare.sprite           -- Sprite drawable.
 ~~~                           
 
-######Interfaces
+###### Interfaces
 
 ~~~lua
 bare.database         -- Interface for storing persistent values.
@@ -148,7 +148,7 @@ bare.shader           -- Interface for using shaders.
 bare.sound            -- Interface for playing sounds.
 ~~~
 
-######Inputs
+###### Inputs
 
 ~~~lua
 bare.gamepadInput     -- Interface for handling gamepad input.
@@ -156,7 +156,7 @@ bare.keyInput         -- Interface for handling keyboard input.
 bare.touchInput       -- Interface for handling touch/mouse input.
 ~~~
 
-######Datatypes
+###### Datatypes
 
 ~~~lua
 bare.color            -- Three/Four dimensional color vector.
@@ -166,7 +166,7 @@ bare.vector2          -- Two dimensional vector.
 bare.vector3          -- Three dimensional vector.
 ~~~
 
-######Enums
+###### Enums
 
 ~~~lua
 bare.blendMode        -- Enums for different color blend modes.
@@ -177,13 +177,13 @@ bare.keys             -- Enums for different keys.
 
 *For furter information on how each of the modules work, please have a look at it's respective class definition. Each method or field of the module has a short documentation attached to it.*
 
-###Examples
+### Examples
 
-######Displaying a sprite
+###### Displaying a sprite
 
 *The sprite already has to be imported into MonoGame's content pipline. Also make sure that your sprites and fonts have a scale definition assigned. This is done by adding a `_nx` suffix to the filename. So if you have got a sprite called `banana.png`, the name for the standard size has to be `banana_1x.png`. The Scaling sizes have to be integer numbers and a standard size always has to be provided.*
 
-#####main.lua
+##### main.lua
 ~~~lua 
 local scene = require "scene.lua"
 
@@ -192,7 +192,7 @@ function bare.start()
 end
 ~~~
 
-#####scene.lua
+##### scene.lua
 ~~~lua 
 local scene = init(bare.scene)
 local sprite = nil
@@ -205,9 +205,9 @@ end)
 return scene
 ~~~
 
-######Handling input
+###### Handling input
 
-#####scene.lua
+##### scene.lua
 ~~~lua
 local scene = init(bare.scene)
 local keyEvent = nil
@@ -223,11 +223,11 @@ end)
 return scene
 ~~~
 
-######Playing a sound
+###### Playing a sound
 
 *The sound already has to be imported into MonoGame's content pipline. Also make sure that you have `SoundEffect` selected as importer, otherwise the sound will not be playable by Bare.*
 
-#####scene.lua
+##### scene.lua
 ~~~lua
 local scene = init(bare.scene)
 local sound = nil
@@ -240,7 +240,7 @@ end)
 return scene
 ~~~
 
-###License
+### License
 
 *Copyright © 2017 – Samuel Oechsler*
 
