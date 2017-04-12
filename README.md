@@ -7,11 +7,11 @@ For further information on the MonoGame framework, please do checkout their [doc
 
 1. Import Bare's shared project into your Visual Studio solution.
 2. Link the shared project with your executing MonoGame project.
-3. Link a version of [MoonSharp](http://www.moonsharp.org) with your executing project.
+3. Link a version of [MoonSharp](http://www.moonsharp.org) with your executing project (or define a `NOSCRIPT` preprocessor flag).
 
 ### Entrypoint
 
-In order for Bare to run, you need to replace the default Game1 class with Bare's Entrypoint. The Entrypoint can also be customized to fit your needs by overriding it. *It is highly recommended that you create your own Entrypoint, when using C# to code.*
+In order for Bare to run, you need to replace the default `Game1` class with Bare's Entrypoint. The Entrypoint can also be customized to fit your needs by overriding it. *It is highly recommended that you create your own Entrypoint, when using C# to code.*
 
 ~~~cs
 using BareKit;
@@ -32,11 +32,11 @@ public class Main
 
 *Bare uitilizes [MoonSharp](http://www.moonsharp.org) to implement the Lua scripting language. It is intended that you use Lua for scripting your games. But because Bare's API is written completly in C# and translated to Lua during runtime, you may use C# aswell for more advanced scripting or due to personal preference.*
 
-* *Known caveat: the integrated [Glide](https://bitbucket.org/jacobalbano/glide) tweening engine is not accessible through Lua!*
+* *Known caveat: the integrated [Glide](https://bitbucket.org/jacobalbano/glide) tweening engine is not accessible through Lua! ([use this instead](https://github.com/kikito/tween.lua))*
 
-Userdefined Lua scripts by deafult have to be placed in the `Scripts` subdirectory of your project and need to be marked as `Embedded resource` in Visual Studio. *For changing the default directory please have a look into Bare's Entrypoint class.*
+Userdefined Lua scripts by deafult are located in the `Scripts` subdirectory of your project and need to be marked as `Embedded resource` in Visual Studio. *For changing the default directory please have a look into Bare's Entrypoint class.*
 
-To enable Bare's scripting create file in the `Scripting` directory, name it `main.Lua` and mark it as `Embedded resource`.  Just add the following code to it and you are ready to go.
+To enable Lua scripting create a file in the `Scripting` directory, name it `main.lua` and mark it as `Embedded resource`.  Just add the following lines of code to it and you are done.
 
 ~~~lua
 function bare.start()
@@ -69,7 +69,7 @@ function bare.update()
 end
 ~~~
 
-*This function is continoussly called befor rendering a frame. Probably this is where all your logic is done.* `bare.delta` *is the so called delta time. It is the amount of time in seconds since the last time this function was called (usually a small value). Due to the event driven nature of the Bare framework, the delta time can be accessed via a variable.*
+*This function is continoussly called before rendering a frame. Probably this is where all your logic is done.* `bare.delta` *is the so called delta time. It is the amount of time in seconds since the last time this function was called (usually a small value). Due to the event driven nature of the Bare framework (each scene has its own update event), the delta time can be accessed via a variable.*
 
 ###### bare.config
 
@@ -95,6 +95,7 @@ Bare's Lua interpereter contains the complete set of standard functions. Beyond 
 typedef = alloc(className, assemblyName)
 -- example
 vector2 = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
+myClass = alloc('MyNamespace.MyClass', _DEFAULT)
 ~~~
 
 *This function allocates C# classes to the Lua scripting context. When allocating from your executing assembly, you can simply use `_DEFAULT` instead of specifing the assembly name.*
@@ -128,7 +129,7 @@ reference = enum(typedef)
 background = enum(color).cornflowerBlue
 ~~~
 
-*This function references C# enums inside the lua scripting context.*
+*This function references C# enums inside the Lua scripting context.*
 
 ###### Drawables
 
@@ -175,13 +176,13 @@ bare.inputState       -- Enums for different input device states.
 bare.keys             -- Enums for different keys.
 ~~~
 
-*For furter information on how each of the modules work, please have a look at it's respective class definition. Each method or field of the module has a short documentation attached to it.*
+*For furter information on how each of the modules work, please have a look at it's respective class definition. Each method and field of the module has a short documentation attached to it.*
 
 ### Examples
 
 ###### Displaying a sprite
 
-*The sprite already has to be imported into MonoGame's content pipline. Also make sure that your sprites and fonts have a scale definition assigned. This is done by adding a `_nx` suffix to the filename. So if you have got a sprite called `banana.png`, the name for the standard size has to be `banana_1x.png`. The Scaling sizes have to be integer numbers and a standard size always has to be provided.*
+*The sprite already has to be imported into MonoGame's content pipline. Also make sure that your sprites and fonts have a scale definition assigned. This is done by adding a `_nx` suffix to the filename. So if you have got a sprite called `banana.png`, the name for the standard size has to be `banana_1x.png`. The Scaling sizes have to be of the integer type and a standard size always has to be provided.*
 
 ##### main.lua
 ~~~lua 
@@ -225,7 +226,7 @@ return scene
 
 ###### Playing a sound
 
-*The sound already has to be imported into MonoGame's content pipline. Also make sure that you have `SoundEffect` selected as importer, otherwise the sound will not be playable by Bare.*
+*The sound already has to be imported into MonoGame's content pipline. Also make sure that you have `SoundEffect` selected as importer, otherwise the sound will not be playable (and an exeption will be thrown).*
 
 ##### scene.lua
 ~~~lua
@@ -244,5 +245,5 @@ return scene
 
 *Copyright © 2017 – Samuel Oechsler*
 
-**Modified version of zlib.** 
+**Modified version of Zlib.** 
 *This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software. Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions: The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a comercial product, an acknowledgment in the product documentation is required. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software. This notice may not be removed or altered from any source distribution.*
