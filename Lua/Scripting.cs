@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NOSCRIPT
+using System;
 using System.Reflection;
 using System.IO;
 
@@ -229,3 +230,4 @@ namespace BareKit.Lua
         public static Table Global => Script?.Globals.Get("bare").Table;
     }
 }
+#endif
