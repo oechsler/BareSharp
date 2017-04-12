@@ -9,7 +9,9 @@ using MoonSharp.Interpreter.Interop;
 using BareKit.Audio;
 using BareKit.Graphics;
 using BareKit.Tweening;
+#if !NOSCRIPT
 using BareKit.Lua;
+#endif
 
 namespace BareKit
 {
@@ -45,9 +47,11 @@ namespace BareKit
             Logger.Info(GetType(), $"Content will be loaded from '{Content.RootDirectory}'.");
             Logger.Info(GetType(), $"Scripts will be loaded from '{Scripting.RootDirectory}'.");
 
+#if !NOSCRIPT
             Scripting.Initialize(this, "main");
             Scripting.Global?.Set("entrypoint", UserData.Create(this));
             Scripting.Call(Scripting.Global?.Get("config"), UserData.Create(this));
+#endif
 
 #if MONOMAC
 			scaling.Center();
@@ -60,9 +64,11 @@ namespace BareKit
             global = new Database("global");
             Stage = new Stage(Scaling, Content, tweening, sound, global);
 
+#if !NOSCRIPT
             Scripting.Global?.Set("stage", UserData.Create(Stage));
             Scripting.Global?.Set("delta", DynValue.NewNumber(0));
             Scripting.Global?.Set("fps", DynValue.NewNumber(0));
+#endif
 
             Logger.Info(GetType(), $"Vertical synchronisation activated '{Graphics.SynchronizeWithVerticalRetrace}'.");
             Logger.Info(GetType(), $"Framstep is set to '{TargetElapsedTime.TotalMilliseconds} ms'.");
@@ -70,7 +76,9 @@ namespace BareKit
             Logger.Info(GetType(), $"Initial content scale is 'x{Scaling.Scale.X}'.");
             Logger.Info(GetType(), "Ready. Handoff to userdefined code.");
 
+#if !NOSCRIPT
             Scripting.Call(Scripting.Global?.Get("start"));
+#endif
 
             GC.Collect();
         } 
@@ -82,8 +90,10 @@ namespace BareKit
 			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             Stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
+#if !NOSCRIPT
             Scripting.Global?.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
             Scripting.Call(Scripting.Global?.Get("update"));
+#endif
 
             if (oneSecond >= 1)
 			{
@@ -91,7 +101,9 @@ namespace BareKit
 				frames = 0;
 				oneSecond--;
 
+#if !NOSCRIPT
                 Scripting.Global?.Set("fps", DynValue.NewNumber(FramesPerSecond));
+#endif
             }
 			oneSecond += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
