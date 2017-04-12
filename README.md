@@ -182,7 +182,7 @@ bare.keys             -- Enums for different keys.
 
 ###### Displaying a sprite
 
-*The sprite already has to be imported into MonoGame's content pipline. Also make sure that your sprites and fonts have a scale definition assigned. This is done by adding a `_nx` suffix to the filename. So if you have got a sprite called `banana.png`, the name for the standard size has to be `banana_1x.png`. The Scaling sizes have to be of the integer type and a standard size always has to be provided.*
+*The sprite already has to be imported into MonoGame's content pipline. Also make sure that your sprites and fonts have a scale definition assigned. This is done by adding a `_nx` suffix to the filename. So if you have got a sprite called `banana.png`, the name for the standard size would be `banana_1x.png`. The Scaling sizes have to be of the integer type and a standard size must always be provided.*
 
 ##### main.lua
 ~~~lua 
