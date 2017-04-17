@@ -18,12 +18,10 @@ using BareKit;
 
 public class Main
 {
-	static Entrypoint entrypoint;
-
 	public static void Main(string args[])
 	{	
-		entrypoint = new Entrypoint();
-		entrypoint.Run();
+		using (var entrypoint = new Entrypoint())
+			entrypoint.Run();
 	}	
 }
 ~~~
@@ -32,7 +30,8 @@ public class Main
 
 *Bare uitilizes [MoonSharp](http://www.moonsharp.org) to implement the Lua scripting language. It is intended that you use Lua for scripting your games. But because Bare's API is written completly in C# and translated to Lua during runtime, you may use C# aswell for more advanced scripting or due to personal preference.*
 
-* *Known caveat: the integrated [Glide](https://bitbucket.org/jacobalbano/glide) tweening engine is not accessible through Lua! ([use this instead](https://github.com/kikito/tween.lua))*
+* *Known caveat: the integrated [Glide](https://bitbucket.org/jacobalbano/glide) tweening engine is not accessible through Lua. [Tween.lua](https://github.com/kikito/tween.lua) is used instead and can be accessed via `tween`.*
+* *Object oriented scripting is possible with the embedded version of [30log](https://github.com/Yonaba/30log), accessible through the `class` field.*
 
 Userdefined Lua scripts by deafult are located in the `Scripts` subdirectory of your project and need to be marked as `Embedded resource` in Visual Studio. *For changing the default directory please have a look into Bare's Entrypoint class.*
 
@@ -120,10 +119,21 @@ print('Current scale: ' .. scale.toString())
 
 *This function instanciates C# objects inside the Lua scripting context. Methodes and fields of the respective objects can be accessed the same way as in C#, but always need to start lowercase. To initiate garbage collection of an instance simply set its userdata reference to a `nil` value.*
 
+###### static
+
+~~~lua
+-- definition
+reference = static(typedef)
+-- example
+stream = static(storage).read("example.txt")
+~~~
+
+*This function references static C# class methods inside the Lua scripting context.*
+
 ###### enum
 
 ~~~lua
--- definituion
+-- definition
 reference = enum(typedef)
 -- example
 background = enum(color).cornflowerBlue
@@ -144,6 +154,9 @@ bare.sprite           -- Sprite drawable.
 ###### Interfaces
 
 ~~~lua
+bare.streamReader     -- System.IO.StreamReader.
+bare.streamWriter     -- System.IO.StreamWriter.
+bare.storage          -- Interface for acessing the filesystem. 
 bare.database         -- Interface for storing persistent values.
 bare.shader           -- Interface for using shaders.
 bare.sound            -- Interface for playing sounds.

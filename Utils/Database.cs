@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.IsolatedStorage;
-using System.Linq;
 using System.Text;
 
 namespace BareKit
@@ -22,17 +20,11 @@ namespace BareKit
     public class Database
     {
         readonly string name;
-        readonly IsolatedStorageFile storage;
         readonly List<DatabaseNode> nodes;
 
         public Database(string name)
         {
             this.name = $"{name}.bdb";
-#if !WINDOWS_UAP
-            storage = IsolatedStorageFile.GetUserStoreForAssembly();
-#else
-            storage = IsolatedStorageFile.GetUserStoreForApplication();
-#endif
             nodes = new List<DatabaseNode>();
 
             Load();
@@ -40,8 +32,7 @@ namespace BareKit
 
         public void Save()
         {
-            var writer = new StreamWriter(new IsolatedStorageFileStream(name, FileMode.Create, storage));
-            writer.WriteLine("# Changes made to this file may result in loss of data");
+            var writer = new StreamWriter(Storage.Write(name));
             foreach (var node in nodes)
             {
                 var reversed = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{node.Key}={node.Value}")).Replace("=", ":").ToCharArray();
@@ -58,9 +49,9 @@ namespace BareKit
             nodes.Clear();
 
             var count = 0;
-            if (storage.FileExists(name))
+            if (Storage.Exists(name))
             {
-                var reader = new StreamReader(new IsolatedStorageFileStream(name, FileMode.Open, storage));
+                var reader = new StreamReader(Storage.Read(name));
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
@@ -84,7 +75,7 @@ namespace BareKit
 
         public void Clear()
         {
-            storage.DeleteFile(name);
+            Storage.Delete(name);
         }
 
         DatabaseNode GetNode(string key)
