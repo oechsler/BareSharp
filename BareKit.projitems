@@ -25,7 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\GamepadInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\TouchInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyInput.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Lua\Scripting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Lua.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Database.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Logger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\RotatedRectangle.cs" />
@@ -36,13 +36,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Glide\Tweener.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\Primitives2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Graphics\Rect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Storage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Input\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\Glide\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Utils\Scripts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Utils\Scripts\boot.lua" />
     <None Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\licence.txt" />
     <None Include="$(MSBuildThisFileDirectory)Utils\Glide\license.txt" />
     <None Include="$(MSBuildThisFileDirectory)Utils\Glide\readme.md" />
