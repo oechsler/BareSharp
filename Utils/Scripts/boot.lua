@@ -1,9 +1,15 @@
 ﻿-- mscorlib.dll
 alloc('System.Type', 'mscorlib')
 bare.timeSpan = alloc('System.TimeSpan', 'mscorlib')
+alloc('System.IO.Stream', 'mscorlib')
+bare.streamReader = alloc('System.IO.StreamReader', 'mscorlib')
+bare.streamWriter = alloc('System.IO.StreamWriter', 'mscorlib')
 if bare.timeSpan == nil then
 	alloc('System.Type', 'System.Runtime')
 	bare.timeSpan = alloc('System.TimeSpan', 'System.Runtime')
+	alloc('System.IO.Stream', 'System.Runtime')
+	bare.streamReader = alloc('System.IO.StreamReader', 'System.Runtime')
+	bare.streamWriter = alloc('System.IO.StreamWriter', 'System.Runtime')
 end
 
 -- MonoGame.Framework.dll
@@ -19,7 +25,7 @@ alloc('Microsoft.Xna.Framework.Content.ContentManager', 'MonoGame.Framework')
 bare.rotatedRectangle = alloc('Microsoft.Xna.Framework.RotatedRectangle', _DEFAULT)
 
 -- BareKit
-alloc('BareKit.Storage', _DEFAULT)
+bare.storage = alloc('BareKit.Storage', _DEFAULT)
 bare.database = alloc('BareKit.Database', _DEFAULT)
 
 -- BareKit.Audio

@@ -23,6 +23,7 @@ namespace BareKit
                 alloc = _LUA.alloc
                 dealloc = _LUA.dealloc
                 init = _LUA.init
+                static = _LUA.enum
                 enum = _LUA.enum
                 call = _LUA.call
                 doString = _LUA.doString
