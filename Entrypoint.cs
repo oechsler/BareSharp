@@ -9,16 +9,14 @@ using MoonSharp.Interpreter.Interop;
 using BareKit.Audio;
 using BareKit.Graphics;
 using BareKit.Tweening;
-using BareKit.Lua;
 
 namespace BareKit
 {
     [MoonSharpUserData]
     public class Entrypoint : Game
     {
-        SoundManager sound;
-
         Tweener tweening;
+        SoundManager sound;
         Database global;
 
         float oneSecond;
@@ -33,7 +31,7 @@ namespace BareKit
 			Scaling = new ScalingManager(Graphics, Window, new Vector3(720, 16, 9), 1.25f);
 
             Content.RootDirectory = "Content";
-            Scripting.RootDirectory = "Scripts";
+            Lua.RootDirectory = "Scripts";
 
             IsMouseVisible = true;
         }
@@ -41,28 +39,32 @@ namespace BareKit
         protected override void Initialize()
         {
             base.Initialize();
+            Storage.Initalize();
 
             Logger.Info(GetType(), $"Content will be loaded from '{Content.RootDirectory}'.");
-            Logger.Info(GetType(), $"Scripts will be loaded from '{Scripting.RootDirectory}'.");
+            Logger.Info(GetType(), $"Scripts will be loaded from '{Lua.RootDirectory}'.");
 
-            Scripting.Initialize(this, "main");
-            Scripting.Global?.Set("entrypoint", UserData.Create(this));
-            Scripting.Call(Scripting.Global?.Get("config"), UserData.Create(this));
+#if !NOSCRIPT
+            Lua.Initialize();
+            Lua.Global?.Get("bare").Table?.Set("entrypoint", UserData.Create(this));
+            Lua.Call(Lua.Global?.Get("bare").Table?.Get("config"), UserData.Create(this));
+#endif
 
 #if MONOMAC
 			scaling.Center();
 #endif
 
-            sound = new SoundManager();
-
             Buffer = new SpriteBatch(GraphicsDevice);
 			tweening = new Tweener();
+            sound = new SoundManager();
             global = new Database("global");
             Stage = new Stage(Scaling, Content, tweening, sound, global);
 
-            Scripting.Global?.Set("stage", UserData.Create(Stage));
-            Scripting.Global?.Set("delta", DynValue.NewNumber(0));
-            Scripting.Global?.Set("fps", DynValue.NewNumber(0));
+#if !NOSCRIPT
+            Lua.Global?.Get("bare").Table?.Set("stage", UserData.Create(Stage));
+            Lua.Global?.Get("bare").Table?.Set("delta", DynValue.NewNumber(0));
+            Lua.Global?.Get("bare").Table?.Set("fps", DynValue.NewNumber(0));
+#endif
 
             Logger.Info(GetType(), $"Vertical synchronisation activated '{Graphics.SynchronizeWithVerticalRetrace}'.");
             Logger.Info(GetType(), $"Framstep is set to '{TargetElapsedTime.TotalMilliseconds} ms'.");
@@ -70,20 +72,23 @@ namespace BareKit
             Logger.Info(GetType(), $"Initial content scale is 'x{Scaling.Scale.X}'.");
             Logger.Info(GetType(), "Ready. Handoff to userdefined code.");
 
-            Scripting.Call(Scripting.Global?.Get("start"));
-
+#if !NOSCRIPT
+            Lua.Call(Lua.Global?.Get("bare").Table?.Get("start"));
             GC.Collect();
+#endif
+
         } 
 
         protected override void Update(GameTime gameTime)
         {
-			sound.Update();
-
 			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            sound.Update();
             Stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            Scripting.Global?.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
-            Scripting.Call(Scripting.Global?.Get("update"));
+#if !NOSCRIPT
+            Lua.Global?.Get("bare").Table?.Set("delta", DynValue.NewNumber(gameTime.ElapsedGameTime.TotalSeconds));
+            Lua.Call(Lua.Global?.Get("bare").Table?.Get("update"));
+#endif
 
             if (oneSecond >= 1)
 			{
@@ -91,7 +96,9 @@ namespace BareKit
 				frames = 0;
 				oneSecond--;
 
-                Scripting.Global?.Set("fps", DynValue.NewNumber(FramesPerSecond));
+#if !NOSCRIPT
+			    Lua.Global?.Get("bare").Table?.Set("fps", DynValue.NewNumber(FramesPerSecond));
+#endif
             }
 			oneSecond += (float)gameTime.ElapsedGameTime.TotalSeconds;
 

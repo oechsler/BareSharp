@@ -25,10 +25,10 @@ namespace BareKit.Graphics
         public Stage(ScalingManager scaling, ContentManager content, Tweener tweening, SoundManager sound, Database global)
         {
 			Initialize(scaling);
-			this.Content = content;
-			this.Tweening = tweening;
-			this.Sound = sound;
-            this.Global = global;
+            Content = content;
+			Tweening = tweening;
+			Sound = sound;
+            Global = global;
 
             // Default background color (hex #282828)
             Color = new Color(40, 40, 40);
