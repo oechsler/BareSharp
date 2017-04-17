@@ -54,5 +54,9 @@ bare.keys = alloc('Microsoft.Xna.Framework.Input.Keys', 'MonoGame.Framework')
 bare.touchInput = alloc('BareKit.Input.TouchInput', _DEFAULT)
 bare.finger = alloc('BareKit.Input.Finger', _DEFAULT)
 
+-- Embedded libraries
+class = require(_DEFAULT .. ".Utils.Scripts.30log", true)
+tween = require(_DEFAULT .. ".Utils.Scripts.tween", true)
+
 -- Load main.lua
 require("main")

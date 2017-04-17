@@ -41,7 +41,6 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Input\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\Glide\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Utils\Scripts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\" />
   </ItemGroup>
   <ItemGroup>
@@ -49,5 +48,7 @@
     <None Include="$(MSBuildThisFileDirectory)Utils\Primitives2D\licence.txt" />
     <None Include="$(MSBuildThisFileDirectory)Utils\Glide\license.txt" />
     <None Include="$(MSBuildThisFileDirectory)Utils\Glide\readme.md" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Utils\Scripts\30log.lua" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Utils\Scripts\tween.lua" />
   </ItemGroup>
 </Project>

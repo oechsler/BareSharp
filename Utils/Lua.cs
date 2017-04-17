@@ -1,5 +1,6 @@
 ﻿#if !NOSCRIPT
 using System;
+using System.IO;
 using System.Reflection;
 
 using MoonSharp.Interpreter;
@@ -38,15 +39,9 @@ namespace BareKit
             Global.Set("_DEFAULT", DynValue.NewString(Assembly.GetExecutingAssembly().GetName().Name));
             Global.Set("bare", DynValue.NewTable(environement));
 
-            try
-            {
-                environement.DoStream(Storage.EmbeddedResource($"{Assembly.GetExecutingAssembly().GetName().Name}.Utils.Scripts.boot.lua"));
-                initialized = true;
-            }
-            catch (InterpreterException e)
-            {
-                Exeption(e);
-            }
+
+            Require($"{Assembly.GetExecutingAssembly().GetName().Name}.Utils.Scripts.boot", true);
+            initialized = true;
         }
 
         public static Type Alloc(string typeName, string assembly)
@@ -116,10 +111,10 @@ namespace BareKit
             return DynValue.Nil;
         }
 
-        public static DynValue Require(string path)
+        public static DynValue Require(string path, bool absolute = false)
         {
-            var resourceName = path.Split('/')[path.Split('/').Length - 1];
-            var resource = Storage.EmbeddedResource($"{ Assembly.GetExecutingAssembly().GetName().Name}.{RootDirectory}.{path}.lua");
+            var resourceName = path.Replace("/", ".").Split('.')[path.Replace("/", ".").Split('.').Length - 1];
+            var resource = Storage.EmbeddedResource(absolute ? $"{path}.lua" : $"{Assembly.GetExecutingAssembly().GetName().Name}.{RootDirectory}.{path}.lua");
             if (resource == null) return DynValue.Nil;
             try
             {
