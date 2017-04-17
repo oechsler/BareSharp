@@ -77,12 +77,7 @@ namespace BareKit
                     convertedArgs[i] = args[i];
             }
 
-            try
-            {
-                return UserData.Create(Activator.CreateInstance(type, convertedArgs));
-            }
-            catch (Exception) { /* ignored */ }
-            return DynValue.Nil;
+            return UserData.Create(Activator.CreateInstance(type, convertedArgs));
         }
 
         public static DynValue Enum(Type type)
