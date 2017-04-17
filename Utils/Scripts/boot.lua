@@ -5,6 +5,7 @@ alloc('System.IO.Stream', 'mscorlib')
 bare.streamReader = alloc('System.IO.StreamReader', 'mscorlib')
 bare.streamWriter = alloc('System.IO.StreamWriter', 'mscorlib')
 if bare.timeSpan == nil then
+	-- .Net Core (System.Runtime)
 	alloc('System.Type', 'System.Runtime')
 	bare.timeSpan = alloc('System.TimeSpan', 'System.Runtime')
 	alloc('System.IO.Stream', 'System.Runtime')
