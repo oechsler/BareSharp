@@ -51,4 +51,8 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Utils\Scripts\30log.lua" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Utils\Scripts\tween.lua" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Utils\Scripts\30log_license.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Utils\Scripts\tween_license.txt" />
+  </ItemGroup>
 </Project>
