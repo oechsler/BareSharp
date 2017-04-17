@@ -9,28 +9,31 @@ namespace BareKit
     [MoonSharpUserData]
     public static class Lua
     {
+        static bool initialized;
         static Script environement;
 
         public static void Initialize()
         {
+            if (initialized) return;
+
             environement = new Script();
 
             UserData.RegisterAssembly(Assembly.GetExecutingAssembly());
             UserData.RegisterType(typeof(EventArgs));
 
-            Global.Set("_LUA", UserData.CreateStatic(typeof(Lua)));
+            Global.Set("_INTERNAL", UserData.CreateStatic(typeof(Lua)));
             DoString(@"
-                alloc = _LUA.alloc
-                dealloc = _LUA.dealloc
-                init = _LUA.init
-                static = _LUA.enum
-                enum = _LUA.enum
-                call = _LUA.call
-                doString = _LUA.doString
-                require = _LUA.require
-                print = _LUA.print
+                alloc = _INTERNAL.alloc
+                dealloc = _INTERNAL.dealloc
+                init = _INTERNAL.init
+                static = _INTERNAL.enum
+                enum = _INTERNAL.enum
+                call = _INTERNAL.call
+                doString = _INTERNAL.doString
+                require = _INTERNAL.require
+                print = _INTERNAL.print
             ", "internal");
-            Global.Set("_LUA", DynValue.Nil);
+            Global.Set("_INTERNAL", DynValue.Nil);
 
             Global.Set("_DEFAULT", DynValue.NewString(Assembly.GetExecutingAssembly().GetName().Name));
             Global.Set("bare", DynValue.NewTable(environement));
@@ -38,6 +41,7 @@ namespace BareKit
             try
             {
                 environement.DoStream(Storage.EmbeddedResource($"{Assembly.GetExecutingAssembly().GetName().Name}.Utils.Scripts.boot.lua"));
+                initialized = true;
             }
             catch (InterpreterException e)
             {
@@ -116,16 +120,14 @@ namespace BareKit
         {
             var resourceName = path.Split('/')[path.Split('/').Length - 1];
             var resource = Storage.EmbeddedResource($"{ Assembly.GetExecutingAssembly().GetName().Name}.{RootDirectory}.{path}.lua");
-            if (resource != null)
+            if (resource == null) return DynValue.Nil;
+            try
             {
-                try
-                {
-                    return environement.DoStream(resource, null, resourceName);
-                }
-                catch (InterpreterException e)
-                {
-                    Exeption(e);
-                }
+                return environement.DoStream(resource, null, resourceName);
+            }
+            catch (InterpreterException e)
+            {
+                Exeption(e);
             }
             return DynValue.Nil;;
         }
