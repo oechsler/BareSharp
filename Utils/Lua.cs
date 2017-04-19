@@ -30,7 +30,7 @@ namespace BareKit
                 static = _INTERNAL.enum
                 enum = _INTERNAL.enum
                 call = _INTERNAL.call
-                doString = _INTERNAL.doString
+                dostring = _INTERNAL.doString
                 require = _INTERNAL.require
                 print = _INTERNAL.print
             ", "internal");
@@ -95,6 +95,10 @@ namespace BareKit
             {
                 Exeption(e);
             }
+            catch (Exception e)
+            {
+                Logger.Warn(typeof(Lua), e.Message);
+            }
             return DynValue.Nil;
         }
 
@@ -107,6 +111,10 @@ namespace BareKit
             catch (InterpreterException e)
             {
                 Exeption(e);
+            }
+            catch (Exception e)
+            {
+                Logger.Warn(typeof(Lua), e.Message);
             }
             return DynValue.Nil;
         }
@@ -123,6 +131,10 @@ namespace BareKit
             catch (InterpreterException e)
             {
                 Exeption(e);
+            }
+            catch (Exception e)
+            {
+                Logger.Warn(typeof(Lua), e.Message);
             }
             return DynValue.Nil;;
         }
