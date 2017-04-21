@@ -31,7 +31,9 @@ namespace BareKit
 			Scaling = new ScalingManager(Graphics, Window, new Vector3(720, 16, 9), 1.25f);
 
             Content.RootDirectory = "Content";
+#if !NOSCRIPT
             Lua.RootDirectory = "Scripts";
+#endif
 
             IsMouseVisible = true;
         }
@@ -41,8 +43,12 @@ namespace BareKit
             base.Initialize();
             Storage.Initalize();
 
-            Logger.Info(GetType(), $"Content will be loaded from '{Content.RootDirectory}'.");
-            Logger.Info(GetType(), $"Scripts will be loaded from '{Lua.RootDirectory}'.");
+            Logger.Info($"Content will be loaded from '{Content.RootDirectory}'.", GetType());
+#if !NOSCRIPT
+            Logger.Info($"Scripts will be loaded from '{Lua.RootDirectory}'.", GetType());
+#else
+            Logger.Info(GetType(), "Lua scripting is disabled 'NOSCRIPT'.");
+#endif
 
 #if !NOSCRIPT
             Lua.Initialize();
@@ -66,11 +72,11 @@ namespace BareKit
             Lua.Global?.Get("bare").Table?.Set("fps", DynValue.NewNumber(0));
 #endif
 
-            Logger.Info(GetType(), $"Vertical synchronisation activated '{Graphics.SynchronizeWithVerticalRetrace}'.");
-            Logger.Info(GetType(), $"Framstep is set to '{TargetElapsedTime.TotalMilliseconds} ms'.");
-            Logger.Info(GetType(), $"Initial window size is '{Scaling.Size.ToString().Replace("{X:", "").Replace(" Y:", "x").Replace("}", "")}'.");
-            Logger.Info(GetType(), $"Initial content scale is 'x{Scaling.Scale.X}'.");
-            Logger.Info(GetType(), "Ready. Handoff to userdefined code.");
+            Logger.Info($"Vertical synchronisation activated '{Graphics.SynchronizeWithVerticalRetrace}'.", GetType());
+            Logger.Info($"Framstep is set to '{TargetElapsedTime.TotalMilliseconds} ms'.", GetType());
+            Logger.Info($"Initial window size is '{Scaling.Size.ToString().Replace("{X:", "").Replace(" Y:", "x").Replace("}", "")}'.", GetType());
+            Logger.Info($"Initial content scale is 'x{Scaling.Scale.X}'.", GetType());
+            Logger.Info("Ready. Handoff to userdefined code.", GetType());
 
 #if !NOSCRIPT
             Lua.Call(Lua.Global?.Get("bare").Table?.Get("start"));
@@ -123,10 +129,12 @@ namespace BareKit
         {
             global.Save();
 
+            Logger.Info("Exit.", GetType());
+
             base.OnExiting(sender, args);
         }
 
-#if !WINDOWS && !MONOMAC && !LINUX 
+#if !WINDOWS && !MONOMAC && !LINUX
         protected override void OnDeactivated(object sender, EventArgs args)
         {
             OnExiting(sender, args);
