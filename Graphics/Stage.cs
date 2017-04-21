@@ -75,10 +75,9 @@ namespace BareKit.Graphics
 			AddChild(sceneInstance);
 			sceneInstance.Enter(current);
 
-		    Logger.Info(GetType(),
-		        current == null
-		            ? $"Initial navigation to '{sceneInstance.GetType().Name}'."
-		            : $"Navigated from '{current.GetType().Name}' to '{sceneInstance.GetType().Name}'.");
+		    Logger.Info(current == null
+		        ? $"Initial navigation to '{sceneInstance.GetType().Name}'."
+		        : $"Navigated from '{current.GetType().Name}' to '{sceneInstance.GetType().Name}'.", GetType());
 
 		    return this;
 		}
@@ -97,7 +96,7 @@ namespace BareKit.Graphics
 
             RemoveChild(current);
 
-            Logger.Info(GetType(), $"Navigated back from '{current.GetType().Name}' to '{target.GetType().Name}'.");
+            Logger.Info($"Navigated back from '{current.GetType().Name}' to '{target.GetType().Name}'.", GetType());
 
             return this;
         }
