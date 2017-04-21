@@ -1,6 +1,4 @@
-﻿using System;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using MoonSharp.Interpreter.Interop;
@@ -69,8 +67,8 @@ namespace BareKit.Graphics
 		/// </summary>
         public Vector2 Position
         {
-            get { return position; }
-            set { position = value; }
+            get => position;
+            set => position = value;
         }
 
 		/// <summary>
@@ -78,18 +76,18 @@ namespace BareKit.Graphics
 		/// </summary>
         public float PositionX
         {
-            get { return position.X; }
-            set { position.X = value; }
-        }
+            get => position.X;
+		    set => position.X = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the y-coordinate of the position vector.
 		/// </summary>
         public float PositionY
         {
-            get { return position.Y; }
-            set { position.Y = value; }
-        }
+            get => position.Y;
+		    set => position.Y = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the rotation in radiants.
@@ -101,8 +99,8 @@ namespace BareKit.Graphics
 		/// </summary>
         public Vector2 Scale
         {
-            get { return scale; }
-            set { scale = value; }
+            get => scale;
+            set => scale = value;
         }
 
 		/// <summary>
@@ -110,90 +108,90 @@ namespace BareKit.Graphics
 		/// </summary>
         public float ScaleX
         {
-            get { return scale.X; }
-            set { scale.X = value; }
-        }
+            get => scale.X;
+		    set => scale.X = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the y-coordinate of the scale vector.
 		/// </summary>
         public float ScaleY
         {
-            get { return scale.Y; }
-            set { scale.Y = value; }
-        }
+            get => scale.Y;
+		    set => scale.Y = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the origin vector.
 		/// </summary>
         public Vector2 Origin
         {
-            get { return origin; }
-            set { origin = value; }
-        }
+            get => origin;
+		    set => origin = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the x-coordinate of the origin vector.
 		/// </summary>
         public float OriginX
         {
-            get { return origin.X; }
-            set { origin.X = value; }
-        }
+            get => origin.X;
+		    set => origin.X = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the y-coordinate of the origin vector.
 		/// </summary>
         public float OriginY
         {
-            get { return origin.Y; }
-            set { origin.Y = value; }
-        }
+            get => origin.Y;
+		    set => origin.Y = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the displayed color.
 		/// </summary>
         public Color Color
         {
-            get { return color; }
-            set { color = value; }
-        }
+            get => color;
+		    set => color = value;
+		}
 
 		/// <summary>
 		/// Gets or sets the red value of the displayed color.
 		/// </summary>
         public int ColorR
         {
-            get { return color.R; }
-            set { color.R = (byte)value; }
-        }
+            get => color.R;
+		    set => color.R = (byte)value;
+		}
 
 		/// <summary>
 		/// Gets or sets the green value of the displayed color.
 		/// </summary>
         public int ColorG
         {
-            get { return color.G; }
-            set { color.G = (byte)value; }
-        }
+            get => color.G;
+		    set => color.G = (byte)value;
+		}
 
 		/// <summary>
 		/// Gets or sets the blue value of the displayed color.
 		/// </summary>
         public int ColorB
         {
-            get { return color.B; }
-            set { color.B = (byte)value; }
-        }
+            get => color.B;
+		    set => color.B = (byte)value;
+		}
 
 		/// <summary>
 		/// Gets or sets the alpha value of the displayed color.
 		/// </summary>
         public float Alpha
         {
-			get { return IsVisible ? alpha : 0; }
-            set { alpha = value; }
-        }
+			get => IsVisible ? alpha : 0;
+		    set => alpha = value;
+		}
 
 		/// <summary>
 		/// Gets or sets a value indicating whether the Drawable is visible.

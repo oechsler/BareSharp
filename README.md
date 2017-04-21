@@ -7,7 +7,7 @@ For further information on the MonoGame framework, please do checkout their [doc
 
 1. Import Bare's shared project into your Visual Studio solution.
 2. Link the shared project with your executing MonoGame project.
-3. Link a version of [MoonSharp](http://www.moonsharp.org) with your executing project (or define a `NOSCRIPT` preprocessor flag).
+3. Link a version of [MoonSharp](http://www.moonsharp.org) with your executing project or define a `NOSCRIPT` preprocessor flag.
 
 ### Entrypoint
 
@@ -85,7 +85,7 @@ end
 
 ### Standard library
 
-Bare's Lua interpereter contains the complete set of standard functions. Beyond that there are a few important functions for registering and allocating objects from the underlaying C# context.
+Bare's Lua interpereter contains most of the standard functions. Beyond that there are a few important functions for registering and allocating objects from the underlaying C# context.
 
 ###### alloc
 
@@ -199,7 +199,7 @@ bare.keys             -- Enums for different keys.
 
 ##### main.lua
 ~~~lua 
-local scene = require "scene.lua"
+local scene = require "scene"
 
 function bare.start()
 	bare.stage.navigateTo(scene)

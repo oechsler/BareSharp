@@ -22,6 +22,10 @@ namespace BareKit
         readonly string name;
         readonly List<DatabaseNode> nodes;
 
+        /// <summary>
+        /// Initializes a new instance of thde Database class.
+        /// </summary>
+        /// <param name="name">The name of the database.</param>
         public Database(string name)
         {
             this.name = $"{name}.bdb";
@@ -30,6 +34,9 @@ namespace BareKit
             Load();
         }
 
+        /// <summary>
+        /// Saves the content of the database to the filesystem.
+        /// </summary>
         public void Save()
         {
             var writer = new StreamWriter(Storage.Write(name));
@@ -41,9 +48,12 @@ namespace BareKit
             }
             writer.Dispose();
 
-            Logger.Info(GetType(), $"Saved '{nodes.Count}' node(s) to '{name}'.");
+            Logger.Info($"Saved '{nodes.Count}' node(s) to '{name}'.", GetType());
         }
 
+        /// <summary>
+        /// Loads the content of the database from the filesystem.
+        /// </summary>
         public void Load()
         {
             nodes.Clear();
@@ -70,11 +80,15 @@ namespace BareKit
                 reader.Dispose();
             }
 
-            Logger.Info(GetType(), $"Loaded '{count}' node(s) from '{name}'.");
+            Logger.Info($"Loaded '{count}' node(s) from '{name}'.", GetType());
         }
 
+        /// <summary>
+        /// Deletes all entry from the database.
+        /// </summary>
         public void Clear()
         {
+            nodes.Clear();
             Storage.Delete(name);
         }
 
@@ -97,16 +111,29 @@ namespace BareKit
                 nodes.Add(node);
         }
 
+        /// <summary>
+        /// Gets the value of a node by its key.
+        /// </summary>
+        /// <param name="key">The key of the node.</param>
         public object Get(string key)
         {
             return GetNode(key).Value;
         }
 
+        /// <summary>
+        /// Sets the value of a node by its key.
+        /// </summary>
+        /// <param name="key">The key of the node.</param>
+        /// <param name="value">The value of the node.</param>
         public void Set(string key, object value)
         {
             SetNode(key, new DatabaseNode { Key = key, Value = value });
         }
 
+        /// <summary>
+        /// Whether the node exists in the database.
+        /// </summary>
+        /// <param name="key">The key of the node.</param>
         public bool Exists(string key)
         {
             return GetNode(key).Value != null;
