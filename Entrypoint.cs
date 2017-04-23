@@ -33,6 +33,9 @@ namespace BareKit
             Content.RootDirectory = "Content";
 #if !NOSCRIPT
             Lua.RootDirectory = "Scripts";
+            Lua.Initialize();
+            Lua.Global?.Get("bare").Table?.Set("entrypoint", UserData.Create(this));
+            Lua.Call(Lua.Global?.Get("bare").Table?.Get("config"), UserData.Create(this));
 #endif
 
             IsMouseVisible = true;
@@ -48,12 +51,6 @@ namespace BareKit
             Logger.Info($"Scripts will be loaded from '{Lua.RootDirectory}'.", GetType());
 #else
             Logger.Info(GetType(), "Lua scripting is disabled 'NOSCRIPT'.");
-#endif
-
-#if !NOSCRIPT
-            Lua.Initialize();
-            Lua.Global?.Get("bare").Table?.Set("entrypoint", UserData.Create(this));
-            Lua.Call(Lua.Global?.Get("bare").Table?.Get("config"), UserData.Create(this));
 #endif
 
 #if MONOMAC
