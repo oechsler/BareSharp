@@ -1,107 +1,268 @@
-#Getting Started
+# Getting Started
 
-For further information on how MonoGame works, please checkout their online [documentation](http://www.monogame.net/documentation/?page=main).
+For further information on the MonoGame framework, please do checkout their [documentation](http://www.monogame.net/documentation/?page=main).
+<br />This guide assumes that you already know how to work with MonoGame's content pipeline.
 
-*To install the Bare framework simply add all the files from this repos master branch to your project and reference the BareKit shared project in your MonoGame application.*
+### General setup
 
-To begin, you want to create a custom Entypoint for your game. Bares Entrypoint is what is known as the Game class in MonoGame.
+1. Import Bare's shared project into your Visual Studio solution.
+2. Link the shared project with your executing MonoGame project.
+3. Link a version of [MoonSharp](http://www.moonsharp.org) with your executing project or define a `NOSCRIPT` preprocessor flag.
 
-~~~csharp
+### Entrypoint
+
+In order for Bare to run, you need to replace the default `Game1` class with Bare's Entrypoint. The Entrypoint can also be customized to fit your needs by overriding it. *It is highly recommended that you create your own Entrypoint, when using C# to code.*
+
+~~~cs
 using BareKit;
 
-public sealed class AppEntrypoint : Entrypoint
+public class Main
 {
-	public override Initialize()
-	{
-		base.Initialize();
-	}
+	public static void Main(string args[])
+	{	
+		using (var entrypoint = new Entrypoint())
+			entrypoint.Run();
+	}	
 }
 ~~~
 
-The Entrypoint holds all systems needed for the Bare framework to work properly. Simply go ahead and run your application. You should end up seeing an empty 
-window with dark-grey background.
+### Scripting
 
-![empty_window](./Assets/empty_window.tiff)
+*Bare uitilizes [MoonSharp](http://www.moonsharp.org) to implement the Lua scripting language. It is intended that you use Lua for scripting your games. But because Bare's API is written completly in C# and translated to Lua during runtime, you may use C# aswell for more advanced scripting or due to personal preference.*
 
-Although the window seems perfect, the resolution borthers you? Alright, no problem! Simply change the default ScalingManager via the Scaling field. *It is necessary that this is done before calling the base class Initialize method of your Entrypoint.*
+* *Known caveat: the integrated [Glide](https://bitbucket.org/jacobalbano/glide) tweening engine is not accessible through Lua. [Tween.lua](https://github.com/kikito/tween.lua) is used instead and can be accessed via `tween`.*
+* *Object oriented scripting is possible with the embedded version of [30log](https://github.com/Yonaba/30log), accessible through the `class` field.*
 
-~~~csharp
-Scaling = new ScalingManager(graphics, window, size, [scale], [fullscreen]);
+Userdefined Lua scripts by deafult are located in the `Scripts` subdirectory of your project and need to be marked as `Embedded resource` in Visual Studio. *For changing the default directory please have a look into Bare's Entrypoint class.*
+
+To enable Lua scripting create a file in the `Scripting` directory, name it `main.lua` and mark it as `Embedded resource`.  Just add the following lines of code to it and you are done.
+
+~~~lua
+function bare.start()
+	print("Ready.")
+end
 ~~~
 
-The size vector is of type Vecor3. Because it is used to determine the size of a window, you might wonder why we are not using a Vector2. This is because we are using the first argument to determine the width of the window and the second and third for the aspect ratio. 
+*When executing, this should print out* `Ready.` *in Visual Studio's output window.*
 
-The correct vector for an 800x600 window therefor would be:
+### Callback functions
 
-~~~csharp
-Vector3 size = new Vector3(800, 4, 3);
+###### bare.start
+
+~~~lua
+function bare.start()
+	-- Creates a scene and navigates to it
+	local scene = init(bare.scene)
+	bare.stage.navigateTo(scene)
+end
 ~~~
 
-Now that your window is perfectly setup you might wonder how to actually display something. Now to understand how this is done you first must know how Bares display system works (it is super easy to get by the way). Imagine you being the director of a sceneplay. You are given a Stage to perform your play on. You as the director would move the Scenes into place at tell your actors what to do in each of them. Its actually the same in Bare.
+*This function gets called once, when Bare is started. This is usually where you load your scenes and setup things specific to your game. You may want to do these things somewhere else, but doing them here ensures that their only done once and therefore saving a lot of system resources.*
 
-~~~csharp
-using BareKit.Graphics;
+###### bare.update
 
-public sealed class MainScene : Scene
-{
-	public override void Enter(Scene from)
-	{
-		base.Enter(from);
-	}
-}
+~~~lua
+function bare.update()
+	-- Increments `number` by `1` per second.
+	number = number + 1 * bare.delta
+end
 ~~~
 
-Now that you have got your Scene class, you can add Drawables like Sprites, Labels and Primitives to display them on screen.
+*This function is continoussly called before rendering a frame. Probably this is where all your logic is done.* `bare.delta` *is the so called delta time. It is the amount of time in seconds since the last time this function was called (usually a small value). Due to the event driven nature of the Bare framework (each scene has its own update event), the delta time can be accessed via a variable.*
 
-This is what you have to do in order to display a snowball sprite image named "snowball_1x.png" from MonoGames content pipeline:
+###### bare.config
 
-~~~csharp
-using BareKit.Graphics;
-
-public class MainScene : Scene
-{
-	Sprite snowball;
-
-	protected override void LoadContent()
-	{
-		base.LoadContent();
-
-		snowball = new Sprite(Content, "snowball");
-	}
-
-	public override void Enter(Scene from)
-	{
-		base.Enter(from);
-
-		AddChild(snowball);
-	}
-}
+~~~lua
+function bare.config(e)
+	-- Sets the window size
+	e.scaling = init(bare.scalingManager, e.graphics, e.window, init(bare.vector3, 950, 16, 9), 1)
+	-- Disables rendering the cursor
+	e.isMouseVisible = false
+end
 ~~~
 
-*You also might wonder why you have to add a "\_1x" suffix to our image name in MonoGames content pipeline. This is because Bare chooses your Drawables resolution automaticaly based on your canvas size. A "\_2x" suffix would therefor simply mean that this image it twice as big as the original one. Having at least a "\_1x" file is required.*
+*This function is called before the window is created and therefore allows you to make a change to the default size of 720x506 in the way indicated above. Other things like for example mouse visibility are configurable aswell.*
 
-But still you will not see any snowball displayed on screen, why? Now this is because you have not added your Scene to the Navigation stack of the Stage yet. So lets do this right away. In your Entrypoints Initialize method call a navigation to your Scenes type.
+### Standard library
 
-~~~csharp
-public override Initialize()
-{
-	base.Initialize();
-	
-	Stage.NavigateTo(typeof(MainScene));
-}
+Bare's Lua interpereter contains most of the standard functions. Beyond that there are a few important functions for registering and allocating objects from the underlaying C# context.
+
+###### alloc
+
+~~~lua 
+-- definition
+typedef = alloc(className, assemblyName)
+-- example
+vector2 = alloc('Microsoft.Xna.Framework.Vector2', 'MonoGame.Framework')
+myClass = alloc('MyNamespace.MyClass', _DEFAULT)
 ~~~
 
-Once you build and run the application agian, you will see your snowball Sprite displayed right in the center of the window.
+*This function allocates C# classes to the Lua scripting context. When allocating from your executing assembly, you can simply use `_DEFAULT` instead of specifing the assembly name.*
 
-![window_snowball](./Assets/window_snowball.tiff)
+###### dealloc
 
-Now that you have got your Sprite displayed you might want to change its atribute fileds like for example Rotation and Position. Please checkout the class reference in the Drawable class file for further information on this topic. 
+~~~lua
+dealloc(typedef)
+~~~
+*This function is the counterpart to alloc (use this function carefully).*
 
-If your are interested in animating your Sprite using the Gilde tweening engine however, please visit their online [documentation](https://bitbucket.org/jacobalbano/glide). The engine itself is implemented under the Bare.Tweening namespace and the Tweening field inside each Scene class (see class reference).
+###### init
 
-For information on playing Sound and handling Input calls checkout their respective class references.
+~~~lua
+-- definition
+instance = init(typedef, arg1, arg2, ...)
+-- example
+scale = init(vector2, 2)
+scale.x = 2.5
+print('Current scale: ' .. scale.toString())
+~~~
 
-*Copyright © 2017 - Samuel Oechsler* 
+*This function instanciates C# objects inside the Lua scripting context. Methodes and fields of the respective objects can be accessed the same way as in C#, but always need to start lowercase. To initiate garbage collection of an instance simply set its userdata reference to a `nil` value.*
+
+###### static
+
+~~~lua
+-- definition
+reference = static(typedef)
+-- example
+stream = static(storage).read("example.txt")
+~~~
+
+*This function references static C# class methods inside the Lua scripting context.*
+
+###### enum
+
+~~~lua
+-- definition
+reference = enum(typedef)
+-- example
+background = enum(color).cornflowerBlue
+~~~
+
+*This function references C# enums inside the Lua scripting context.*
+
+###### Drawables
+
+~~~lua
+bare.container        -- Container drawable.
+bare.label            -- Text-label drawable.
+bare.rect             -- Rectangular drawable.
+bare.scene            -- Scene for rendering drawables.
+bare.sprite           -- Sprite drawable.
+~~~                           
+
+###### Interfaces
+
+~~~lua
+bare.streamReader     -- System.IO.StreamReader.
+bare.streamWriter     -- System.IO.StreamWriter.
+bare.storage          -- Interface for acessing the filesystem. 
+bare.database         -- Interface for storing persistent values.
+bare.shader           -- Interface for using shaders.
+bare.sound            -- Interface for playing sounds.
+~~~
+
+###### Inputs
+
+~~~lua
+bare.gamepadInput     -- Interface for handling gamepad input.
+bare.keyInput         -- Interface for handling keyboard input.
+bare.touchInput       -- Interface for handling touch/mouse input.
+~~~
+
+###### Datatypes
+
+~~~lua
+bare.color            -- Three/Four dimensional color vector.
+bare.rotatedRectangle -- Rotatable, rectangular shape.
+bare.timeSpan         -- System.TimeSpan.
+bare.vector2          -- Two dimensional vector.
+bare.vector3          -- Three dimensional vector.
+~~~
+
+###### Enums
+
+~~~lua
+bare.blendMode        -- Enums for different color blend modes.
+bare.finger           -- Enums for different fingers.
+bare.inputState       -- Enums for different input device states.
+bare.keys             -- Enums for different keys.
+~~~
+
+*For furter information on how each of the modules work, please have a look at it's respective class definition. Each method and field of the module has a short documentation attached to it.*
+
+### Examples
+
+###### Displaying a sprite
+
+*The sprite already has to be imported into MonoGame's content pipline. Also make sure that your sprites and fonts have a scale definition assigned. This is done by adding a `_nx` suffix to the filename. So if you have got a sprite called `banana.png`, the name for the standard size would be `banana_1x.png`. The Scaling sizes have to be of the integer type and a standard size must always be provided.*
+
+##### main.lua
+~~~lua 
+local scene = require "scene"
+
+function bare.start()
+	bare.stage.navigateTo(scene)
+end
+~~~
+
+##### scene.lua
+~~~lua 
+local scene = init(bare.scene)
+local sprite = nil
+
+scene.entered.add(function(self)
+	sprite = init(bare.sprite, self.content, "banana")
+	self.addChild(sprite)
+end)
+
+return scene
+~~~
+
+###### Handling input
+
+##### scene.lua
+~~~lua
+local scene = init(bare.scene)
+local keyEvent = nil
+
+scene.entered.add(function(self)
+	keyEvent = init(bare.keyInput, enum(bare.inputState).pressed, enum(bare.keys).k)
+	keyEvent.triggered.add(function(sender)
+		print(sender .. " triggered the event.")
+	end)
+	self.input.addChild(keyEvent)
+end)
+
+return scene
+~~~
+
+###### Playing a sound
+
+*The sound already has to be imported into MonoGame's content pipline. Also make sure that you have `SoundEffect` selected as importer, otherwise the sound will not be playable (and an exeption will be thrown).*
+
+##### scene.lua
+~~~lua
+local scene = init(bare.scene)
+local sound = nil
+
+scene.entered.add(function(self)
+	sound = init(bare.sound, self.content, "banana_squash")
+	self.sound.addChild(sound.play())
+end)
+
+return scene
+~~~
+
+### Contribute
+
+If you want to contribute to this project, have some questions on how something works or just want to have a chat with those who do, checkout the creators [Slack](http://boxnetwork.de/slack) team.
 
 
 
+### License
+
+*Copyright © 2017 – Samuel Oechsler*
+
+**Modified version of Zlib.** 
+*This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software. Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions: The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a comercial product, an acknowledgment in the product documentation is required. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software. This notice may not be removed or altered from any source distribution.*
