@@ -16,7 +16,7 @@ namespace BareKit.Graphics
 
         Container parent;
 
-        public Drawable()
+        protected Drawable()
         {
             position = new Vector2(0);
             Rotation = 0;

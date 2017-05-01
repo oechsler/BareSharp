@@ -114,18 +114,18 @@ namespace BareKit.Audio
         /// </summary>
 		public float Volume
 		{
-			get { return sound.Volume; }
-			set { sound.Volume = value; }
-		}
+			get => sound.Volume;
+            set => sound.Volume = value;
+        }
 
         /// <summary>
         /// Gets or sets the Sounds pitch value.
         /// </summary>
         public float Pitch
 		{
-			get { return sound.Pitch; }
-			set { sound.Pitch = value; }
-		}
+			get => sound.Pitch;
+            set => sound.Pitch = value;
+        }
 
         /// <summary>
         /// Gets the value inidiacting whether the Sound is playing.
@@ -137,8 +137,8 @@ namespace BareKit.Audio
         /// </summary>
 		public bool IsLooped
 		{
-			get { return sound.IsLooped; }
-			set { sound.IsLooped = value; }
-		}
+			get => sound.IsLooped;
+	        set => sound.IsLooped = value;
+	    }
 	}
 }

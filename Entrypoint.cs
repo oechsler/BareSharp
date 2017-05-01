@@ -84,7 +84,7 @@ namespace BareKit
 
         protected override void Update(GameTime gameTime)
         {
-			tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            tweening.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             sound.Update();
             Stage.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
