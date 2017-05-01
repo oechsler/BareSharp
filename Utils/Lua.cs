@@ -1,5 +1,6 @@
 ﻿#if !NOSCRIPT
 using System;
+using System.IO;
 using System.Reflection;
 
 using MoonSharp.Interpreter;
@@ -177,7 +178,18 @@ namespace BareKit
                                 $"{path.Replace(".lua", "")}.lua" : 
                                 $"{Assembly.GetExecutingAssembly().GetName().Name}.{RootDirectory}.{path.Replace(".lua", "")}.lua"
                            );
-            if (resource == null) return DynValue.Nil;
+            if (resource == null)
+            {
+                try
+                {
+                    resource = File.OpenRead(
+                        absolute ?
+                            $"{path.Replace(".lua", "")}.lua" :
+                            $"{RootDirectory}/{path.Replace(".lua", "")}.lua"
+                    );
+                }
+                catch (Exception) { return DynValue.Nil; }
+            }
             try
             {
                 return environement.DoStream(resource, null, resourceName);
@@ -190,7 +202,7 @@ namespace BareKit
             {
                 Logger.Warn(e.Message, typeof(Lua));
             }
-            return DynValue.Nil;;
+            return DynValue.Nil;
         }
 
         /// <summary>
