@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework.Content;
 
 namespace BareKit.Graphics
 {
-    class Sprite : Drawable
+    public class Sprite : Drawable
     {
         readonly ContentManager content;
 
-        readonly string assetName;
+        string assetName;
         Vector2 assetScale;
         Vector2 screenScale;
         Texture2D texture;
@@ -24,7 +24,9 @@ namespace BareKit.Graphics
         {
             this.content = content;
             this.assetName = assetName;
+            assetScale = new Vector2(1);
             texture = content.Load<Texture2D>(assetName + "_1x");
+            TextureRect = texture.Bounds;
 			IsRendered = true;
         }
 
@@ -46,10 +48,10 @@ namespace BareKit.Graphics
 			if (screenBounds.Intersects(Bounds) && Alpha > 0)
 			{
 				IsRendered = true;
-				buffer.Draw(texture: texture,
+                buffer.Draw(texture: texture,
 							position: Scaling.Size / 2 + Position,
-                            sourceRectangle: texture.Bounds,
-							origin: new Vector2(texture.Width, texture.Height) / 2 + Origin,
+                            sourceRectangle: new Rectangle((int)(TextureRect.X * assetScale.X), (int)(TextureRect.Y * assetScale.X), (int)(TextureRect.Width * assetScale.X), (int)(TextureRect.Height * assetScale.X)),
+							origin: new Vector2(TextureRect.Width, TextureRect.Height) / 2 + Origin,
 							rotation: Rotation,
 							scale: screenScale * Scale,
 							color: Color * Alpha,
@@ -57,6 +59,7 @@ namespace BareKit.Graphics
                             effects: SpriteEffects.None,
                             layerDepth: 0
 						   );
+
 			}
 			else
 				IsRendered = false;
@@ -95,15 +98,46 @@ namespace BareKit.Graphics
         /// <param name="assetName">The within the content pipeline assigned name.</param>
 		public Sprite Change(string assetName)
         {
-            texture = content.Load<Texture2D>(assetName);
+            this.assetName = assetName;
+            assetScale = new Vector2(1);
+            texture = content.Load<Texture2D>(assetName + "_1x");
+            TextureRect = texture.Bounds;
+
+            OnResize(Scaling, EventArgs.Empty);
 
             return this;
         }
 
+        public Rectangle TextureRect { get; set; }
+
+        public int TextureRectX
+        {
+            get => TextureRect.X;
+            set => TextureRect = new Rectangle(value, TextureRect.Y, TextureRect.Width, TextureRect.Height);
+        }
+
+        public int TextureRectY
+        {
+            get => TextureRect.Y;
+            set => TextureRect = new Rectangle(TextureRect.X, value, TextureRect.Width, TextureRect.Height);
+        }
+
+        public int TextureRectWidth
+        {
+            get => TextureRect.Width;
+            set => TextureRect = new Rectangle(TextureRect.X, TextureRect.Y, value, TextureRect.Height);
+        }
+
+        public int TextureRectHeight
+        {
+            get => TextureRect.X;
+            set => TextureRect = new Rectangle(TextureRect.X, TextureRect.Y, TextureRect.Width, value);
+        }
+
         /// <summary>
-		/// Gets the size vector.
-		/// </summary>
-        public Vector2 Size => new Vector2(texture.Width, texture.Height) * screenScale * Scale;
+        /// Gets the size vector.
+        /// </summary>
+        public Vector2 Size => new Vector2(TextureRect.Width, TextureRect.Height) * screenScale * Scale;
 
         /// <summary>
 		/// Gets the bounds rectangle.
