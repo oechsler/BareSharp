@@ -254,12 +254,6 @@ end)
 return scene
 ~~~
 
-### Contribute
-
-If you want to contribute to this project, have some questions on how something works or just want to have a chat with those who do, checkout the creators [Slack](http://boxnetwork.de/slack) team.
-
-
-
 ### License
 
 *Copyright © 2017 – Samuel Oechsler*
