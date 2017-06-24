@@ -50,7 +50,7 @@ namespace BareKit
 #if !NOSCRIPT
             Logger.Info($"Scripts will be loaded from '{Lua.RootDirectory}'.", GetType());
 #else
-            Logger.Info(GetType(), "Lua scripting is disabled 'NOSCRIPT'.");
+            Logger.Info("Lua scripting is disabled 'NOSCRIPT'.", GetType());
 #endif
 
 #if MONOMAC
