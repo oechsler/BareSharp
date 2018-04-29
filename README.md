@@ -1,3 +1,6 @@
+*Since this has been a project for school, it won't get updates in the future! 
+<br />Nevertheless feel free to use the code in you're own projects.*
+
 # Getting Started
 
 For further information on the MonoGame framework, please do checkout their [documentation](http://www.monogame.net/documentation/?page=main).
@@ -16,9 +19,9 @@ In order for Bare to run, you need to replace the default `Game1` class with Bar
 ~~~cs
 using BareKit;
 
-public class Main
+public class Program
 {
-	public static void Main(string args[])
+	public static void Main(string[] args)
 	{	
 		using (var entrypoint = new Entrypoint())
 			entrypoint.Run();
@@ -57,7 +60,7 @@ function bare.start()
 end
 ~~~
 
-*This function gets called once, when Bare is started. This is usually where you load your scenes and setup things specific to your game. You may want to do these things somewhere else, but doing them here ensures that their only done once and therefore saving a lot of system resources.*
+*This function gets called once, when Bare is started. This is usually where you load your scenes and setup things specific to your game. You may want to do these things somewhere else, but doing them here ensures that they're only done once and therefore saving a lot of system resources.*
 
 ###### bare.update
 
